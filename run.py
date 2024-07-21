@@ -10,7 +10,11 @@ def main(stdscr):
 
     warning_window = curses.newwin(1, 30, 15, 10)
 
+    empty_lines = "                                       "
     game_name = "tWIZY"
+    empty_left_lines = "                   "
+    empty_right_lines = "                 "
+    slogan = "<-====== wizy for real hackers ======->"
     key = None
 
     while True:
@@ -19,27 +23,32 @@ def main(stdscr):
         # Clear warning window
         warning_window.clear()
 
-        stdscr.addstr(4, 30, "                                       ", BLUE_AND_CYAN)
-        stdscr.addstr(5, 30, "                   ", BLUE_AND_CYAN)
-        stdscr.addstr(5, 46, game_name, BLUE_AND_CYAN | curses.A_BOLD)
-        stdscr.addstr(5, 46 + len(game_name), "                  ", BLUE_AND_CYAN)
-        stdscr.addstr(6, 30, "                                       ", BLUE_AND_CYAN)
-        stdscr.addstr(8, 30, "<-====== wizy for real hackers ======->", curses.color_pair(2) | curses.A_ITALIC)
+        height, width = stdscr.getmaxyx()
+
+        start_x_game_name = int((width // 2) - (len(game_name) // 2))
+        start_x_empty_lines = int((width // 2) - (len(empty_lines) // 2))
+
+        stdscr.addstr(4, start_x_empty_lines, empty_lines, BLUE_AND_CYAN)
+        stdscr.addstr(5, start_x_empty_lines, empty_left_lines, BLUE_AND_CYAN)
+        stdscr.addstr(5, start_x_game_name, game_name, BLUE_AND_CYAN | curses.A_BOLD)
+        stdscr.addstr(5, start_x_empty_lines + len(empty_left_lines) + len(game_name) - 2, empty_right_lines, BLUE_AND_CYAN)
+        stdscr.addstr(6, start_x_empty_lines, empty_lines, BLUE_AND_CYAN)
+        stdscr.addstr(8, start_x_empty_lines, slogan, curses.color_pair(2) | curses.A_ITALIC)
 
         """
         Welcome page
         """
         # Instructions for the user
+
         input_name = "Enter your name: "
-        stdscr.addstr(10, 30, input_name)
-        stdscr.refresh()
-        if input_name != '' and key == curses.KEY_ENTER:
-            curses.setsyx(11, 51)
+        stdscr.addstr(10, start_x_empty_lines, input_name)
 
         input_password = "Enter your password: "
-        stdscr.addstr(11, 30, input_password)
-        if input_password == '' and key == curses.KEY_ENTER:
-            warning_window.addnstr("You need to provide a password")
+        stdscr.addstr(11, start_x_empty_lines, input_password)
+
+        # if input_password == '' or input_password == '':
+        #     warning_window.addstr(15, 10, "You need to provide a username/password")
+        #     stdscr.refresh()
             
             
         stdscr.refresh()
@@ -47,8 +56,8 @@ def main(stdscr):
         # Create an input window for name
         # nlines - 1, ncolumns - 12 (login's length), 
         # begin_y - 10, begin_x - 30 (begin_x for instructions) +  len(instructions)
-        input_window_name = curses.newwin(1, 12, 10, 30 + len(input_name))
-        input_window_password = curses.newwin(1, 12, 11, 30 + len(input_password))
+        input_window_name = curses.newwin(1, 12, 10, start_x_empty_lines + len(input_name))
+        input_window_password = curses.newwin(1, 12, 11, start_x_empty_lines + len(input_password))
         curses.echo()  # Enable echoing of input characters
 
         # Get user input name
