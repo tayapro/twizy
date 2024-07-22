@@ -7,6 +7,8 @@ def main():
     while True:
         if screen == screens.HOME_SCREEN:
             screen = on_load_home_screen(curses.wrapper)
+        elif screen == screens.MAIN_MENU_SCREEN:
+            screen = on_load_main_menu_screen(curses.wrapper)
         else:
             return
 
