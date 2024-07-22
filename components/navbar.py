@@ -1,5 +1,5 @@
-from consts import screens
 import curses
+from config import palette
 
 class NavAction(object):
     def __init__(self, key, screen, message):
@@ -27,16 +27,15 @@ class Navbar(object):
             self.message = self.message + " " + action.text()
 
     def draw(self, stdscr):
-        curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_YELLOW)
-        YELLOW_AND_BLACK = curses.color_pair(2)
+        color = curses.color_pair(palette.ACCENT_COLOR)
         height, width = stdscr.getmaxyx()
 
-        stdscr.addstr(0, 0, " " * width, YELLOW_AND_BLACK)
-        stdscr.addstr(1, 0, " " * width, YELLOW_AND_BLACK)
-        stdscr.addstr(1, 0, "  tWIZY", YELLOW_AND_BLACK)
+        stdscr.addstr(0, 0, " " * width, color)
+        stdscr.addstr(1, 0, " " * width, color)
+        stdscr.addstr(1, 0, "  tWIZY", color | curses.A_BOLD)
         nav_str = self.message + "  "
-        stdscr.addstr(1, width - len(nav_str), nav_str, YELLOW_AND_BLACK)
-        stdscr.addstr(2, 0, " " * width, YELLOW_AND_BLACK)
+        stdscr.addstr(1, width - len(nav_str), nav_str, color)
+        stdscr.addstr(2, 0, " " * width, color)
 
     def update(self, stdscr, character):
         for action in self.actions:

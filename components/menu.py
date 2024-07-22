@@ -1,5 +1,6 @@
 import sys 
 import curses
+from config import palette
 
 class Menu(object):
     cursor = 0
@@ -11,10 +12,8 @@ class Menu(object):
 
 
     def draw(self, stdscr):
-        curses.init_pair(10, curses.COLOR_WHITE, curses.COLOR_BLACK)
-        curses.init_pair(11, curses.COLOR_BLACK, curses.COLOR_WHITE)
-        normal = curses.color_pair(10)
-        selected = curses.color_pair(11)
+        normal = curses.color_pair(palette.MAIN_COLOR)
+        selected = curses.color_pair(palette.MAIN_COLOR_INV)
 
         for index, opt in enumerate(self.options):
             print(f"{self.cursor} -- {self.y} -- {self.x} -- {index} -- {opt}", file=sys.stderr)
