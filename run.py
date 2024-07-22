@@ -1,6 +1,7 @@
 import curses
-from consts import screens
 from screens.home_screen import on_load_home_screen
+from screens.main_menu_screen import on_load_main_menu_screen
+from consts import screens
 
 def main():
     screen = screens.HOME_SCREEN
