@@ -32,9 +32,11 @@ class Navbar(object):
         height, width = stdscr.getmaxyx()
 
         stdscr.addstr(0, 0, " " * width, YELLOW_AND_BLACK)
-        stdscr.addstr(0, 0, "  tWIZY", YELLOW_AND_BLACK)
+        stdscr.addstr(1, 0, " " * width, YELLOW_AND_BLACK)
+        stdscr.addstr(1, 0, "  tWIZY", YELLOW_AND_BLACK)
         nav_str = self.message + "  "
-        stdscr.addstr(0, width - len(nav_str), nav_str, YELLOW_AND_BLACK)
+        stdscr.addstr(1, width - len(nav_str), nav_str, YELLOW_AND_BLACK)
+        stdscr.addstr(2, 0, " " * width, YELLOW_AND_BLACK)
 
     def update(self, stdscr, character):
         for action in self.actions:
