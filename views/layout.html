@@ -92,7 +92,8 @@
         .xterm .xterm-viewport {
             /* On OS X this is required in order for the scroll bar to appear fully opaque */
             background-color: #000;
-            overflow-y: scroll;
+            /* overflow-y: scroll; */
+            overflow: hidden;
             cursor: default;
             position: absolute;
             right: 0;
@@ -178,7 +179,7 @@
         button {
             width: 200px;
             height: 40px;
-            background-color: #E84610;
+            background-color: #595250;
             border: 1px solid grey;
             color: white;
             text-transform: uppercase;
