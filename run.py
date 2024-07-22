@@ -43,9 +43,6 @@ def main(stdscr):
         input_name = "Enter your name: "
         stdscr.addstr(10, start_x_empty_lines, input_name)
 
-        input_password = "Enter your password: "
-        stdscr.addstr(11, start_x_empty_lines, input_password)
-
         # if input_password == '' or input_password == '':
         #     warning_window.addstr(15, 10, "You need to provide a username/password")
         #     stdscr.refresh()
@@ -57,12 +54,10 @@ def main(stdscr):
         # nlines - 1, ncolumns - 12 (login's length), 
         # begin_y - 10, begin_x - 30 (begin_x for instructions) +  len(instructions)
         input_window_name = curses.newwin(1, 12, 10, start_x_empty_lines + len(input_name))
-        input_window_password = curses.newwin(1, 12, 11, start_x_empty_lines + len(input_password))
         curses.echo()  # Enable echoing of input characters
 
         # Get user input name
         user_input_name = input_window_name.getstr().decode('utf-8')
-        user_input_password = input_window_password.getstr().decode('utf-8')
 
         """
         Menu page
@@ -70,7 +65,6 @@ def main(stdscr):
         # Clear screen and display the entered input
         stdscr.clear()
         stdscr.addstr(0, 0, f"Hello, {user_input_name}!")
-        stdscr.addstr(1, 0, f"Your password is {user_input_password}!")
         stdscr.refresh()
 
         # Wait for user input before exiting

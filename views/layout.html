@@ -8,10 +8,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xterm/3.14.5/xterm.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xterm/3.14.5/addons/attach/attach.js"></script>
-    <title>Python Terminal by Code Institute</title>
+    <title>tWIZY</title>
+    <!-- TODO: Add icon -->
+    <!-- <link rel="icon" type="image/png" href=""> -->
     <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
         body {
             font-family: Arial;
+            height: 100vh;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+            justify-content: center;
+            background-image: url('https://raw.githubusercontent.com/tayapro/twizy/main/static/images/colored_space.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
         /**
@@ -19,7 +35,7 @@
         */
 
         .xterm {
-            font-feature-settings: "liga"0;
+            font-feature-settings: "liga" 0;
             position: relative;
             user-select: none;
             -ms-user-select: none;
