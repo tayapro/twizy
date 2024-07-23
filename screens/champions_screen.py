@@ -16,7 +16,7 @@ def champions_screen_handler(stdscr):
 
     navbar = Navbar(
         NavAction("h", consts.HOME_SCREEN, "Home  "),
-        NavAction("g", consts.HOME_SCREEN, "Game  "),
+        NavAction("g", consts.GAME_SCREEN, "Game  "),
         NavAction("q", None, "Quit  ")
     )
 
