@@ -32,20 +32,19 @@ def login_screen_handler(stdscr):
         stdscr.addstr(height // 2, width // 2, user)
         stdscr.refresh()
         code = stdscr.getch()
-        print(f"Code: {code}", file=sys.stderr)
         character = chr(code)
         if character.isalpha() and character.isascii():
             user += character
 
-        if code in [curses.KEY_BACKSPACE]:
+        if code in [263, curses.KEY_BACKSPACE]:
             user = user[:-1]
             continue
 
-        if code == curses.KEY_ENTER or code in [10, 13]:
+        if code in [10, 13, curses.KEY_ENTER]:
             if len(user) < 4:
                 error = "too short"
                 continue
-            print(f"OK -- {user}", file=sys.stderr)
+
             local_storage.set_item("user", user)
             return
 
