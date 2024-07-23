@@ -6,20 +6,16 @@ from components.navbar import Navbar, NavAction
 from config import palette
 from lib import local_storage
 
-def home_screen_handler(stdscr):
+def game_screen_handler(stdscr):
     color = curses.color_pair(palette.MAIN_COLOR)
 
     height, width = stdscr.getmaxyx()
-    user = local_storage.get_item("user")
-
-    msg = f"Hello {user}!!! HOME Press M to main menu"
+    msg = f"GAME screen"
     x = int((width // 2) - (len(msg) // 2))
     g = Greeting(msg, 4, x, color | curses.A_ITALIC)   
 
-
     navbar = Navbar(
-        NavAction("c", consts.CHAMPIONS_SCREEN, "Champions  "),
-        NavAction("g", consts.GAME_SCREEN, "Game  "),
+        NavAction("a", consts.HOME_SCREEN, "Abort  "),
         NavAction("q", None, "Quit  ")
     )
 
@@ -37,5 +33,5 @@ def home_screen_handler(stdscr):
         if change:
             return screen
 
-def on_load_home_screen(w):
-    return w(home_screen_handler)
+def on_load_game_screen(w):
+    return w(game_screen_handler)
