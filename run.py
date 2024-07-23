@@ -4,6 +4,7 @@ from screens.main_menu_screen import on_load_main_menu_screen
 from config import consts
 from config import palette
 
+
 def main():
     palette.init_colors()
     screen = consts.HOME_SCREEN

@@ -5,6 +5,9 @@ from components.menu import Menu
 from config import palette
 
 def main_menu_screen_handler(stdscr):
+    curses.noecho()           # Prevent input from displaying in the screen
+    curses.curs_set(0)        # Cursor invisible (0)
+
     height, width = stdscr.getmaxyx()
 
     navbar = Navbar(
@@ -13,7 +16,7 @@ def main_menu_screen_handler(stdscr):
         NavAction("q", None, "Quit")
     )
 
-    menu = Menu(height//2 - 2, width//2, "Jabloki", "Fructi", "Kolbasa", "Producti")
+    menu = Menu(height//2 - 2, width//2, "MENU", "Game", "Champions board", "Quit")
 
     while True:
         # Clear screen
@@ -25,7 +28,6 @@ def main_menu_screen_handler(stdscr):
 
         character = stdscr.getch()
         menu.update(character)
-
 
         change, screen = navbar.update(stdscr, character)
         if change:
