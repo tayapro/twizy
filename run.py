@@ -5,8 +5,6 @@ from screens.login_screen import on_load_login_screen
 from config import consts
 from config import palette
 
-stdscr = curses.initscr()
-
 def main():
     palette.init_colors()
     on_load_login_screen(curses.wrapper)

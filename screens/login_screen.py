@@ -22,7 +22,6 @@ def login_screen_handler(stdscr):
     while True:
         # Clear screen
         stdscr.clear()
-        curses.curs_set(1)
 
         g.draw(stdscr)   
         if len(error) > 0:
