@@ -37,7 +37,7 @@ def login_screen_handler(stdscr):
         if character.isalpha() and character.isascii():
             user += character
 
-        if code in [263, curses.KEY_BACKSPACE]:
+        if code in [curses.KEY_BACKSPACE]:
             user = user[:-1]
             continue
 
