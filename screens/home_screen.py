@@ -9,9 +9,10 @@ from lib import local_storage
 
 def home_screen_handler(stdscr):
     curses.initscr()
-    curses.curs_set(0)
     curses.start_color()
     color = curses.color_pair(palette.ACCENT_COLOR_INV)
+    stdscr.getyx()
+    stdscr.move(0, 0)
 
     navbar = Navbar(
         NavAction("c", consts.CHAMPIONS_SCREEN, "Champions  "),
@@ -21,14 +22,14 @@ def home_screen_handler(stdscr):
 
     height, width = stdscr.getmaxyx()
 
+    title = "   HOME PAGE   "  
+    title_x = width // 2 - len(title) // 2
+    title_g = Greeting(title, 5, title_x, color)
+
     user_name = local_storage.get_item("user")
     user = f"  USER : {user_name}  "
     user_x = width - len(user) - 10
     user_g = Greeting(user, 5, user_x, color | curses.A_ITALIC) 
-
-    title = "   HOME PAGE   "  
-    title_x = width // 2 - len(title) // 2
-    title_g = Greeting(title, 5, title_x, color)
 
     welcome = "WELCOME to the tWIZY quiz!"
     welcome_x = width // 2 - len(welcome) // 2
@@ -60,8 +61,8 @@ def home_screen_handler(stdscr):
         rectangle(stdscr, 5, 5, height - 5, width - 5)
 
         navbar.draw(stdscr)
-        user_g.draw(stdscr)
         title_g.draw(stdscr)
+        user_g.draw(stdscr)
         welcome_g.draw(stdscr)
         welcome1_g.draw(stdscr)
         rules_g.draw(stdscr)

@@ -30,7 +30,9 @@ def login_screen_handler(stdscr):
 
         stdscr.addstr(height // 2, width // 2 - len(instructions), instructions)
         stdscr.addstr(height // 2, width // 2, user)
+
         stdscr.refresh()
+        
         code = stdscr.getch()
         character = chr(code)
         if character.isalpha() and character.isascii():
