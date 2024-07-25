@@ -26,7 +26,7 @@ def game_screen_handler(stdscr):
     user_x = width - len(user) - 10
     user_g = Greeting(user, 5, user_x, color | curses.A_ITALIC) 
 
-    question_num = 1
+    question_counter = 1
     TOTAL_QUESTIONS = 10
 
     # initialize answers
