@@ -1,18 +1,15 @@
 import sys
 import curses
-from config import consts
+from config import consts, layout, palette
 from components.greeting import Greeting
 from components.navbar import Navbar, NavAction
-from config import palette
+from components.centered_text import CenteredText
 from lib import local_storage
 
 def champions_screen_handler(stdscr):
     color = curses.color_pair(palette.MAIN_COLOR)
-
-    height, width = stdscr.getmaxyx()
-    title = "CHAMPIONS BOARD"
-    x = int((width // 2) - (len(msg) // 2))
-    g = Greeting(title, 4, x, color | curses.A_ITALIC)   
+ 
+    title = CenteredText("  CHAMPIONS BOARD  ", layout.FRAME_PADDING, color)
 
     navbar = Navbar(
         NavAction("h", consts.HOME_SCREEN, "Home  "),
@@ -25,7 +22,7 @@ def champions_screen_handler(stdscr):
         stdscr.clear()
 
         navbar.draw(stdscr)
-        g.draw(stdscr)
+        title.draw(stdscr)
 
         stdscr.refresh()
 
