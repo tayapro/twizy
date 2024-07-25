@@ -10,7 +10,7 @@ def outcome_screen_handler(stdscr):
     color = curses.color_pair(palette.MAIN_COLOR)
 
     height, width = stdscr.getmaxyx()
-    msg = f"OUTCOME screen"
+    msg = "  OUTCOME  "
     x = int((width // 2) - (len(msg) // 2))
     g = Greeting(msg, 4, x, color | curses.A_ITALIC)   
 

@@ -1,15 +1,13 @@
 import sys
 import curses
 from curses.textpad import rectangle
-from config import consts
+from config import consts, layout, palette
 from components.greeting import Greeting
 from components.navbar import Navbar, NavAction
-from config import palette
+from components.menu import Menu
 from lib import local_storage
 
 def game_screen_handler(stdscr):
-    stdscr.getyx()
-    stdscr.move(0, 0)
     color = curses.color_pair(palette.MAIN_COLOR)
 
     navbar = Navbar(
@@ -19,7 +17,7 @@ def game_screen_handler(stdscr):
 
     height, width = stdscr.getmaxyx()
 
-    title = "   tWIZY GAME PAGE   "  
+    title = "   tWIZY GAME   "  
     title_x = width // 2 - len(title) // 2
     title_g = Greeting(title, 5, title_x, color)
 
@@ -28,36 +26,50 @@ def game_screen_handler(stdscr):
     user_x = width - len(user) - 10
     user_g = Greeting(user, 5, user_x, color | curses.A_ITALIC) 
 
-    score_num = 0
-    score_x = 10
+    question_num = 1
+    TOTAL_QUESTIONS = 10
+
+    # initialize answers
+    answers = Menu(12, 10, "Options", "1. Alien", "2. Monster", "3. Programmer", "4. Who?")
 
     while True:
         # Clear screen
         stdscr.clear()
 
-        if score_num == 10:
-            return
+        border_padding = 5
+        rectangle(stdscr, border_padding, border_padding, 
+                  height - border_padding, width - border_padding)
 
-        score = f"  SCORE: {score_num}  "
+        question_counter_text = f"  QUESTION : {question_counter} / {TOTAL_QUESTIONS} "
+        stdscr.addstr(5, 10, question_counter_text)
 
-        rectangle(stdscr, 5, 5, height - 5, width - 5)
         navbar.draw(stdscr)
         user_g.draw(stdscr)
         title_g.draw(stdscr)
-        stdscr.addstr(5, 10, score)
+
+        stdscr.addstr(10, 10, "Who's Mr. Bean?")
+        answers.draw(stdscr)
 
         stdscr.refresh()
 
         code = stdscr.getch()
-        if code in [10, 13, curses.KEY_ENTER] and score_num < 10:
-            score_num += 1
-            print(f"SCORE_NUM: --- {score_num}", file=sys.stderr)
-            continue
+
+        answers.update(code)
 
         character = chr(code)
-        change, screen = navbar.update(stdscr, character)
+        change, screen = navbar.update(stdscr, code)
         if change:
             return screen
+
+        if question_counter == TOTAL_QUESTIONS:
+            return consts.OUTCOME_SCREEN
+
+        if code in [10, 13, curses.KEY_ENTER]:
+            question_counter += 1
+            print(f"Answer: i={answers.cursor}, op={answers.get_selection()}", file=sys.stderr)
+            answers.set_options("1. Alien", "2. Monster", "3. Programmer", f"4. Who? {question_counter}")
+            print(f"QUESTION_COUNTER: --- {question_counter}", file=sys.stderr)
+            continue
 
 def on_load_game_screen(w):
     return w(game_screen_handler)

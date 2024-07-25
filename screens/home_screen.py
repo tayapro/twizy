@@ -1,11 +1,12 @@
 import sys
 import curses
 from curses.textpad import rectangle
-from config import consts
+from config import consts, layout, palette
 from components.greeting import Greeting
 from components.navbar import Navbar, NavAction
-from config import palette
 from lib import local_storage
+from components.centered_text import CenteredText
+from components.text import Text
 
 def home_screen_handler(stdscr):
     curses.initscr()
@@ -22,54 +23,33 @@ def home_screen_handler(stdscr):
 
     height, width = stdscr.getmaxyx()
 
-    title = "   HOME PAGE   "  
-    title_x = width // 2 - len(title) // 2
-    title_g = Greeting(title, 5, title_x, color)
-
     user_name = local_storage.get_item("user")
-    user = f"  USER : {user_name}  "
-    user_x = width - len(user) - 10
-    user_g = Greeting(user, 5, user_x, color | curses.A_ITALIC) 
+    user_text = f"  USER : {user_name}  "
+    user_text_x = width - len(user_text) - 10
 
-    welcome = "WELCOME to the tWIZY quiz!"
-    welcome_x = width // 2 - len(welcome) // 2
-    welcome_g = Greeting(welcome, 8, welcome_x, color)
-
-    welcome1 =  "Get ready to test your knowledge and have fun."
-    welcome1_x = width // 2 - len(welcome1) // 2
-    welcome1_g = Greeting(welcome1, 9, welcome1_x, color)
-
-    rules = "RULES: "
-    rules_g = Greeting(rules, 11, 20, color)
-
-    rule1 = "1. Read Each Question Carefully."
-    rule1_g = Greeting(rule1, 13, 20, color)
-
-    rule2 = "2. Select Your Answer"
-    rule2_g = Greeting(rule2, 14, 20, color)
-
-    rule3 = "3. Earn Points"
-    rule3_g = Greeting(rule3, 15, 20, color)
-
-    start_game = "To start the game, press the `g` button."
-    start_game_g = Greeting(start_game, 20, 20, color)
+    texts = [
+        Text(user_text, layout.FRAME_PADDING, user_text_x, color),
+        CenteredText("   HOME   ", layout.FRAME_PADDING, color),
+        CenteredText("WELCOME to the tWIZY quiz!", 8, color),
+        CenteredText("Get ready to test your knowledge and have fun.", 9, color),
+        Text("RULES: ", 11, layout.MAIN_TEXT_MARGING_X, color),
+        Text("1. Read Each Question Carefully.", 13, layout.MAIN_TEXT_MARGING_X, color),
+        Text("2. Select Your Answer", 14, layout.MAIN_TEXT_MARGING_X, color),
+        Text("3. Earn Points", 15, layout.MAIN_TEXT_MARGING_X, color),
+        CenteredText("To start the game, press the `g` button.", 20, color)
+    ]
 
     while True:
         # Clear screen
         stdscr.clear()
 
-        rectangle(stdscr, 5, 5, height - 5, width - 5)
+        rectangle(stdscr, layout.FRAME_PADDING, layout.FRAME_PADDING, 
+                  height - layout.FRAME_PADDING, width - layout.FRAME_PADDING)
 
         navbar.draw(stdscr)
-        title_g.draw(stdscr)
-        user_g.draw(stdscr)
-        welcome_g.draw(stdscr)
-        welcome1_g.draw(stdscr)
-        rules_g.draw(stdscr)
-        rule1_g.draw(stdscr)
-        rule2_g.draw(stdscr)
-        rule3_g.draw(stdscr)
-        start_game_g.draw(stdscr)
+
+        for t in texts:
+            t.draw(stdscr)
 
         stdscr.refresh()
 

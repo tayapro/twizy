@@ -12,18 +12,24 @@ class Menu(object):
         self.options = args[:]
         self.title = title
 
+    def set_options(self, *args):
+        self.cursor = 0
+        self.options = args[:]
+
+    def get_selection(self):
+        return self.options[self.cursor]
+
     def draw(self, stdscr):
         normal = curses.color_pair(palette.MAIN_COLOR)
         selected = curses.color_pair(palette.MAIN_COLOR_INV)
 
-        rectangle(stdscr, 10, 30, 20, 90)
         stdscr.addstr(10, 15, self.title)
 
         for index, opt in enumerate(self.options):
-            print(f"{self.cursor} -- {self.y} -- {self.x} -- {index} -- {opt}", file=sys.stderr)
             stdscr.addstr(self.y + index, self.x, opt, selected if self.cursor == index else normal)
 
     def update(self, character):
+        # print(f"{character} -- {ord('o')}", file=sys.stderr)
         if character == ord('o'):
             self.cursor -= 1
         elif character == ord('l'):
