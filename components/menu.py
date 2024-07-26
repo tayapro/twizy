@@ -33,14 +33,10 @@ class Menu(object):
             stdscr.addstr(self.y + index + padding, self.x, opt, selected if self.cursor == index else normal)
 
     def update(self, character):
-        # print(f"{character} -- {ord('o')}", file=sys.stderr)
         if character == ord('o'):
             self.cursor -= 1
         elif character == ord('l'):
             self.cursor += 1
-
-        print(f"{self.cursor}", file=sys.stderr)
-
 
         if self.cursor < 0:
             self.cursor = len(self.options) - 1

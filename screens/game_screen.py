@@ -71,11 +71,8 @@ def game_screen_handler(stdscr):
 
         if code in [10, 13, curses.KEY_ENTER]:
             question_counter += 1
-            print(f"Answer: i={answers.cursor}, op={answers.get_selection()}", file=sys.stderr)
             answers.set_options("1. Alien", "2. Monster", "3. Programmer", f"4. Who? {question_counter}")
             question.message = "Are you sure that you are sure? "
-            # question.restart()
-            print(f"QUESTION_COUNTER: --- {question_counter}", file=sys.stderr)
             continue
 
 def on_load_game_screen(w):

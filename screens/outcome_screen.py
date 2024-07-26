@@ -16,8 +16,8 @@ def outcome_screen_handler(stdscr):
 
     navbar = Navbar(
         NavAction("h", consts.HOME_SCREEN, "Home  "),
-        NavAction("g", consts.HOME_SCREEN, "Game  "),
-        NavAction("c", consts.HOME_SCREEN, "Champions  "),
+        NavAction("g", consts.GAME_SCREEN, "Game  "),
+        NavAction("c", consts.CHAMPIONS_SCREEN, "Champions  "),
         NavAction("q", None, "Quit  ")
     )
 
