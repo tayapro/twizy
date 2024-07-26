@@ -6,8 +6,10 @@ from screens.champions_screen import on_load_champions_screen
 from screens.outcome_screen import on_load_outcome_screen
 from config import consts
 from config import palette
+from lib.spreadsheet_storage import init_storage
 
 def main():
+    init_storage()
     palette.init_colors()
     on_load_login_screen(curses.wrapper)
 

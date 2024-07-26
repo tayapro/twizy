@@ -32,7 +32,8 @@ def game_screen_handler(stdscr):
     question_counter = 1
 
     # initialize answers
-    answers = Menu(12, 10, "", "1. Alien", "2. Monster", "3. Programmer", "4. Who?")
+    answers_list = ["1. Alien", "2. Monster", "3. Programmer", "4. Who?"]
+    answers = Menu(12, 10, "", *answers_list)
     question = AnimatedText("Who's Mr. Bean? ", 10, 10, 0.1)
 
     while True:
@@ -49,7 +50,6 @@ def game_screen_handler(stdscr):
             layout.FRAME_PADDING_TOP, 10
         ).draw(stdscr)
    
-        # stdscr.addstr(10, 10, "Who's Mr. Bean?")
         answers.draw(stdscr)
         question.draw(stdscr)
 
