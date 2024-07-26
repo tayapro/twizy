@@ -23,10 +23,14 @@ class Menu(object):
         normal = curses.color_pair(palette.MAIN_COLOR)
         selected = curses.color_pair(palette.MAIN_COLOR_INV)
 
-        stdscr.addstr(10, 15, self.title)
+        padding = 0
+
+        if len(self.title) > 0:
+            stdscr.addstr(self.y, self.x, self.title)
+            padding = 1
 
         for index, opt in enumerate(self.options):
-            stdscr.addstr(self.y + index, self.x, opt, selected if self.cursor == index else normal)
+            stdscr.addstr(self.y + index + padding, self.x, opt, selected if self.cursor == index else normal)
 
     def update(self, character):
         # print(f"{character} -- {ord('o')}", file=sys.stderr)

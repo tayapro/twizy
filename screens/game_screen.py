@@ -1,10 +1,14 @@
 import sys
 import curses
 from curses.textpad import rectangle
-from config import consts, layout, palette
+from config import consts, layout, palette, game
 from components.greeting import Greeting
 from components.navbar import Navbar, NavAction
 from components.menu import Menu
+from components.frame import Frame
+from components.text import Text
+from components.centered_text import CenteredText
+from components.right_text import RightText
 from lib import local_storage
 
 def game_screen_handler(stdscr):
@@ -15,38 +19,33 @@ def game_screen_handler(stdscr):
         NavAction("q", None, "Quit  ")
     )
 
-    height, width = stdscr.getmaxyx()
-
-    title = "   tWIZY GAME   "  
-    title_x = width // 2 - len(title) // 2
-    title_g = Greeting(title, 5, title_x, color)
-
     user_name = local_storage.get_item("user")
-    user = f"  USER : {user_name}  "
-    user_x = width - len(user) - 10
-    user_g = Greeting(user, 5, user_x, color | curses.A_ITALIC) 
+
+    elements = [
+        Frame(layout.FRAME_PADDING, layout.FRAME_PADDING),
+        RightText(f"  USER : {user_name}  ", layout.FRAME_PADDING, 10, color),
+        CenteredText("   tWIZY GAME   ", layout.FRAME_PADDING, color)
+    ]
 
     question_counter = 1
-    TOTAL_QUESTIONS = 10
 
     # initialize answers
-    answers = Menu(12, 10, "Options", "1. Alien", "2. Monster", "3. Programmer", "4. Who?")
+    answers = Menu(12, 10, "", "1. Alien", "2. Monster", "3. Programmer", "4. Who?")
 
     while True:
         # Clear screen
         stdscr.clear()
 
-        border_padding = 5
-        rectangle(stdscr, border_padding, border_padding, 
-                  height - border_padding, width - border_padding)
-
-        question_counter_text = f"  QUESTION : {question_counter} / {TOTAL_QUESTIONS} "
-        stdscr.addstr(5, 10, question_counter_text)
-
         navbar.draw(stdscr)
-        user_g.draw(stdscr)
-        title_g.draw(stdscr)
 
+        for e in elements:
+            e.draw(stdscr)
+
+        # question_counter is different for every draw cycle, when we hit Enter
+        Text(f"  QUESTION : {question_counter} / {game.TOTAL_QUESTIONS} ", 
+            5, 10
+        ).draw(stdscr)
+   
         stdscr.addstr(10, 10, "Who's Mr. Bean?")
         answers.draw(stdscr)
 
@@ -61,7 +60,7 @@ def game_screen_handler(stdscr):
         if change:
             return screen
 
-        if question_counter == TOTAL_QUESTIONS:
+        if question_counter == game.TOTAL_QUESTIONS:
             return consts.OUTCOME_SCREEN
 
         if code in [10, 13, curses.KEY_ENTER]:

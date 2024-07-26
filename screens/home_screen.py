@@ -1,12 +1,14 @@
 import sys
 import curses
-from curses.textpad import rectangle
 from config import consts, layout, palette
+from components.text import Text
+from components.frame import Frame
+from components.right_text import RightText
 from components.greeting import Greeting
 from components.navbar import Navbar, NavAction
-from lib import local_storage
 from components.centered_text import CenteredText
-from components.text import Text
+from lib import local_storage
+
 
 def home_screen_handler(stdscr):
     curses.initscr()
@@ -24,11 +26,10 @@ def home_screen_handler(stdscr):
     height, width = stdscr.getmaxyx()
 
     user_name = local_storage.get_item("user")
-    user_text = f"  USER : {user_name}  "
-    user_text_x = width - len(user_text) - 10
 
-    texts = [
-        Text(user_text, layout.FRAME_PADDING, user_text_x, color),
+    elements = [
+        Frame(layout.FRAME_PADDING, layout.FRAME_PADDING),
+        RightText(f"  USER : {user_name}  ", layout.FRAME_PADDING, 10, color),
         CenteredText("   HOME   ", layout.FRAME_PADDING, color),
         CenteredText("WELCOME to the tWIZY quiz!", 8, color),
         CenteredText("Get ready to test your knowledge and have fun.", 9, color),
@@ -43,13 +44,10 @@ def home_screen_handler(stdscr):
         # Clear screen
         stdscr.clear()
 
-        rectangle(stdscr, layout.FRAME_PADDING, layout.FRAME_PADDING, 
-                  height - layout.FRAME_PADDING, width - layout.FRAME_PADDING)
-
         navbar.draw(stdscr)
 
-        for t in texts:
-            t.draw(stdscr)
+        for e in elements:
+            e.draw(stdscr)
 
         stdscr.refresh()
 
