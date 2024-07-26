@@ -9,6 +9,7 @@ from components.frame import Frame
 from components.text import Text
 from components.centered_text import CenteredText
 from components.right_text import RightText
+from components.animated_text import AnimatedText
 from lib import local_storage
 
 def game_screen_handler(stdscr):
@@ -31,6 +32,7 @@ def game_screen_handler(stdscr):
 
     # initialize answers
     answers = Menu(12, 10, "", "1. Alien", "2. Monster", "3. Programmer", "4. Who?")
+    question = AnimatedText("Who's Mr. Bean? ", 10, 10, 0.03)
 
     while True:
         # Clear screen
@@ -46,10 +48,14 @@ def game_screen_handler(stdscr):
             5, 10
         ).draw(stdscr)
    
-        stdscr.addstr(10, 10, "Who's Mr. Bean?")
+        # stdscr.addstr(10, 10, "Who's Mr. Bean?")
         answers.draw(stdscr)
+        question.draw(stdscr)
 
         stdscr.refresh()
+
+        if not question.is_animation_finished():
+            continue
 
         code = stdscr.getch()
 
@@ -67,6 +73,8 @@ def game_screen_handler(stdscr):
             question_counter += 1
             print(f"Answer: i={answers.cursor}, op={answers.get_selection()}", file=sys.stderr)
             answers.set_options("1. Alien", "2. Monster", "3. Programmer", f"4. Who? {question_counter}")
+            question.message = "Are you sure that you are sure? "
+            # question.restart()
             print(f"QUESTION_COUNTER: --- {question_counter}", file=sys.stderr)
             continue
 
