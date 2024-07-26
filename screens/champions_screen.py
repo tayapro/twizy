@@ -9,7 +9,7 @@ from lib import local_storage
 def champions_screen_handler(stdscr):
     color = curses.color_pair(palette.MAIN_COLOR)
  
-    title = CenteredText("  CHAMPIONS BOARD  ", layout.FRAME_PADDING, color)
+    title = CenteredText("  CHAMPIONS BOARD  ", layout.FRAME_PADDING_TOP, color)
 
     navbar = Navbar(
         NavAction("h", consts.HOME_SCREEN, "Home  "),

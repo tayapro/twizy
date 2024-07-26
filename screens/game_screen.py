@@ -23,9 +23,10 @@ def game_screen_handler(stdscr):
     user_name = local_storage.get_item("user")
 
     elements = [
-        Frame(layout.FRAME_PADDING, layout.FRAME_PADDING),
-        RightText(f"  USER : {user_name}  ", layout.FRAME_PADDING, 10, color),
-        CenteredText("   tWIZY GAME   ", layout.FRAME_PADDING, color)
+        Frame(layout.FRAME_PADDING_TOP, layout.FRAME_PADDING_LEFT, 
+              layout.FRAME_PADDING_BOTTOM, layout.FRAME_PADDING_RIGHT),
+        RightText(f"  USER : {user_name}  ", layout.FRAME_PADDING_TOP, 10, color),
+        CenteredText("   tWIZY GAME   ", layout.FRAME_PADDING_TOP, color)
     ]
 
     question_counter = 1
@@ -45,7 +46,7 @@ def game_screen_handler(stdscr):
 
         # question_counter is different for every draw cycle, when we hit Enter
         Text(f"  QUESTION : {question_counter} / {game.TOTAL_QUESTIONS} ", 
-            5, 10
+            layout.FRAME_PADDING_TOP, 10
         ).draw(stdscr)
    
         # stdscr.addstr(10, 10, "Who's Mr. Bean?")

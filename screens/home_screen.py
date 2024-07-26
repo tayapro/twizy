@@ -28,9 +28,10 @@ def home_screen_handler(stdscr):
     user_name = local_storage.get_item("user")
 
     elements = [
-        Frame(layout.FRAME_PADDING, layout.FRAME_PADDING),
-        RightText(f"  USER : {user_name}  ", layout.FRAME_PADDING, 10, color),
-        CenteredText("   HOME   ", layout.FRAME_PADDING, color),
+        Frame(layout.FRAME_PADDING_TOP, layout.FRAME_PADDING_LEFT, 
+              layout.FRAME_PADDING_BOTTOM, layout.FRAME_PADDING_RIGHT),
+        RightText(f"  USER : {user_name}  ", layout.FRAME_PADDING_TOP, 10, color),
+        CenteredText("   HOME   ", layout.FRAME_PADDING_TOP, color),
         CenteredText("WELCOME to the tWIZY quiz!", 8, color),
         CenteredText("Get ready to test your knowledge and have fun.", 9, color),
         Text("RULES: ", 11, layout.MAIN_TEXT_MARGING_X, color),
