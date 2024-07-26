@@ -32,7 +32,7 @@ def game_screen_handler(stdscr):
 
     # initialize answers
     answers = Menu(12, 10, "", "1. Alien", "2. Monster", "3. Programmer", "4. Who?")
-    question = AnimatedText("Who's Mr. Bean? ", 10, 10, 0.03)
+    question = AnimatedText("Who's Mr. Bean? ", 10, 10, 0.1)
 
     while True:
         # Clear screen
