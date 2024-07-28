@@ -17,7 +17,8 @@ class Menu(object):
         self.options = args[:]
 
     def get_selection(self):
-        return self.options[self.cursor]
+        # return self.options[self.cursor]
+        return self.cursor
 
     def draw(self, stdscr):
         normal = curses.color_pair(palette.MAIN_COLOR)

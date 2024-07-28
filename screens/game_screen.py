@@ -55,10 +55,7 @@ def game_screen_handler(stdscr):
     i = 0
     answers_list = quiz[i][2:6]
     question = CenteredText(quiz[i][0], 10, color)
-    # answers = Menu(12, 10, "", *answers_list)
     # question = AnimatedText(quiz[i][0], 10, 10, 0.1)
-    # print(f"answers_list: {answers_list}", file=sys.stderr)
-    # print(f"question: {quiz[0][0]}", file=sys.stderr)
 
     while True:
         # Clear screen
@@ -96,6 +93,10 @@ def game_screen_handler(stdscr):
             return consts.OUTCOME_SCREEN
 
         if code in [10, 13, curses.KEY_ENTER]:
+            user_answer = answers.get_selection()
+            if user_answer == int(quiz[i][1]):
+                score += 1
+
             question_counter += 1
             i += 1
             answers_list = quiz[i][2:6]
