@@ -54,8 +54,9 @@ def game_screen_handler(stdscr):
     # Initialize answers
     i = 0
     answers_list = quiz[i][2:6]
+    question = CenteredText(quiz[i][0], 10, color)
     # answers = Menu(12, 10, "", *answers_list)
-    question = AnimatedText(quiz[i][0], 10, 10, 0.1)
+    # question = AnimatedText(quiz[i][0], 10, 10, 0.1)
     # print(f"answers_list: {answers_list}", file=sys.stderr)
     # print(f"question: {quiz[0][0]}", file=sys.stderr)
 
@@ -64,7 +65,6 @@ def game_screen_handler(stdscr):
         stdscr.clear()
 
         navbar.draw(stdscr)
-
         for e in elements:
             e.draw(stdscr)
 
@@ -79,8 +79,8 @@ def game_screen_handler(stdscr):
 
         stdscr.refresh()
 
-        if not question.is_animation_finished():
-            continue
+        # if not question.is_animation_finished():
+        #     continue
 
         code = stdscr.getch()
 
