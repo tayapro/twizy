@@ -1,8 +1,9 @@
 import sys
 import curses
 import random
+import time
 from curses.textpad import rectangle
-from config import consts, layout, palette, game
+from config import screens, layout, palette, game
 from components.greeting import Greeting
 from components.navbar import Navbar, NavAction
 from components.menu import Menu
@@ -22,15 +23,16 @@ def fetch_quiz_data():
         in spreadsheet_storage.get_table("quiz")[1:]
     ]
 
-def set_quiz(quiz_arr):
-    random.shuffle(quiz_arr)
-    return quiz_arr[:10]
+def get_quiz():
+    data = fetch_quiz_data()
+    random.shuffle(data)
+    return data[:10]
 
 def game_screen_handler(stdscr):
     color = curses.color_pair(palette.MAIN_COLOR)
 
     navbar = Navbar(
-        NavAction("a", consts.HOME_SCREEN, "Abort  "),
+        NavAction("a", screens.HOME_SCREEN, "Abort  "),
         NavAction("q", None, "Quit  ")
     )
 
@@ -43,19 +45,14 @@ def game_screen_handler(stdscr):
         CenteredText("   tWIZY GAME   ", layout.FRAME_PADDING_TOP, color)
     ]
 
+    quiz = get_quiz()
+
     question_counter = 1
-    score = 0
+    correct_answers_counter = 0
+    question, corrent_option_index, *options = quiz[0]
 
-    quiz_storage_data = fetch_quiz_data()
-    quiz = set_quiz(quiz_storage_data)
-    print(f"QUIZ: {quiz}", file=sys.stderr)
-    print("----------------------------------------", file=sys.stderr)
-
-    # Initialize answers
-    i = 0
-    answers_list = quiz[i][2:6]
-    question = CenteredText(quiz[i][0], 10, color)
-    # question = AnimatedText(quiz[i][0], 10, 10, 0.1)
+    options_menu = Menu(12, 10, "", *options)
+    question_text = CenteredText(question + " ", 10, color) # Question
 
     while True:
         # Clear screen
@@ -70,38 +67,40 @@ def game_screen_handler(stdscr):
             layout.FRAME_PADDING_TOP, 10
         ).draw(stdscr)
    
-        answers = Menu(12, 10, "", *answers_list)
-        answers.draw(stdscr)
-        question.draw(stdscr)
+        options_menu.draw(stdscr)
+        question_text.draw(stdscr)
 
         stdscr.refresh()
-
-        # if not question.is_animation_finished():
-        #     continue
+        
+        start_time = time.time()
 
         code = stdscr.getch()
 
-        answers.update(code)
+        options_menu.update(code)
 
         character = chr(code)
         change, screen = navbar.update(stdscr, code)
         if change:
             return screen
 
+        # When answeeed all questions
         if question_counter == game.TOTAL_QUESTIONS:
-            local_storage.set_item("score", score)
-            return consts.OUTCOME_SCREEN
+            total_time = time.time()
+            local_storage.set_item("score", correct_answers_counter)
+            return screens.OUTCOME_SCREEN
 
+        # When user hits enter
         if code in [10, 13, curses.KEY_ENTER]:
-            user_answer = answers.get_selection()
-            if user_answer == int(quiz[i][1]):
-                score += 1
+            user_option = options_menu.get_selection()
+            if user_option == int(corrent_option_index):
+                correct_answers_counter += 1
 
             question_counter += 1
-            i += 1
-            answers_list = quiz[i][2:6]
-            answers.set_options(answers_list)
-            question.message = quiz[i][0]
+            # question_counter -1 becaause of question starts from 1
+            question, corrent_option_index, *options = quiz[question_counter - 1]
+
+            options_menu.set_options(*options)
+            question_text.message = question + " "
             continue
 
 def on_load_game_screen(w):

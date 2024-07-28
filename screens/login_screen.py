@@ -1,9 +1,8 @@
 import sys
 import curses
-from config import consts
+from config import screens, palette
 from components.greeting import Greeting
 from components.navbar import Navbar, NavAction
-from config import palette
 from lib import local_storage
 
 def login_screen_handler(stdscr):

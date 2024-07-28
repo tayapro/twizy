@@ -1,6 +1,6 @@
 import sys
 import curses
-from config import consts, layout, palette
+from config import screens, layout, palette
 from components.text import Text
 from components.frame import Frame
 from components.right_text import RightText
@@ -18,8 +18,8 @@ def home_screen_handler(stdscr):
     stdscr.move(0, 0)
 
     navbar = Navbar(
-        NavAction("c", consts.CHAMPIONS_SCREEN, "Champions  "),
-        NavAction("g", consts.GAME_SCREEN, "Game  "),
+        NavAction("c", screens.CHAMPIONS_SCREEN, "Champions  "),
+        NavAction("g", screens.GAME_SCREEN, "Game  "),
         NavAction("q", None, "Quit  ")
     )
 

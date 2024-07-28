@@ -1,12 +1,11 @@
 import sys
 import curses
-from config import consts
 from components.frame import Frame
 from components.greeting import Greeting
 from components.navbar import Navbar, NavAction
 from components.centered_text import CenteredText
 from components.right_text import RightText
-from config import consts, layout, palette
+from config import screens, layout, palette
 from lib import local_storage
 
 def outcome_screen_handler(stdscr):
@@ -15,9 +14,9 @@ def outcome_screen_handler(stdscr):
     height, width = stdscr.getmaxyx()
 
     navbar = Navbar(
-        NavAction("h", consts.HOME_SCREEN, "Home  "),
-        NavAction("g", consts.GAME_SCREEN, "Game  "),
-        NavAction("c", consts.CHAMPIONS_SCREEN, "Champions  "),
+        NavAction("h", screens.HOME_SCREEN, "Home  "),
+        NavAction("g", screens.GAME_SCREEN, "Game  "),
+        NavAction("c", screens.CHAMPIONS_SCREEN, "Champions  "),
         NavAction("q", None, "Quit  ")
     )
 
