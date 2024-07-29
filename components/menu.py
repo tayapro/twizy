@@ -6,11 +6,12 @@ from config import palette
 class Menu(object):
     cursor = 0
 
-    def __init__(self, y, x, title, *args):
+    def __init__(self, y, x, title, show_numbers, *args):
         self.y = y
         self.x = x
-        self.options = args[:]
         self.title = title
+        self.show_numbers = show_numbers
+        self.options = args[:]
 
     def set_options(self, *args):
         self.cursor = 0
@@ -30,7 +31,8 @@ class Menu(object):
             padding = 1
 
         for index, opt in enumerate(self.options):
-            stdscr.addstr(self.y + index + padding, self.x, opt, selected if self.cursor == index else normal)
+            text = f"{index+1}. {opt}" if self.show_numbers else opt
+            stdscr.addstr(self.y + index + padding, self.x, text, selected if self.cursor == index else normal)
 
     def update(self, character):
         if character == ord('o'):

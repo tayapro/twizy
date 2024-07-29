@@ -51,7 +51,7 @@ def game_screen_handler(stdscr):
     correct_answers_counter = 0
     question, corrent_option_index, *options = quiz[0]
 
-    options_menu = Menu(12, 10, "", *options)
+    options_menu = Menu(12, 10, "", True, *options)
     question_text = CenteredText(question + " ", 10, color) # Question
 
     while True:
@@ -85,8 +85,10 @@ def game_screen_handler(stdscr):
 
         # When answeeed all questions
         if question_counter == game.TOTAL_QUESTIONS:
-            total_time = time.time()
-            local_storage.set_item("score", correct_answers_counter)
+            quiz_time = time.time() - start_time
+            local_storage.set_item("total_mistakes", game.TOTAL_QUESTIONS - correct_answers_counter)
+            local_storage.set_item("correct_answers", correct_answers_counter)
+            local_storage.set_item("quiz_time", quiz_time)
             return screens.OUTCOME_SCREEN
 
         # When user hits enter
