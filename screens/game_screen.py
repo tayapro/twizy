@@ -27,28 +27,11 @@ def get_quiz():
     random.shuffle(data)
     return data[:10]
 
-def game_screen_handler(stdscr):
+def content_screen_handler(stdscr, navbar, elements, data):
     color = curses.color_pair(palette.MAIN_COLOR)
-
-    navbar = Navbar(
-        NavAction("a", screens.HOME_SCREEN, "Abort  "),
-        NavAction("q", None, "Quit  ")
-    )
-
-    user_name = local_storage.get_item("user")
-
-    elements = [
-        Frame(layout.FRAME_PADDING_TOP, layout.FRAME_PADDING_LEFT, 
-              layout.FRAME_PADDING_BOTTOM, layout.FRAME_PADDING_RIGHT),
-        RightText(f"  USER : {user_name}  ", layout.FRAME_PADDING_TOP, 10, color),
-        CenteredText("   tWIZY GAME   ", layout.FRAME_PADDING_TOP, color)
-    ]
-
-    quiz = get_quiz()
-
     question_counter = 1
     correct_answers_counter = 0
-    question, corrent_option_index, *options = quiz[0]
+    question, corrent_option_index, *options = data[0]
 
     options_menu = Menu(12, 10, "", True, *options)
     question_text = CenteredText(question + " ", 10, color) # Question
@@ -61,7 +44,7 @@ def game_screen_handler(stdscr):
         for e in elements:
             e.draw(stdscr)
 
-        # question_counter is different for every draw cycle, when we hit Enter
+        # Question_counter is different for every draw cycle, when we hit Enter
         Text(f"  QUESTION : {question_counter} / {game.TOTAL_QUESTIONS} ", 
             layout.FRAME_PADDING_TOP, 10
         ).draw(stdscr)
@@ -97,12 +80,50 @@ def game_screen_handler(stdscr):
                 correct_answers_counter += 1
 
             question_counter += 1
-            # question_counter -1 becaause of question starts from 1
-            question, corrent_option_index, *options = quiz[question_counter - 1]
+            # Question_counter -1 becaause of question starts from 1
+            question, corrent_option_index, *options = data[question_counter - 1]
 
             options_menu.set_options(*options)
             question_text.message = question + " "
             continue
+
+def skeleton_screen_handler(stdscr, navbar, elements):
+    color = curses.color_pair(palette.MAIN_COLOR)
+    height, width = stdscr.getmaxyx()
+
+    stdscr.clear()
+
+    navbar.draw(stdscr)
+
+    for e in elements:
+        e.draw(stdscr)
+
+    banner = CenteredText("Your quiz is on its way, please wait...", height // 2, color)
+    banner.draw(stdscr)
+    
+    stdscr.refresh()
+    
+    return get_quiz()
+
+def game_screen_handler(stdscr):
+    color = curses.color_pair(palette.MAIN_COLOR)
+
+    navbar = Navbar(
+        NavAction("a", screens.HOME_SCREEN, "Abort  "),
+        NavAction("q", None, "Quit  ")
+    )
+
+    user_name = local_storage.get_item("user")
+
+    elements = [
+        Frame(layout.FRAME_PADDING_TOP, layout.FRAME_PADDING_LEFT, 
+              layout.FRAME_PADDING_BOTTOM, layout.FRAME_PADDING_RIGHT),
+        RightText(f"  USER : {user_name}  ", layout.FRAME_PADDING_TOP, 10, color),
+        CenteredText("   tWIZY GAME   ", layout.FRAME_PADDING_TOP, color)
+    ]
+
+    data = skeleton_screen_handler(stdscr, navbar, elements)
+    return content_screen_handler(stdscr, navbar, elements, data)
 
 def on_load_game_screen(w):
     return w(game_screen_handler)

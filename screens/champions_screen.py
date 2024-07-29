@@ -74,7 +74,7 @@ def skeleton_screen_handler(stdscr, navbar, elements):
     for e in elements:
         e.draw(stdscr)
 
-    banner = CenteredText("Loading please wait...", height // 2, color)
+    banner = CenteredText("The champions board is on its way, please wait...", height // 2, color)
     banner.draw(stdscr)
     
     stdscr.refresh()
@@ -98,7 +98,7 @@ def champions_screen_handler(stdscr):
     )
 
     data = skeleton_screen_handler(stdscr, navbar, elements)
-    content_screen_handler(stdscr, navbar, elements, data)
+    return content_screen_handler(stdscr, navbar, elements, data)
     
 
 def on_load_champions_screen(w):
