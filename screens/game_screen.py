@@ -29,7 +29,7 @@ def get_quiz():
 
 def content_screen_handler(stdscr, navbar, elements, data):
     color = curses.color_pair(palette.MAIN_COLOR)
-    question_counter = 1
+    question_counter = 0
     correct_answers_counter = 0
     question, corrent_option_index, *options = data[0]
 
@@ -45,12 +45,14 @@ def content_screen_handler(stdscr, navbar, elements, data):
             e.draw(stdscr)
 
         # Question_counter is different for every draw cycle, when we hit Enter
-        Text(f"  QUESTION : {question_counter} / {game.TOTAL_QUESTIONS} ", 
+        Text(f"  QUESTION : {question_counter + 1} / {game.TOTAL_QUESTIONS} ", 
             layout.FRAME_PADDING_TOP, 10
         ).draw(stdscr)
    
         options_menu.draw(stdscr)
         question_text.draw(stdscr)
+
+        # stdscr.addstr(1,1, f"Hint: {int(corrent_option_index)+1}")
 
         stdscr.refresh()
         
@@ -65,14 +67,6 @@ def content_screen_handler(stdscr, navbar, elements, data):
         if change:
             return screen
 
-        # When answeeed all questions
-        if question_counter == game.TOTAL_QUESTIONS:
-            quiz_time = time.time() - start_time
-            local_storage.set_item("total_mistakes", game.TOTAL_QUESTIONS - correct_answers_counter)
-            local_storage.set_item("correct_answers", correct_answers_counter)
-            local_storage.set_item("quiz_time", quiz_time)
-            return screens.OUTCOME_SCREEN
-
         # When user hits enter
         if code in [10, 13, curses.KEY_ENTER]:
             user_option = options_menu.get_selection()
@@ -80,12 +74,21 @@ def content_screen_handler(stdscr, navbar, elements, data):
                 correct_answers_counter += 1
 
             question_counter += 1
-            # Question_counter -1 becaause of question starts from 1
-            question, corrent_option_index, *options = data[question_counter - 1]
+            if question_counter < game.TOTAL_QUESTIONS:
+                question, corrent_option_index, *options = data[question_counter]
 
             options_menu.set_options(*options)
             question_text.message = question + " "
-            continue
+
+        # When answeeed all questions
+        if question_counter == game.TOTAL_QUESTIONS:
+            end_time = time.time()
+            quiz_time = end_time - start_time
+            local_storage.set_item("total_mistakes", game.TOTAL_QUESTIONS - correct_answers_counter)
+            local_storage.set_item("correct_answers", correct_answers_counter)
+            local_storage.set_item("quiz_time", quiz_time)
+            local_storage.set_item("end_time", int(end_time))
+            return screens.OUTCOME_SCREEN
 
 def skeleton_screen_handler(stdscr, navbar, elements):
     color = curses.color_pair(palette.MAIN_COLOR)

@@ -8,19 +8,8 @@ from components.navbar import Navbar, NavAction
 from components.centered_text import CenteredText
 from components.menu import Menu
 from components.frame import Frame
+from components.champions import fetch_champions
 from lib import local_storage
-from lib import spreadsheet_storage
-
-def fetch_champions():
-    return [
-        (n, s) for n, s in spreadsheet_storage.get_table("champions")[1:]
-    ]
-
-def update_champions(new_champion):
-    return
-
-def check_score(score):
-    return
 
 def content_screen_handler(stdscr, navbar, elements, data):
     while True:
@@ -33,7 +22,7 @@ def content_screen_handler(stdscr, navbar, elements, data):
         for e in elements:
             e.draw(stdscr)
 
-        max_name_length = max(len(name) for name, _ in data)
+        max_name_length = max(len(name) for name, _, _ in data)
 
         # Define the start position
         name_header = "Name"
@@ -51,7 +40,7 @@ def content_screen_handler(stdscr, navbar, elements, data):
             "-" * (max_name_length + len(name_header) + len(score_header) + gap))
 
         # Print the data rows
-        for i, (name, score) in enumerate(data):
+        for i, (name, score, time) in enumerate(data):
             stdscr.addstr(start_y + 2 + i, start_x, 
             f"{name.ljust(max_name_length + gap + len(name_header), 
             gap_filler)}{str(score).rjust(len(score_header))}")
