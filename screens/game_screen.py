@@ -11,7 +11,6 @@ from components.frame import Frame
 from components.text import Text
 from components.centered_text import CenteredText
 from components.right_text import RightText
-from components.animated_text import AnimatedText
 from lib import local_storage, spreadsheet_storage
 
 def fetch_quiz_data():
