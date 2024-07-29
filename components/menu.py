@@ -34,10 +34,10 @@ class Menu(object):
             text = f"{index+1}. {opt}" if self.show_numbers else opt
             stdscr.addstr(self.y + index + padding, self.x, text, selected if self.cursor == index else normal)
 
-    def update(self, character):
-        if character == ord('o'):
+    def update(self, code):
+        if code == curses.KEY_UP:
             self.cursor -= 1
-        elif character == ord('l'):
+        if code == curses.KEY_DOWN:
             self.cursor += 1
 
         if self.cursor < 0:
