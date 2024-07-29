@@ -1,4 +1,3 @@
-import sys
 import curses
 from config import screens, palette
 from components.greeting import Greeting

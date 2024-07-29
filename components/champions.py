@@ -1,11 +1,13 @@
 import sys
+import logging
 from lib import spreadsheet_storage
 
 def fetch_champions():
     champions = [
         (name, int(score), time) for name, score, time in spreadsheet_storage.get_table("champions")[1:]
     ]
-    print(f"CHAMPIONS: {champions}", file=sys.stderr)
+    logging.info(f"CHAMPIONS: {champions}")
+
     return champions
 
 def update_champions(new_champions):

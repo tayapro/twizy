@@ -1,4 +1,3 @@
-import sys
 import curses
 from config import screens, layout, palette
 from components.text import Text

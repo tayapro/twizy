@@ -1,6 +1,4 @@
-import sys
-import curses
-import gspread
+import sys, curses, gspread
 from google.oauth2.service_account import Credentials
 from config import screens, layout, palette
 from components.greeting import Greeting

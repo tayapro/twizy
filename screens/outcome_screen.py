@@ -1,5 +1,4 @@
-import sys
-import curses
+import curses, logging
 from components.frame import Frame
 from components.greeting import Greeting
 from components.navbar import Navbar, NavAction
@@ -94,7 +93,7 @@ def outcome_screen_handler(stdscr):
     ]
 
     data = skeleton_screen_handler(stdscr, navbar, elements)
-    print(f"DATA: {data}", file=sys.stderr)
+    logging.info(f"Outcome data: {data}")
     return content_screen_handler(stdscr, navbar, elements, data)
 
 def on_load_outcome_screen(w):

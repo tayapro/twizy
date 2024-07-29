@@ -1,7 +1,4 @@
-import sys
-import curses
-import random
-import time
+import sys, curses, random, time, logging 
 from curses.textpad import rectangle
 from config import screens, layout, palette, game
 from components.greeting import Greeting
@@ -35,6 +32,8 @@ def content_screen_handler(stdscr, navbar, elements, data):
 
     options_menu = Menu(12, 10, "", True, *options)
     question_text = CenteredText(question + " ", 10, color) # Question
+    logging.debug(f"Hint: {int(corrent_option_index)+1}")
+
 
     while True:
         # Clear screen
@@ -76,6 +75,7 @@ def content_screen_handler(stdscr, navbar, elements, data):
             question_counter += 1
             if question_counter < game.TOTAL_QUESTIONS:
                 question, corrent_option_index, *options = data[question_counter]
+                logging.debug(f"Hint: {int(corrent_option_index)+1}")
 
             options_menu.set_options(*options)
             question_text.message = question + " "
