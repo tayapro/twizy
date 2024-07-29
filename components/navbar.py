@@ -1,6 +1,7 @@
 import curses
 from config import palette
 
+
 class NavAction(object):
     def __init__(self, key, screen, message):
         self.key = key
@@ -15,6 +16,7 @@ class NavAction(object):
             return True
 
         return False
+
 
 class Navbar(object):
     def __init__(self, *args):

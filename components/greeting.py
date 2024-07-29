@@ -5,6 +5,5 @@ class Greeting(object):
         self.x = x
         self.args = args
 
-
     def draw(self, stdscr):
         stdscr.addstr(self.y, self.x, self.message, *self.args)

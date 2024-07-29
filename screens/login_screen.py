@@ -4,13 +4,14 @@ from components.greeting import Greeting
 from components.navbar import Navbar, NavAction
 from lib import local_storage
 
+
 def login_screen_handler(stdscr):
     color = curses.color_pair(palette.MAIN_COLOR)
 
     height, width = stdscr.getmaxyx()
     msg = f"LOGIN screen"
     x = int((width // 2) - (len(msg) // 2))
-    g = Greeting(msg, 4, x, color | curses.A_ITALIC)   
+    g = Greeting(msg, 4, x, color | curses.A_ITALIC)
 
     user = ""
     error = ""
@@ -21,16 +22,17 @@ def login_screen_handler(stdscr):
         # Clear screen
         stdscr.clear()
 
-        g.draw(stdscr)   
+        g.draw(stdscr)
         if len(error) > 0:
             stdscr.addstr(height // 2 + 2, width // 2, error, curses.A_ITALIC)
             error = ""
 
-        stdscr.addstr(height // 2, width // 2 - len(instructions), instructions)
+        stdscr.addstr(height // 2, width // 2 - len(instructions),
+                      instructions)
         stdscr.addstr(height // 2, width // 2, user)
 
         stdscr.refresh()
-        
+
         code = stdscr.getch()
         character = chr(code)
         if character.isalpha() and character.isascii():
@@ -47,6 +49,7 @@ def login_screen_handler(stdscr):
 
             local_storage.set_item("user", user)
             return
+
 
 def on_load_login_screen(w):
     return w(login_screen_handler)

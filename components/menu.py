@@ -1,7 +1,8 @@
-import sys 
+import sys
 import curses
-from curses.textpad import rectangle  
+from curses.textpad import rectangle
 from config import palette
+
 
 class Menu(object):
     cursor = 0
@@ -32,7 +33,8 @@ class Menu(object):
 
         for index, opt in enumerate(self.options):
             text = f"{index+1}. {opt}" if self.show_numbers else opt
-            stdscr.addstr(self.y + index + padding, self.x, text, selected if self.cursor == index else normal)
+            stdscr.addstr(self.y + index + padding, self.x, text,
+                          selected if self.cursor == index else normal)
 
     def update(self, code):
         if code == curses.KEY_UP:

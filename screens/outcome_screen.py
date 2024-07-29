@@ -1,4 +1,5 @@
-import curses, logging
+import curses
+import logging
 from components.frame import Frame
 from components.greeting import Greeting
 from components.navbar import Navbar, NavAction
@@ -8,6 +9,7 @@ from components.score import get_score_and_tier
 from components.champions import record_user_score
 from config import screens, layout, palette
 from lib import local_storage
+
 
 def get_quiz_outcome():
     user_name = local_storage.get_item("user")
@@ -20,11 +22,12 @@ def get_quiz_outcome():
     place = record_user_score(user_name, score, timestamp)
 
     return {
-        "score": score, 
-        "tier": tier, 
-        "place": place, 
+        "score": score,
+        "tier": tier,
+        "place": place,
         "correct_answers": correct_answers
     }
+
 
 def content_screen_handler(stdscr, navbar, elements, data):
     color = curses.color_pair(palette.MAIN_COLOR)
@@ -36,7 +39,8 @@ def content_screen_handler(stdscr, navbar, elements, data):
     ]
 
     if data["place"] != -1:
-        elements.append(CenteredText(f"YOUR PLACE: {data["place"]}  ", 15, color))
+        place_text = f"YOUR PLACE: {data["place"]}  "
+        elements.append(CenteredText(place_text, 15, color))
 
     while True:
         # Clear screen
@@ -53,6 +57,7 @@ def content_screen_handler(stdscr, navbar, elements, data):
         if change:
             return screen
 
+
 def skeleton_screen_handler(stdscr, navbar, elements):
     color = curses.color_pair(palette.MAIN_COLOR)
     height, width = stdscr.getmaxyx()
@@ -64,12 +69,14 @@ def skeleton_screen_handler(stdscr, navbar, elements):
     for e in elements:
         e.draw(stdscr)
 
-    banner = CenteredText("Your quiz outcome is on its way, please wait...", height // 2, color)
+    banner_text = "Your quiz outcome is on its way, please wait..."
+    banner = CenteredText(banner_text, height // 2, color)
     banner.draw(stdscr)
-    
+
     stdscr.refresh()
-    
+
     return get_quiz_outcome()
+
 
 def outcome_screen_handler(stdscr):
     color = curses.color_pair(palette.MAIN_COLOR)
@@ -84,17 +91,19 @@ def outcome_screen_handler(stdscr):
     )
 
     user_name = local_storage.get_item("user")
+    user_text = f"  USER : {user_name}  "
 
     elements = [
-        Frame(layout.FRAME_PADDING_TOP, layout.FRAME_PADDING_LEFT, 
+        Frame(layout.FRAME_PADDING_TOP, layout.FRAME_PADDING_LEFT,
               layout.FRAME_PADDING_BOTTOM, layout.FRAME_PADDING_RIGHT),
         CenteredText("   GAME OUTCOME   ", layout.FRAME_PADDING_TOP, color),
-        RightText(f"  USER : {user_name}  ", layout.FRAME_PADDING_TOP, 10, color),
+        RightText(user_text, layout.FRAME_PADDING_TOP, 10, color),
     ]
 
     data = skeleton_screen_handler(stdscr, navbar, elements)
     logging.info(f"Outcome data: {data}")
     return content_screen_handler(stdscr, navbar, elements, data)
+
 
 def on_load_outcome_screen(w):
     return w(outcome_screen_handler)

@@ -1,4 +1,8 @@
-import sys, curses, random, time, logging 
+import sys
+import curses
+import random
+import time
+import logging
 from curses.textpad import rectangle
 from config import screens, layout, palette, game
 from components.greeting import Greeting
@@ -10,19 +14,20 @@ from components.centered_text import CenteredText
 from components.right_text import RightText
 from lib import local_storage, spreadsheet_storage
 
+
 def fetch_quiz_data():
     return [
-        (question, correct_option, option_0,
-        optiopn_1, option_2, option_3) 
-        for question, correct_option, option_0,
-            optiopn_1, option_2, option_3 
+        (question, correct_option, option_0, optiopn_1, option_2, option_3)
+        for question, correct_option, option_0, optiopn_1, option_2, option_3
         in spreadsheet_storage.get_table("quiz")[1:]
     ]
+
 
 def get_quiz():
     data = fetch_quiz_data()
     random.shuffle(data)
     return data[:10]
+
 
 def content_screen_handler(stdscr, navbar, elements, data):
     color = curses.color_pair(palette.MAIN_COLOR)
@@ -31,9 +36,8 @@ def content_screen_handler(stdscr, navbar, elements, data):
     question, corrent_option_index, *options = data[0]
 
     options_menu = Menu(12, 10, "", True, *options)
-    question_text = CenteredText(question + " ", 10, color) # Question
+    question_text = CenteredText(question + " ", 10, color)  # Question
     logging.debug(f"Hint: {int(corrent_option_index)+1}")
-
 
     while True:
         # Clear screen
@@ -44,17 +48,16 @@ def content_screen_handler(stdscr, navbar, elements, data):
             e.draw(stdscr)
 
         # Question_counter is different for every draw cycle, when we hit Enter
-        Text(f"  QUESTION : {question_counter + 1} / {game.TOTAL_QUESTIONS} ", 
-            layout.FRAME_PADDING_TOP, 10
-        ).draw(stdscr)
-   
+        Text(f"  QUESTION : {question_counter + 1} / {game.TOTAL_QUESTIONS} ",
+             layout.FRAME_PADDING_TOP, 10).draw(stdscr)
+
         options_menu.draw(stdscr)
         question_text.draw(stdscr)
 
         # stdscr.addstr(1,1, f"Hint: {int(corrent_option_index)+1}")
 
         stdscr.refresh()
-        
+
         start_time = time.time()
 
         code = stdscr.getch()
@@ -74,7 +77,8 @@ def content_screen_handler(stdscr, navbar, elements, data):
 
             question_counter += 1
             if question_counter < game.TOTAL_QUESTIONS:
-                question, corrent_option_index, *options = data[question_counter]
+                (question, corrent_option_index,
+                *options) = data[question_counter]
                 logging.debug(f"Hint: {int(corrent_option_index)+1}")
 
             options_menu.set_options(*options)
@@ -84,11 +88,13 @@ def content_screen_handler(stdscr, navbar, elements, data):
         if question_counter == game.TOTAL_QUESTIONS:
             end_time = time.time()
             quiz_time = end_time - start_time
-            local_storage.set_item("total_mistakes", game.TOTAL_QUESTIONS - correct_answers_counter)
+            total_mistakes = game.TOTAL_QUESTIONS - correct_answers_counter
+            local_storage.set_item("total_mistakes", total_mistakes)
             local_storage.set_item("correct_answers", correct_answers_counter)
             local_storage.set_item("quiz_time", quiz_time)
             local_storage.set_item("end_time", int(end_time))
             return screens.OUTCOME_SCREEN
+
 
 def skeleton_screen_handler(stdscr, navbar, elements):
     color = curses.color_pair(palette.MAIN_COLOR)
@@ -101,12 +107,14 @@ def skeleton_screen_handler(stdscr, navbar, elements):
     for e in elements:
         e.draw(stdscr)
 
-    banner = CenteredText("Your quiz is on its way, please wait...", height // 2, color)
+    banner = CenteredText("Your quiz is on its way, please wait...",
+                          height // 2, color)
     banner.draw(stdscr)
-    
+
     stdscr.refresh()
-    
+
     return get_quiz()
+
 
 def game_screen_handler(stdscr):
     color = curses.color_pair(palette.MAIN_COLOR)
@@ -119,14 +127,16 @@ def game_screen_handler(stdscr):
     user_name = local_storage.get_item("user")
 
     elements = [
-        Frame(layout.FRAME_PADDING_TOP, layout.FRAME_PADDING_LEFT, 
+        Frame(layout.FRAME_PADDING_TOP, layout.FRAME_PADDING_LEFT,
               layout.FRAME_PADDING_BOTTOM, layout.FRAME_PADDING_RIGHT),
-        RightText(f"  USER : {user_name}  ", layout.FRAME_PADDING_TOP, 10, color),
+        RightText(f"  USER : {user_name}  ",
+                  layout.FRAME_PADDING_TOP, 10, color),
         CenteredText("   tWIZY GAME   ", layout.FRAME_PADDING_TOP, color)
     ]
 
     data = skeleton_screen_handler(stdscr, navbar, elements)
     return content_screen_handler(stdscr, navbar, elements, data)
+
 
 def on_load_game_screen(w):
     return w(game_screen_handler)
