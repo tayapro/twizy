@@ -137,10 +137,10 @@ def game_screen_handler(stdscr):
         RightText(f"  USER : {user_name}  ",
                   layout.FRAME_PADDING_TOP, 10, color),
         CenteredText("   tWIZY GAME   ", layout.FRAME_PADDING_TOP, color),
-        CenteredText("Use the Up and Down arrow keys for navigate through the options"
-            " and Enter to confirm", 20, color_yellow),
+        CenteredText("Use the Up and Down arrow keys for navigate through", 19, color_yellow),
+        CenteredText("the options and Enter to confirm", 20, color_yellow),
     ]
-
+ 
     data = skeleton_screen_handler(stdscr, navbar, elements)
     return content_screen_handler(stdscr, navbar, elements, data)
 
