@@ -3,7 +3,6 @@ import curses
 import gspread
 from google.oauth2.service_account import Credentials
 from config import screens, layout, palette
-from components.greeting import Greeting
 from components.navbar import Navbar, NavAction
 from components.centered_text import CenteredText
 from components.menu import Menu

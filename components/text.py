@@ -6,4 +6,5 @@ class Text(object):
         self.args = args[:]
 
     def draw(self, stdscr):
-        stdscr.addstr(self.y, self.x, self.message, *self.args)
+        if len(self.message) > 0:
+            stdscr.addstr(self.y, self.x, self.message, *self.args)

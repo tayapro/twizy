@@ -5,6 +5,7 @@ class CenteredText(object):
         self.args = args[:]
 
     def draw(self, stdscr):
-        height, width = stdscr.getmaxyx()
-        x = width // 2 - len(self.message) // 2
-        stdscr.addstr(self.y, x, self.message, *self.args)
+        if len(self.message) > 0:
+            height, width = stdscr.getmaxyx()
+            x = width // 2 - len(self.message) // 2
+            stdscr.addstr(self.y, x, self.message, *self.args)

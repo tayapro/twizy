@@ -5,7 +5,6 @@ import time
 import logging
 from curses.textpad import rectangle
 from config import screens, layout, palette, game
-from components.greeting import Greeting
 from components.navbar import Navbar, NavAction
 from components.menu import Menu
 from components.frame import Frame

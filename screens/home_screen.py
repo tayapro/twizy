@@ -3,7 +3,6 @@ from config import screens, layout, palette
 from components.text import Text
 from components.frame import Frame
 from components.right_text import RightText
-from components.greeting import Greeting
 from components.navbar import Navbar, NavAction
 from components.centered_text import CenteredText
 from lib import local_storage
@@ -32,8 +31,8 @@ def home_screen_handler(stdscr):
         RightText(f"  USER : {user_name}  ", layout.FRAME_PADDING_TOP, 10,
                   color),
         CenteredText("   HOME   ", layout.FRAME_PADDING_TOP, color),
-        CenteredText("WELCOME to the tWIZY quiz!", 8, color),
-        CenteredText("Get ready to test your knowledge and have fun.", 9,
+        # CenteredText("WELCOME to the tWIZY quiz!", 8, color),
+        CenteredText("Get ready to test your knowledge and have fun?", 9,
                      color),
         Text("RULES: ", 11, layout.MAIN_TEXT_MARGING_X, color),
         Text("1. Read Each Question Carefully.", 13,

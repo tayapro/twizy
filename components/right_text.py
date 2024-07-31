@@ -6,6 +6,7 @@ class RightText(object):
         self.args = args[:]
 
     def draw(self, stdscr):
-        height, width = stdscr.getmaxyx()
-        x = width - len(self.message) - self.right_marging
-        stdscr.addstr(self.y, x, self.message, *self.args)
+        if len(self.message) > 0:
+            height, width = stdscr.getmaxyx()
+            x = width - len(self.message) - self.right_marging
+            stdscr.addstr(self.y, x, self.message, *self.args)

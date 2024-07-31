@@ -1,7 +1,6 @@
 import curses
 import logging
 from components.frame import Frame
-from components.greeting import Greeting
 from components.navbar import Navbar, NavAction
 from components.centered_text import CenteredText
 from components.right_text import RightText
@@ -44,7 +43,7 @@ def content_screen_handler(stdscr, navbar, elements, data):
         CenteredText(f"{'* ' * data["tier"]}", 12, color),
         CenteredText(f"Your score: {data["score"]}", 14, color),
         CenteredText(f"Correct answers: {data["correct_answers"]}", 15, color),
-        CenteredText("Do you want to play again? Press 'g'", 20, color_yellow),
+        CenteredText("Do you want to play again? Press `g` button.", 20, color_yellow),
     ]
 
     if data["place"] != -1:
@@ -64,6 +63,7 @@ def content_screen_handler(stdscr, navbar, elements, data):
         character = stdscr.getch()
         change, screen = navbar.update(stdscr, character)
         if change:
+            local_storage.clear()
             return screen
 
 
