@@ -37,9 +37,9 @@ def content_screen_handler(stdscr, navbar, elements, data):
     correct_answers_counter = 0
     question, corrent_option_index, *options = data[0]
 
-    options_menu = Menu(12, 10, "", True, *options)
-    question_text = CenteredText(question + " ", 10, color)  # Question
-    logging.debug(f"Hint: {int(corrent_option_index)+1}")
+    options_menu = Menu(13, layout.MAIN_TEXT_MARGING_X, "", True, *options)
+    question_text = CenteredText(question + " ", 10, color)  
+    logging.debug(f"Hint: {int(corrent_option_index) + 1}") # Logging correct answer
 
     while True:
         # Clear screen
@@ -122,6 +122,7 @@ def skeleton_screen_handler(stdscr, navbar, elements):
 
 def game_screen_handler(stdscr):
     color = curses.color_pair(palette.MAIN_COLOR)
+    color_yellow = curses.color_pair(palette.ACCENT_COLOR_INV)
 
     navbar = Navbar(
         NavAction("a", screens.HOME_SCREEN, "Abort  "),
@@ -135,7 +136,9 @@ def game_screen_handler(stdscr):
               layout.FRAME_PADDING_BOTTOM, layout.FRAME_PADDING_RIGHT),
         RightText(f"  USER : {user_name}  ",
                   layout.FRAME_PADDING_TOP, 10, color),
-        CenteredText("   tWIZY GAME   ", layout.FRAME_PADDING_TOP, color)
+        CenteredText("   tWIZY GAME   ", layout.FRAME_PADDING_TOP, color),
+        CenteredText("Use the Up and Down arrow keys for navigate through the options"
+            " and Enter to confirm", 20, color_yellow),
     ]
 
     data = skeleton_screen_handler(stdscr, navbar, elements)

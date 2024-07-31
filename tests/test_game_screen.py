@@ -48,10 +48,10 @@ def mock_imports_and_configs(monkeypatch):
 def test_content_screen_handler():
     stdscr = MagicMock()
     stdscr.getmaxyx.return_value = (20, 40)
-    stdscr.getch.side_effect = [ord('q')]  # Simulate pressing 'q' to quit
+    stdscr.getch.side_effect = [ord('a')]  # Simulate pressing 'a' to quit
 
     navbar = MagicMock()
-    navbar.update.return_value = (True, 3)  # Mock update returning a screen switch
+    navbar.update.return_value = (True, 0)  # Mock update returning a screen switch
 
     elements = [MagicMock()]
     data = mock_quiz_data
