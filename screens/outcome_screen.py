@@ -31,11 +31,20 @@ def get_quiz_outcome():
 
 def content_screen_handler(stdscr, navbar, elements, data):
     color = curses.color_pair(palette.MAIN_COLOR)
+    color_yellow = curses.color_pair(palette.ACCENT_COLOR_INV)
+
+    user_name = local_storage.get_item("user")
 
     elements = [
-        CenteredText(f"CORRECT ANSWERS: {data["correct_answers"]}", 12, color),
-        CenteredText(f"SCORE: {data["score"]}", 13, color),
-        CenteredText(f"TIER: {'*' * data["tier"]}", 14, color)
+        Frame(layout.FRAME_PADDING_TOP, layout.FRAME_PADDING_LEFT,
+              layout.FRAME_PADDING_BOTTOM, layout.FRAME_PADDING_RIGHT),
+        RightText(f"  USER : {user_name}  ",
+                  layout.FRAME_PADDING_TOP, 10, color),
+        CenteredText("   GAME RESULTS   ", layout.FRAME_PADDING_TOP, color),
+        CenteredText(f"{'* ' * data["tier"]}", 12, color),
+        CenteredText(f"Your score: {data["score"]}", 14, color),
+        CenteredText(f"Correct answers: {data["correct_answers"]}", 15, color),
+        CenteredText("Do you want to play again? Press 'g'", 20, color_yellow),
     ]
 
     if data["place"] != -1:
