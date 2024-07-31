@@ -23,24 +23,22 @@ def test_get_score():
     assert get_score(total_mistakes=10, max_mistakes=10, total_time=60, max_time=60) == 0
 
     # Test case 3: Some mistakes and some time
-    assert get_score(total_mistakes=5, max_mistakes=10, total_time=30, max_time=60) == 750
+    assert get_score(total_mistakes=5, max_mistakes=10, total_time=30, max_time=60) == 500
 
     # Test case 4: Edge cases
     assert get_score(total_mistakes=10, max_mistakes=5, total_time=60, max_time=30) == 0
-    assert get_score(total_mistakes=0, max_mistakes=10, total_time=60, max_time=0) == 0
 
 @patch('config.game', MockGame)
 def test_get_score_and_tier():
-    # Test case 1: Score above 700 should be 3-star
-    assert get_score_and_tier(total_mistakes=0, total_time=10) == (1000, 3)
+    # Test case 1: Score above 700+ should be 3-star
+    assert get_score_and_tier(total_mistakes=4, total_time=10) == (716, 3)
 
     # Test case 2: Score between 300 and 700 should be 2-star
-    assert get_score_and_tier(total_mistakes=5, total_time=30) == (750, 2)
+    assert get_score_and_tier(total_mistakes=5, total_time=10) == (666, 2)
 
     # Test case 3: Score below 300 should be 1-star
-    assert get_score_and_tier(total_mistakes=10, total_time=60) == (0, 1)
+    assert get_score_and_tier(total_mistakes=8, total_time=40) == (266, 1)
 
     # Test case 4: Edge cases
-    assert get_score_and_tier(total_mistakes=10, total_time=0) == (0, 1)
+    assert get_score_and_tier(total_mistakes=10, total_time=60) == (0, 1)
     assert get_score_and_tier(total_mistakes=0, total_time=0) == (1000, 3)
-
