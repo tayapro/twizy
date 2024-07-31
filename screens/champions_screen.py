@@ -57,6 +57,8 @@ def content_screen_handler(stdscr, navbar, elements, data):
 
 
 def skeleton_screen_handler(stdscr, navbar, elements):
+    curses.initscr()
+    curses.start_color()
     color = curses.color_pair(palette.MAIN_COLOR)
     height, width = stdscr.getmaxyx()
 
