@@ -41,14 +41,14 @@ def content_screen_handler(stdscr, navbar, elements, data):
                   layout.FRAME_PADDING_TOP, 10, color),
         CenteredText("   GAME RESULTS   ", layout.FRAME_PADDING_TOP, color),
         CenteredText(f"{'* ' * data["tier"]}", 12, color),
-        CenteredText(f"Your score: {data["score"]}", 14, color),
-        CenteredText(f"Correct answers: {data["correct_answers"]}", 15, color),
+        CenteredText(f"Your score: {data["score"]}", 16, color),
+        CenteredText(f"Correct answers: {data["correct_answers"]}", 17, color),
         CenteredText("Do you want to play again? Press `g` button.", 20, color_yellow),
     ]
 
     if data["place"] != -1:
-        place_text = f"YOUR PLACE: {data["place"]}  "
-        elements.append(CenteredText(place_text, 15, color))
+        place_text = f"YOUR PLACE: {data["place"]} on Champions's board"
+        elements.append(CenteredText(place_text, 14, color))
 
     while True:
         # Clear screen
