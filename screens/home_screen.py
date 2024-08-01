@@ -12,8 +12,8 @@ def home_screen_handler(stdscr):
     curses.initscr()
     curses.start_color()
     color = curses.color_pair(palette.ACCENT_COLOR_INV)
-    stdscr.getyx()
-    stdscr.move(0, 0)
+    # stdscr.getyx()
+    # stdscr.move(0, 0)
 
     navbar = Navbar(
         NavAction("c", screens.CHAMPIONS_SCREEN, "Champions  "),
@@ -24,6 +24,8 @@ def home_screen_handler(stdscr):
     height, width = stdscr.getmaxyx()
 
     user_name = local_storage.get_item("user")
+    if user_name == None or len(user_name) == 0:
+        raise Exception("User name is not set")
 
     elements = [
         Frame(layout.FRAME_PADDING_TOP, layout.FRAME_PADDING_LEFT,
@@ -31,7 +33,6 @@ def home_screen_handler(stdscr):
         RightText(f"  USER : {user_name}  ", layout.FRAME_PADDING_TOP, 10,
                   color),
         CenteredText("   HOME   ", layout.FRAME_PADDING_TOP, color),
-        # CenteredText("WELCOME to the tWIZY quiz!", 8, color),
         CenteredText("Get ready to test your knowledge and have fun?", 9,
                      color),
         Text("RULES: ", 11, layout.MAIN_TEXT_MARGING_X, color),

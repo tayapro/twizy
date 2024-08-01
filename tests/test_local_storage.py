@@ -34,6 +34,3 @@ def test_clear_storage_empty():
 
     # Ensure no exceptions are raised and storage is empty
     assert local_storage.get_item("user") is None
-
-# if __name__ == "__main__":
-#     pytest.main()
