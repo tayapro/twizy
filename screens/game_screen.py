@@ -29,8 +29,6 @@ def get_quiz():
 
 
 def content_screen_handler(stdscr, navbar, elements, data):
-    curses.initscr()
-    curses.start_color()
     color = curses.color_pair(palette.MAIN_COLOR)
     question_counter = 0
     correct_answers_counter = 0
@@ -98,8 +96,6 @@ def content_screen_handler(stdscr, navbar, elements, data):
 
 
 def skeleton_screen_handler(stdscr, navbar, elements):
-    curses.initscr()
-    curses.start_color()
     color = curses.color_pair(palette.MAIN_COLOR)
     height, width = stdscr.getmaxyx()
 

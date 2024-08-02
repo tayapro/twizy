@@ -9,16 +9,7 @@ from unittest.mock import MagicMock, patch
 from components.frame import Frame
 import curses
 
-# # Define box-drawing characters for curses
-setattr(curses, "ACS_VLINE", "|")
-setattr(curses, "ACS_HLINE", "-")
-setattr(curses, "ACS_ULCORNER", "+")
-setattr(curses, "ACS_URCORNER", "+")
-setattr(curses, "ACS_LRCORNER", "+")
-setattr(curses, "ACS_LLCORNER", "+")
-
-@patch('curses.textpad.rectangle')
-def test_frame_draw(mock_rectangle):
+def test_frame_draw():
     """
     Test that Frame.draw correctly draws a frame on the screen.
 
@@ -48,6 +39,5 @@ def test_frame_draw(mock_rectangle):
     mock_stdscr.addch.assert_any_call(2, 35, "+")
     mock_stdscr.addch.assert_any_call(16, 35, "+")
     mock_stdscr.addch.assert_any_call(16, 3, "+")
+
     
-    # Verify that the rectangle function is called once with correct parameters
-    mock_rectangle.assert_called_once_with(mock_stdscr, 2, 3, 16, 35)

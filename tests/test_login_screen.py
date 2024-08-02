@@ -22,12 +22,7 @@ mock_logo = """
 @patch('screens.login_screen.local_storage.clear')
 @patch('screens.login_screen.local_storage.set_item')
 @patch('screens.login_screen.curses.color_pair')
-@patch('screens.login_screen.curses.initscr')
-@patch('screens.login_screen.curses.start_color')
-def test_login_screen_handler(
-    mock_start_color, mock_initscr, mock_color_pair,
-    mock_set_item, mock_clear
-):
+def test_login_screen_handler(mock_color_pair, mock_set_item, mock_clear):
     # Mock the standard screen and its methods
     stdscr = MagicMock()
     stdscr.getmaxyx.return_value = (20, 40)  # Mock screen dimensions
@@ -46,10 +41,6 @@ def test_login_screen_handler(
 
     # Verify that the set_item was called with the correct username
     mock_set_item.assert_called_once_with("user", "Test")
-
-    # Check that curses functions were called for initialization
-    mock_initscr.assert_called_once()
-    mock_start_color.assert_called_once()
 
     # Verify that the screen was cleared and refreshed
     stdscr.clear.assert_called()

@@ -100,6 +100,8 @@ def outcome_screen_handler(stdscr):
     )
 
     user_name = local_storage.get_item("user")
+    if user_name == None or len(user_name) == 0:
+        raise Exception("User name is not set")
     user_text = f"  USER : {user_name}  "
 
     elements = [

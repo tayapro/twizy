@@ -22,22 +22,19 @@ def test_main_flow(mock_curses_wrapper, mock_on_load_error_screen, mock_on_load_
                    mock_on_load_champions_screen, mock_on_load_game_screen, mock_on_load_home_screen,
                    mock_on_load_login_screen, mock_init_colors, mock_init_storage):
     # Simulate the sequence of screens
-    # mock_on_load_login_screen.side_effect = [None]  # Login screen loads once
-    mock_on_load_home_screen.side_effect = [screens.HOME_SCREEN]
-    mock_on_load_game_screen.side_effect = [screens.GAME_SCREEN]
-    mock_on_load_champions_screen.side_effect = [screens.CHAMPIONS_SCREEN]
-    mock_on_load_outcome_screen.side_effect = [screens.OUTCOME_SCREEN]
-    # mock_on_load_error_screen.side_effect = [None]
+    mock_on_load_home_screen.return_value = screens.GAME_SCREEN
+    mock_on_load_game_screen.return_value = screens.OUTCOME_SCREEN
+    mock_on_load_outcome_screen.return_value = screens.CHAMPIONS_SCREEN
 
     # Call the main function
     main()
 
-    # Check that the screens were loaded in the correct order
-    # assert mock_on_load_login_screen.call_count == 1
-    assert mock_on_load_home_screen.call_count == 0
-    assert mock_on_load_game_screen.call_count == 1
-    assert mock_on_load_champions_screen.call_count == 2
-    assert mock_on_load_outcome_screen.call_count == 3
+    # Check that every screen is called once during the flow
+    mock_on_load_login_screen.assert_called_once()
+    mock_on_load_home_screen.assert_called_once()
+    mock_on_load_game_screen.assert_called_once()
+    mock_on_load_outcome_screen.assert_called_once()
+    mock_on_load_champions_screen.assert_called_once()
 
     # Check that init_storage and init_colors were called
     mock_init_storage.assert_called_once()
@@ -78,5 +75,8 @@ def test_home_screen_exception(mock_curses_wrapper, mock_on_load_error_screen,
     main()
 
     # Verify that the error screen was displayed after an exception in the home screen
-    assert mock_on_load_error_screen.call_count == 1
-    assert mock_on_load_home_screen.call_count == 1
+    # Expected navigation: 
+    #  login -> home (exception) -> error -> home (exception) -> error -> quit
+    assert mock_on_load_login_screen.call_count == 1
+    assert mock_on_load_error_screen.call_count == 2
+    assert mock_on_load_home_screen.call_count == 2

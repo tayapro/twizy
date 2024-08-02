@@ -9,8 +9,6 @@ from lib import local_storage
 
 
 def home_screen_handler(stdscr):
-    curses.initscr()
-    curses.start_color()
     color = curses.color_pair(palette.ACCENT_COLOR_INV)
     # stdscr.getyx()
     # stdscr.move(0, 0)

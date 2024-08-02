@@ -21,23 +21,22 @@ mock_score = 850
 mock_tier = 3
 mock_place = 3
 
+# Mocking the necessary imports and configurations
+@pytest.fixture(autouse=True)
+def mock_imports_and_configs(monkeypatch):
+    monkeypatch.setattr('screens.outcome_screen.curses.color_pair', lambda x: x)
+
 @patch('screens.outcome_screen.local_storage.get_item')
 @patch('screens.outcome_screen.local_storage.clear')
 @patch('screens.outcome_screen.get_score_and_tier')
 @patch('screens.outcome_screen.record_user_score')
-@patch('screens.outcome_screen.curses.color_pair')
-@patch('screens.outcome_screen.curses.initscr')
-@patch('screens.outcome_screen.curses.start_color')
 def test_outcome_screen_handler(
-    mock_start_color, mock_initscr, mock_color_pair, mock_record_user_score,
+    mock_record_user_score,
     mock_get_score_and_tier, mock_clear, mock_get_item
 ):
     # Mock the standard screen and its methods
     stdscr = MagicMock()
     stdscr.getmaxyx.return_value = (24, 80)  # Mock screen dimensions
-
-    # Set the color pair return values based on palette colors
-    mock_color_pair.side_effect = lambda x: x
 
     # Mock the return values of local_storage.get_item
     mock_get_item.side_effect = lambda key: {
@@ -72,10 +71,6 @@ def test_outcome_screen_handler(
     mock_get_score_and_tier.assert_called_once_with(mock_mistakes, mock_quiz_time)
     mock_record_user_score.assert_called_once_with(mock_user, mock_score, mock_end_time)
 
-    # Check that curses functions were called for initialization
-    mock_initscr.assert_called_once()
-    mock_start_color.assert_called_once()
-
     # Verify that the screen was cleared and refreshed
     stdscr.clear.assert_called()
     stdscr.refresh.assert_called()
@@ -88,6 +83,7 @@ def test_outcome_screen_handler(
 def test_outcome_screen_handler_no_user(mock_clear, mock_get_item):
     # Mock the standard screen and its methods
     stdscr = MagicMock()
+    stdscr.getmaxyx.return_value = (24, 80)  # Mock screen dimensions
 
     # Simulate the scenario where no username is set
     mock_get_item.return_value = None

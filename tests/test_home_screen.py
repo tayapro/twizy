@@ -14,11 +14,7 @@ mock_user_name = "TestUser"
 
 @patch('screens.home_screen.local_storage.get_item')
 @patch('screens.home_screen.curses.color_pair')
-@patch('screens.home_screen.curses.initscr')
-@patch('screens.home_screen.curses.start_color')
-def test_home_screen_handler(
-    mock_start_color, mock_initscr, mock_color_pair, mock_get_item
-):
+def test_home_screen_handler(mock_color_pair, mock_get_item):
     # Mock the standard screen and its methods
     stdscr = MagicMock()
     stdscr.getmaxyx.return_value = (24, 80)  # Mock screen dimensions
@@ -41,10 +37,6 @@ def test_home_screen_handler(
     # Verify that the username was fetched
     mock_get_item.assert_called_once_with("user")
 
-    # Check that curses functions were called for initialization
-    mock_initscr.assert_called_once()
-    mock_start_color.assert_called_once()
-
     # Verify that the screen was cleared and refreshed
     stdscr.clear.assert_called()
     stdscr.refresh.assert_called()
@@ -55,9 +47,15 @@ def test_home_screen_handler(
 
 
 @patch('screens.home_screen.local_storage.get_item', return_value=None)
-def test_home_screen_handler_no_user(mock_get_item):
+@patch('screens.home_screen.curses.color_pair')
+def test_home_screen_handler_no_user(mock_color_pair, mock_get_item):
     # Mock the standard screen and its methods
     stdscr = MagicMock()
+    stdscr.getmaxyx.return_value = (24, 80)  # Mock screen dimensions
+
+    # Set the color pair return values based on palette colors
+    mock_color_pair.side_effect = lambda x: x
+
 
     # Simulate the scenario where no username is set
     with pytest.raises(Exception, match="User name is not set"):

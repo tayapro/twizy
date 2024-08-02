@@ -42,6 +42,7 @@ def mock_imports_and_configs(monkeypatch):
     monkeypatch.setattr('config.palette', MockPalette)
     monkeypatch.setattr('config.screens', MockScreens)
     monkeypatch.setattr('components.champions.fetch_champions', lambda: mock_champion_data)
+    monkeypatch.setattr('screens.champions_screen.curses.color_pair', lambda x: x)
 
     # Mock the SHEET object and the worksheet method
     mock_sheet = MagicMock()

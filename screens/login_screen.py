@@ -22,8 +22,6 @@ def login_screen_handler(stdscr):
     local_storage.clear()
 
     # Initialize curses and set colors
-    curses.initscr()
-    curses.start_color()
     color = curses.color_pair(palette.MAIN_COLOR)
     accent_color = curses.color_pair(palette.ACCENT_COLOR_INV)
 
