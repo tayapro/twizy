@@ -17,6 +17,7 @@ def test_main_flow(mock_curses_wrapper, mock_on_load_error_screen, mock_on_load_
                    mock_on_load_champions_screen, mock_on_load_game_screen, mock_on_load_home_screen,
                    mock_on_load_login_screen, mock_init_colors, mock_init_storage):
     # Simulate the sequence of screens
+    mock_on_load_login_screen.return_value = screens.HOME_SCREEN
     mock_on_load_home_screen.return_value = screens.GAME_SCREEN
     mock_on_load_game_screen.return_value = screens.OUTCOME_SCREEN
     mock_on_load_outcome_screen.return_value = screens.CHAMPIONS_SCREEN
@@ -62,16 +63,16 @@ def test_home_screen_exception(mock_curses_wrapper, mock_on_load_error_screen,
                                mock_on_load_home_screen, mock_on_load_login_screen, 
                                mock_init_colors, mock_init_storage):
     # Set up the screens to transition from login to home
-    mock_on_load_login_screen.return_value = None
+    mock_on_load_login_screen.return_value = screens.HOME_SCREEN
     mock_on_load_home_screen.side_effect = Exception("Home screen error")
-    mock_on_load_error_screen.side_effect = [screens.HOME_SCREEN, None]  # Go back to home, then exit
+    mock_on_load_error_screen.side_effect = [screens.LOGIN_SCREEN, None]  # Go back to login, then exit
 
     # Call the main function
     main()
 
     # Verify that the error screen was displayed after an exception in the home screen
-    # Expected navigation: 
-    #  login -> home (exception) -> error -> home (exception) -> error -> quit
-    assert mock_on_load_login_screen.call_count == 1
+    # Expected flow: 
+    # login -> home -> error (user is not set) -> login -> home -> error (None) -> quit
+    assert mock_on_load_login_screen.call_count == 2
     assert mock_on_load_error_screen.call_count == 2
     assert mock_on_load_home_screen.call_count == 2

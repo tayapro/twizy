@@ -4,7 +4,17 @@ from components.navbar import Navbar, NavAction
 from components.text import Text
 from components.centered_text import CenteredText
 from lib import local_storage
+import logging
 
+def next_screen():
+    user = local_storage.get_item("user")
+    logging.error(f"user: {user}")
+    if user == None or len(user) == 0:
+        logging.error("going login")
+        return screens.LOGIN_SCREEN
+    
+    logging.error("going home")
+    return screens.HOME_SCREEN
 
 def error_screen_handler(stdscr):
     """
@@ -59,7 +69,7 @@ def error_screen_handler(stdscr):
     if change:
         return screen
 
-    return screens.HOME_SCREEN
+    return next_screen()
 
 
 def on_load_error_screen(w):

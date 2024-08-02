@@ -85,7 +85,7 @@ def login_screen_handler(stdscr):
                 continue
 
             local_storage.set_item("user", user_element.message)
-            return
+            return screens.HOME_SCREEN
 
 
 def on_load_login_screen(w):

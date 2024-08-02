@@ -27,7 +27,7 @@ def test_error_screen_handler(
     result = error_screen_handler(stdscr)
 
     # Verify that local storage was accessed correctly
-    mock_get_item.assert_called_once_with("user")
+    mock_get_item.assert_called_with("user")
     mock_clear.assert_called_once()
     mock_set_item.assert_called_once_with("user", "TestUser")
 
