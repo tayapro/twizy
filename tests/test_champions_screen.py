@@ -1,11 +1,5 @@
-import sys
-import os
 from unittest.mock import MagicMock, patch
 import pytest
-import curses
-
-# Set the correct path for imports
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from screens import champions_screen  # Adjust this based on your actual path
 

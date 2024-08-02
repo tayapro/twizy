@@ -1,10 +1,3 @@
-import sys
-import os
-
-# Add the parent directory to the system path to ensure proper module resolution
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
-import curses
 import pytest
 from unittest.mock import MagicMock, patch
 from screens import game_screen

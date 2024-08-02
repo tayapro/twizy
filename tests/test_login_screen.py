@@ -1,11 +1,5 @@
-import sys
-import os
-
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
 import pytest
 from unittest.mock import MagicMock, patch
-import curses
 from config import layout, palette
 from screens.login_screen import login_screen_handler
 from lib import local_storage

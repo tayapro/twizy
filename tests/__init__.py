@@ -1,3 +1,9 @@
+import sys
+import os
+
+# Ensure the correct path for module resolution
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import curses
 
 # Define box-drawing characters for curses
