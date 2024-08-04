@@ -5,7 +5,7 @@ from lib import spreadsheet_storage
 
 def fetch_champions():
     champions = [
-        (name, int(score), time) for name, score,
+        (name, int(score), int(time)) for name, score,
         time in spreadsheet_storage.get_table("champions")[1:]
     ]
     logging.info(f"CHAMPIONS: {champions}")

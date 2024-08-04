@@ -24,9 +24,9 @@ class MockScreens:
 # Mock data for quiz questions
 mock_quiz_table = [
     ("question", "correct option", "option_0", "option_1", "option_2", "option_3"),
-    ("What is 2+2?", "0", "3", "4", "5", "6"),
-    ("What is the capital of France?", "0", "Berlin", "Madrid", "Paris", "Rome"),
-    ("What is the boiling point of water?", "1", "90", "100", "80", "110"),
+    ("What is 2+2?", 0, "3", "4", "5", "6"),
+    ("What is the capital of France?", 0, "Berlin", "Madrid", "Paris", "Rome"),
+    ("What is the boiling point of water?", 1, "90", "100", "80", "110"),
 ]
 
 mock_quiz_data = mock_quiz_table[1:]
@@ -43,6 +43,7 @@ def mock_imports_and_configs(monkeypatch):
     monkeypatch.setattr('lib.local_storage.get_item', lambda x: "Test User" if x == "user" else None)
     monkeypatch.setattr('lib.local_storage.set_item', lambda x, y: None)
     monkeypatch.setattr('screens.game_screen.curses.color_pair', lambda x: x)
+
 
 def test_content_screen_handler():
     stdscr = MagicMock()

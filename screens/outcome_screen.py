@@ -12,6 +12,10 @@ from lib import local_storage
 
 def get_quiz_outcome():
     user_name = local_storage.get_item("user")
+    if user_name == None or len(user_name) == 0:
+        raise Exception("User name is not set")
+
+    # TODO check each and rise exception if not set
     total_miskates = local_storage.get_item("total_mistakes")
     correct_answers = local_storage.get_item("correct_answers")
     quiz_time = local_storage.get_item("quiz_time")
@@ -64,6 +68,7 @@ def content_screen_handler(stdscr, navbar, elements, data):
         change, screen = navbar.update(stdscr, character)
         if change:
             local_storage.clear()
+            local_storage.set_item("user", user_name)
             return screen
 
 

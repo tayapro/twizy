@@ -16,7 +16,7 @@ from lib import local_storage, spreadsheet_storage
 
 def fetch_quiz_data():
     return [
-        (question, correct_option, option_0, optiopn_1, option_2, option_3)
+        (question, int(correct_option), option_0, optiopn_1, option_2, option_3)
         for question, correct_option, option_0, optiopn_1, option_2, option_3
         in spreadsheet_storage.get_table("quiz")[1:]
     ]
@@ -30,13 +30,22 @@ def get_quiz():
 
 def content_screen_handler(stdscr, navbar, elements, data):
     color = curses.color_pair(palette.MAIN_COLOR)
+    accent_color = curses.color_pair(palette.ACCENT_COLOR_INV)
+
     question_counter = 0
     correct_answers_counter = 0
     question, corrent_option_index, *options = data[0]
 
     options_menu = Menu(13, layout.MAIN_TEXT_MARGING_X, "", True, *options)
     question_text = CenteredText(question + " ", 10, color)  
-    logging.debug(f"Hint: {int(corrent_option_index) + 1}") # Logging correct answer
+    logging.debug(f"Hint: {corrent_option_index + 1}") # Logging correct answer
+
+    elements += [
+        CenteredText("Use the Up and Down arrow keys for navigate through", 19, accent_color),
+        CenteredText("the options and Enter to confirm", 20, accent_color),
+    ]
+
+    start_time = time.time()
 
     while True:
         # Clear screen
@@ -57,8 +66,6 @@ def content_screen_handler(stdscr, navbar, elements, data):
 
         stdscr.refresh()
 
-        start_time = time.time()
-
         code = stdscr.getch()
 
         options_menu.update(code)
@@ -71,14 +78,14 @@ def content_screen_handler(stdscr, navbar, elements, data):
         # When user hits enter
         if code in [10, 13, curses.KEY_ENTER]:
             user_option = options_menu.get_selection()
-            if user_option == int(corrent_option_index):
+            if user_option == corrent_option_index:
                 correct_answers_counter += 1
 
             question_counter += 1
             if question_counter < game.TOTAL_QUESTIONS:
                 (question, corrent_option_index,
                 *options) = data[question_counter]
-                logging.debug(f"Hint: {int(corrent_option_index)+1}")
+                logging.debug(f"Hint: {corrent_option_index+1}")
 
             options_menu.set_options(*options)
             question_text.message = question + " "
@@ -87,10 +94,11 @@ def content_screen_handler(stdscr, navbar, elements, data):
         if question_counter == game.TOTAL_QUESTIONS:
             end_time = time.time()
             quiz_time = end_time - start_time
+            logging.debug(f"start_time: {start_time}, end_time: {end_time}, quiz_time: {quiz_time}")
             total_mistakes = game.TOTAL_QUESTIONS - correct_answers_counter
             local_storage.set_item("total_mistakes", total_mistakes)
             local_storage.set_item("correct_answers", correct_answers_counter)
-            local_storage.set_item("quiz_time", quiz_time)
+            local_storage.set_item("quiz_time", int(quiz_time))
             local_storage.set_item("end_time", int(end_time))
             return screens.OUTCOME_SCREEN
 
@@ -117,7 +125,6 @@ def skeleton_screen_handler(stdscr, navbar, elements):
 
 def game_screen_handler(stdscr):
     color = curses.color_pair(palette.MAIN_COLOR)
-    color_yellow = curses.color_pair(palette.ACCENT_COLOR_INV)
 
     navbar = Navbar(
         NavAction("a", screens.HOME_SCREEN, "Abort  "),
@@ -125,15 +132,15 @@ def game_screen_handler(stdscr):
     )
 
     user_name = local_storage.get_item("user")
+    if user_name == None or len(user_name) == 0:
+        raise Exception("User name is not set")
 
     elements = [
         Frame(layout.FRAME_PADDING_TOP, layout.FRAME_PADDING_LEFT,
               layout.FRAME_PADDING_BOTTOM, layout.FRAME_PADDING_RIGHT),
         RightText(f"  USER : {user_name}  ",
                   layout.FRAME_PADDING_TOP, 10, color),
-        CenteredText("   tWIZY GAME   ", layout.FRAME_PADDING_TOP, color),
-        CenteredText("Use the Up and Down arrow keys for navigate through", 19, color_yellow),
-        CenteredText("the options and Enter to confirm", 20, color_yellow),
+        CenteredText("   tWIZY GAME   ", layout.FRAME_PADDING_TOP, color)
     ]
  
     data = skeleton_screen_handler(stdscr, navbar, elements)

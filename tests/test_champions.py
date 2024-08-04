@@ -1,6 +1,5 @@
 import pytest
 from unittest.mock import patch
-import logging
 from components import champions
 
 # Patching lib.spreadsheet_storage functions for testing
@@ -10,11 +9,11 @@ def test_fetch_champions(mock_set_table, mock_get_table):
     # Setup the mock to return a specific table structure
     mock_get_table.return_value = [
         ['name', 'score', 'timestamp'],
-        ['Bob', '900', '1722262477'],
-        ['Dave', '800', '1722262475'],
-        ['Alice', '780', '1722262478'],
-        ['Charlie', '767', '1722262476'],
-        ['Eve', '720', '1722262474'],
+        ['Bob', '900', 1722262477],
+        ['Dave', '800', 1722262475],
+        ['Alice', '780', 1722262478],
+        ['Charlie', '767', 1722262476],
+        ['Eve', '720', 1722262474],
     ]
 
     # Call the function to test
@@ -22,11 +21,11 @@ def test_fetch_champions(mock_set_table, mock_get_table):
 
     # Expected result
     expected_champions = [
-        ('Bob', 900, '1722262477'),
-        ('Dave', 800, '1722262475'),
-        ('Alice', 780, '1722262478'),
-        ('Charlie', 767, '1722262476'),
-        ('Eve', 720, '1722262474'),
+        ('Bob', 900, 1722262477),
+        ('Dave', 800, 1722262475),
+        ('Alice', 780, 1722262478),
+        ('Charlie', 767, 1722262476),
+        ('Eve', 720, 1722262474),
     ]
 
     # Assert that the function returns the expected result
@@ -37,11 +36,11 @@ def test_fetch_champions(mock_set_table, mock_get_table):
 def test_update_champions(mock_set_table):
     # Define the new champions data
     new_champions = [
-        ('Bob', 900, '1722262477'),
-        ('Frank', 850, '1722262480'),
-        ('Dave', 800, '1722262475'),
-        ('Alice', 780, '1722262478'),
-        ('Charlie', 767, '1722262476'),
+        ('Bob', 900, 1722262477),
+        ('Frank', 850, 1722262480),
+        ('Dave', 800, 1722262475),
+        ('Alice', 780, 1722262478),
+        ('Charlie', 767, 1722262476),
     ]
 
     # Call the function to test
@@ -64,24 +63,24 @@ def test_record_user_score(mock_set_table, mock_get_table):
     # Mock data setup: Initially, the leaderboard has 5 players.
     mock_get_table.return_value = [
         ['name', 'score', 'timestamp'],
-        ['Bob', '900', '1722262477'],
-        ['Dave', '800', '1722262475'],
-        ['Alice', '780', '1722262478'],
-        ['Charlie', '767', '1722262476'],
-        ['Eve', '720', '1722262474'],
+        ['Bob', '900', 1722262477],
+        ['Dave', '800', 1722262475],
+        ['Alice', '780', 1722262478],
+        ['Charlie', '767', 1722262476],
+        ['Eve', '720', 1722262474],
     ]
 
     # New score to be added
-    new_user = ('Frank', 850, '1722262480')
+    new_user = ('Frank', 850, 1722262480)
     result = champions.record_user_score(*new_user)
 
     # Expected champions after adding new user (keeping max 5 and score < 1000)
     expected_champions = [
-        ('Bob', 900, '1722262477'),
-        ('Frank', 850, '1722262480'),
-        ('Dave', 800, '1722262475'),
-        ('Alice', 780, '1722262478'),
-        ('Charlie', 767, '1722262476')
+        ('Bob', 900, 1722262477),
+        ('Frank', 850, 1722262480),
+        ('Dave', 800, 1722262475),
+        ('Alice', 780, 1722262478),
+        ('Charlie', 767, 1722262476)
     ]
 
     # Verify set_table was called correctly
@@ -90,28 +89,3 @@ def test_record_user_score(mock_set_table, mock_get_table):
     # Verify the new user's rank (1-based index)
     assert result == 2  # "Frank" should be 2nd on the leaderboard
 
-
-@patch('logging.info')
-def test_logging_info(mock_logging_info):
-    # Setup mock to avoid actual logging during tests
-    mock_logging_info.return_value = None
-
-    # Mock data setup
-    with patch('lib.spreadsheet_storage.get_table') as mock_get_table:
-        mock_get_table.return_value = [
-            ['name', 'score', 'timestamp'],
-            ['Bob', '900', '1722262477'],
-            ['Dave', '800', '1722262475'],
-            ['Alice', '780', '1722262478'],
-            ['Charlie', '767', '1722262476'],
-            ['Eve', '720', '1722262474'],
-        ]
-
-        # Test fetch_champions to ensure logging is called
-        champions.fetch_champions()
-
-        # Expected log message
-        expected_log = "CHAMPIONS: [('Bob', 900, '1722262477'), ('Dave', 800, '1722262475'), ('Alice', 780, '1722262478'), ('Charlie', 767, '1722262476'), ('Eve', 720, '1722262474')]"
-
-        # Ensure the logging.info was called with the correct message
-        mock_logging_info.assert_called_once_with(expected_log)

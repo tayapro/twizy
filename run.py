@@ -21,6 +21,7 @@ logging.basicConfig(
     level=logging.DEBUG,
 )
 
+
 def main():
     """
     The main function that initializes the game and handles screen navigation.
