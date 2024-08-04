@@ -3,16 +3,26 @@ import curses
 from unittest.mock import MagicMock, patch
 from components.menu import Menu
 
+
 # Mocking palette attributes for testing
 class MockPalette:
     MAIN_COLOR = 1
     MAIN_COLOR_INV = 2
 
+
 palette = MockPalette()
+
 
 @patch('config.palette', palette)  # Mocking the palette from config
 @patch('curses.color_pair')
 def test_menu_draw(mock_color_pair):
+    """
+    The test verifies that the `draw` method correctly renders the menu
+    on the screen.
+    It checks that the title and menu options are displayed with
+    the correct colors.
+    """
+
     # Mock return values for color pairs
     mock_color_pair.side_effect = [10, 20]  # Normal and selected colors
 
@@ -39,7 +49,13 @@ def test_menu_draw(mock_color_pair):
     ]
     mock_stdscr.addstr.assert_has_calls(expected_calls, any_order=False)
 
+
 def test_menu_update():
+    """
+    The test verifies that the `update` method correctly handles navigation
+    input and updates the selected menu item accordingly.
+    """
+
     options = ["Option 1", "Option 2", "Option 3"]
     menu = Menu(5, 10, "", False, *options)
 

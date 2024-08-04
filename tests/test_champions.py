@@ -2,10 +2,16 @@ import pytest
 from unittest.mock import patch
 from components import champions
 
+
 # Patching lib.spreadsheet_storage functions for testing
 @patch('lib.spreadsheet_storage.get_table')
 @patch('lib.spreadsheet_storage.set_table')
 def test_fetch_champions(mock_set_table, mock_get_table):
+    """
+    The test verifies that `fetch_champions` correctly retrieves and formats
+    champion data from the spreadsheet storage.
+    """
+
     # Setup the mock to return a specific table structure
     mock_get_table.return_value = [
         ['name', 'score', 'timestamp'],
@@ -34,6 +40,11 @@ def test_fetch_champions(mock_set_table, mock_get_table):
 
 @patch('lib.spreadsheet_storage.set_table')
 def test_update_champions(mock_set_table):
+    """
+    The test verifies that `update_champions` correctly updates the champions
+    data in the spreadsheet storage with new data.
+    """
+
     # Define the new champions data
     new_champions = [
         ('Bob', 900, 1722262477),
@@ -51,6 +62,11 @@ def test_update_champions(mock_set_table):
 
 
 def test_turn_index_into_place():
+    """
+    The test verifies that `turn_index_into_place` correctly converts index
+    values to their corresponding 1-based place values.
+    """
+
     # Test various indices
     assert champions.turn_index_into_place(0) == 1
     assert champions.turn_index_into_place(1) == 2
@@ -60,6 +76,11 @@ def test_turn_index_into_place():
 @patch('lib.spreadsheet_storage.get_table')
 @patch('lib.spreadsheet_storage.set_table')
 def test_record_user_score(mock_set_table, mock_get_table):
+    """
+    The test verifies that `record_user_score` correctly records a new user
+    score, updates the leaderboard, and returns the user's rank.
+    """
+
     # Mock data setup: Initially, the leaderboard has 5 players.
     mock_get_table.return_value = [
         ['name', 'score', 'timestamp'],
@@ -88,4 +109,3 @@ def test_record_user_score(mock_set_table, mock_get_table):
 
     # Verify the new user's rank (1-based index)
     assert result == 2  # "Frank" should be 2nd on the leaderboard
-

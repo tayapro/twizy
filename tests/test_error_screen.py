@@ -5,6 +5,7 @@ from components.navbar import Navbar, NavAction
 from screens.error_screen import error_screen_handler
 from config import screens, palette, layout, logo
 
+
 @patch('screens.error_screen.local_storage.get_item')
 @patch('screens.error_screen.local_storage.clear')
 @patch('screens.error_screen.local_storage.set_item')
@@ -13,6 +14,13 @@ def test_error_screen_handler(
     mock_color_pair,
     mock_set_item, mock_clear, mock_get_item
 ):
+    """
+    The test verifies that the `error_screen_handler` function correctly:
+    1. Interacts with local storage to get and set user information.
+    2. Clears and refreshes the screen.
+    3. Transitions to the home screen based on user input.
+    """
+
     # Mock the standard screen and its methods
     stdscr = MagicMock()
     stdscr.getmaxyx.return_value = (20, 40)

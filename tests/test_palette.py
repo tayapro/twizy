@@ -2,8 +2,19 @@ import pytest
 from unittest import mock
 from config import palette
 
+
 @pytest.fixture
 def mock_curses():
+    """
+    Fixture to mock functions and constants from the curses module.
+
+    This fixture replaces certain functions and constants from the `curses`
+    module with mock objects to prevent actual terminal interactions during
+    tests. The mocked `curses` functions include `init_pair` for color pair
+    initialization, and `curses.wrapper` to simulate the curses initialization
+    function.
+    """
+
     """Fixture to mock curses module functions."""
     with mock.patch('curses.init_pair') as mock_init_pair, \
          mock.patch('curses.COLOR_WHITE', new=15), \
@@ -18,6 +29,13 @@ def mock_curses():
 
 
 def test_init_colors(mock_curses):
+    """
+    The test verifies that the `init_colors` function correctly initializes
+    color pairs using `curses.init_pair` with the appropriate color values.
+    It also ensures that the `curses.wrapper` function is called with
+    a function that initializes the colors.
+    """
+
     # Mock stdscr
     mock_stdscr = mock.Mock()
 

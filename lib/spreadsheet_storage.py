@@ -2,10 +2,18 @@ import gspread
 from google.oauth2.service_account import Credentials
 
 
+# Global variable to hold the Google Sheets client instance
 SHEET = None
 
 
 def init_storage():
+    """
+    Initialize the Google Sheets client.
+
+    This function sets up the connection to a Google Sheets document using
+    service account credentials stored in 'creds.json'. It also specifies
+    the scope of access permissions needed for the operations.
+    """
     global SHEET
 
     scope = [
@@ -21,28 +29,43 @@ def init_storage():
 
 
 def get_column(worksheet_name, col_num):
+    """
+    Retrieve a specific column of data from a worksheet.
+    """
     page = SHEET.worksheet(worksheet_name)
     return [i for i in page.col_values(col_num)[1:]]
 
 
 def set_column(worksheet_name, col_num, data):
+    """
+    Update a specific column of data in a worksheet.
+    """
     page = SHEET.worksheet(worksheet_name)
     r = column_to_range(col_num, data)
     page.update(r, data)
 
 
 def column_to_range(col_num, data):
+    """
+    Convert a column number and data length to an A1 notation range.
+    """
     letter_code = ord('A') + col_num - 1
     letter = chr(letter_code)
     return f"{letter}2:{letter}{len(data) + 1}"
 
 
 def get_table(worksheet_name):
+    """
+    Retrieve the entire table of data from a worksheet.
+    """
     page = SHEET.worksheet(worksheet_name)
     return [[row for row in col] for col in page.get_all_values()]
 
 
 def set_table(worksheet_name, table):
+    """
+    Update an entire table of data in a worksheet.
+    """
     start_letter = 'A'
     end_letter = chr(ord('A') + len(table[0]) - 1)
     r = f"{start_letter}2:{end_letter}{len(table) + 1}"

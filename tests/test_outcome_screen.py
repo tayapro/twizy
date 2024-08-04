@@ -15,10 +15,21 @@ mock_score = 850
 mock_tier = 3
 mock_place = 3
 
+
 # Mocking the necessary imports and configurations
 @pytest.fixture(autouse=True)
 def mock_imports_and_configs(monkeypatch):
-    monkeypatch.setattr('screens.outcome_screen.curses.color_pair', lambda x: x)
+    """
+    Fixture to mock imports and configurations for testing.
+
+    This fixture automatically replaces the `curses.color_pair` function
+    used in the `screens.outcome_screen` module with a no-op lambda function.
+    This allows the tests to run without requiring actual curses terminal
+    interactions.
+    """
+    monkeypatch.setattr('screens.outcome_screen.curses.color_pair',
+                        lambda x: x)
+
 
 @patch('screens.outcome_screen.local_storage.get_item')
 @patch('screens.outcome_screen.local_storage.clear')
@@ -28,6 +39,13 @@ def test_outcome_screen_handler(
     mock_record_user_score,
     mock_get_score_and_tier, mock_clear, mock_get_item
 ):
+    """
+    The test verifies that the `outcome_screen_handler` function correctly
+    processes user data, calculates the score and tier, and determines the next
+    screen. It also checks interactions with mocked functions and verifies
+    correct function calls.
+    """
+
     # Mock the standard screen and its methods
     stdscr = MagicMock()
     stdscr.getmaxyx.return_value = (24, 80)  # Mock screen dimensions
@@ -61,9 +79,12 @@ def test_outcome_screen_handler(
     mock_get_item.assert_any_call("quiz_time")
     mock_get_item.assert_any_call("end_time")
 
-    # Verify that get_score_and_tier and record_user_score were called correctly
-    mock_get_score_and_tier.assert_called_once_with(mock_mistakes, mock_quiz_time)
-    mock_record_user_score.assert_called_once_with(mock_user, mock_score, mock_end_time)
+    # Verify that get_score_and_tier and record_user_score were called
+    # correctly
+    mock_get_score_and_tier.assert_called_once_with(mock_mistakes,
+                                                    mock_quiz_time)
+    mock_record_user_score.assert_called_once_with(mock_user, mock_score,
+                                                   mock_end_time)
 
     # Verify that the screen was cleared and refreshed
     stdscr.clear.assert_called()
@@ -72,9 +93,16 @@ def test_outcome_screen_handler(
     # Check if navbar and elements were drawn correctly
     stdscr.getmaxyx.assert_called()
 
+
 @patch('screens.outcome_screen.local_storage.get_item')
 @patch('screens.outcome_screen.local_storage.clear')
 def test_outcome_screen_handler_no_user(mock_clear, mock_get_item):
+    """
+    The test simulates a scenario where no username is available in
+    `local_storage`.
+    It verifies that an exception is raised due to the missing user name.
+    """
+
     # Mock the standard screen and its methods
     stdscr = MagicMock()
     stdscr.getmaxyx.return_value = (24, 80)  # Mock screen dimensions

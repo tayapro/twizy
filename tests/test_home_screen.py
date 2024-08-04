@@ -6,9 +6,17 @@ from screens.home_screen import home_screen_handler
 # Sample user name for testing
 mock_user_name = "TestUser"
 
+
 @patch('screens.home_screen.local_storage.get_item')
 @patch('screens.home_screen.curses.color_pair')
 def test_home_screen_handler(mock_color_pair, mock_get_item):
+    """
+    The test verifies that the `home_screen_handler` function correctly
+    transitions to the game screen when the user provides valid input.
+    It also ensures that the user name is fetched, and the screen is
+    properly cleared and refreshed.
+    """
+
     # Mock the standard screen and its methods
     stdscr = MagicMock()
     stdscr.getmaxyx.return_value = (24, 80)  # Mock screen dimensions
@@ -43,13 +51,19 @@ def test_home_screen_handler(mock_color_pair, mock_get_item):
 @patch('screens.home_screen.local_storage.get_item', return_value=None)
 @patch('screens.home_screen.curses.color_pair')
 def test_home_screen_handler_no_user(mock_color_pair, mock_get_item):
+    """
+    The test verifies that the `home_screen_handler` function raises an
+    exception when no user name is available in local storage. It ensures
+    that the function properly handles the case where the user name is not
+    set.
+    """
+
     # Mock the standard screen and its methods
     stdscr = MagicMock()
     stdscr.getmaxyx.return_value = (24, 80)  # Mock screen dimensions
 
     # Set the color pair return values based on palette colors
     mock_color_pair.side_effect = lambda x: x
-
 
     # Simulate the scenario where no username is set
     with pytest.raises(Exception, match="User name is not set"):
