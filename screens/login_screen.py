@@ -1,4 +1,5 @@
 import curses
+import logging
 from config import screens, layout, palette, logo
 from components.navbar import Navbar, NavAction
 from components.text import Text
@@ -8,14 +9,8 @@ from lib import local_storage
 
 def login_screen_handler(stdscr):
     """
-    Handles the login screen interaction.
-
-    This function initializes the login screen, clears any local storage data,
-    and prompts the user to enter their name. It includes error handling for
-    name length and provides a visual UI using curses.
-
-    Args:
-        stdscr (curses.window): The main window object from curses.
+    Main handler for the login screen, managing the display and
+    user interactions.
     """
 
     # Clear any existing user data
@@ -27,7 +22,8 @@ def login_screen_handler(stdscr):
 
     prompt = "Name (3-8 chars): "
 
-    # Create the UI elements (the numbers are line's numbers)
+    # Define the elements to be displayed on the login screen
+    # (the numbers are line's numbers)
     elements = [
         Text("WELCOME", 10, layout.FRAME_PADDING_LEFT, accent_color),
         Text("TO THE tWIZY QUIZ!", 11, layout.FRAME_PADDING_LEFT, color),
@@ -55,7 +51,7 @@ def login_screen_handler(stdscr):
         # Clear screen
         stdscr.clear()
 
-        # Draw each UI element
+        # Draw elements
         for e in elements:
             e.draw(stdscr)
         error_element.message = ""
@@ -85,14 +81,12 @@ def login_screen_handler(stdscr):
                 continue
 
             local_storage.set_item("user", user_element.message)
+            logging.info(f"Username: {user_element.message}")
             return screens.HOME_SCREEN
 
 
 def on_load_login_screen(w):
     """
     Wrapper function for setting up the login screen.
-
-    Args:
-        w (function): The function to be called with the login_screen_handler.
     """
     return w(login_screen_handler)

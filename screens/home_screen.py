@@ -1,4 +1,5 @@
 import curses
+import logging
 from config import screens, layout, palette
 from components.text import Text
 from components.frame import Frame
@@ -9,10 +10,14 @@ from lib import local_storage
 
 
 def home_screen_handler(stdscr):
-    color = curses.color_pair(palette.ACCENT_COLOR_INV)
-    # stdscr.getyx()
-    # stdscr.move(0, 0)
+    """
+    Main handler for the home screen, managing the display and
+    user interactions.
+    """
 
+    color = curses.color_pair(palette.ACCENT_COLOR_INV)
+
+    # Create the navbar with navigation actions
     navbar = Navbar(
         NavAction("c", screens.CHAMPIONS_SCREEN, "Champions  "),
         NavAction("g", screens.GAME_SCREEN, "Game  "),
@@ -21,10 +26,14 @@ def home_screen_handler(stdscr):
 
     height, width = stdscr.getmaxyx()
 
+    # Retrieve the user name from local storage
     user_name = local_storage.get_item("user")
-    if user_name == None or len(user_name) == 0:
+    if user_name is None or len(user_name) == 0:
         raise Exception("User name is not set")
+    logging.info(f"User: {user_name}")
 
+    # Define the elements to be displayed on the home screen
+    # (the numbers are line's numbers)
     elements = [
         Frame(layout.FRAME_PADDING_TOP, layout.FRAME_PADDING_LEFT,
               layout.FRAME_PADDING_BOTTOM, layout.FRAME_PADDING_RIGHT),
@@ -45,13 +54,14 @@ def home_screen_handler(stdscr):
         # Clear screen
         stdscr.clear()
 
+        # Draw elements
         navbar.draw(stdscr)
-
         for e in elements:
             e.draw(stdscr)
 
         stdscr.refresh()
 
+        # Get user input and check for navigation change
         character = stdscr.getch()
         change, screen = navbar.update(stdscr, character)
         if change:
@@ -59,4 +69,7 @@ def home_screen_handler(stdscr):
 
 
 def on_load_home_screen(w):
+    """
+    Wrapper function for setting up the home screen.
+    """
     return w(home_screen_handler)

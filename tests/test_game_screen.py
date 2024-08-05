@@ -129,8 +129,7 @@ def test_game_screen_handler(mock_skeleton_handler):
     result = game_screen.game_screen_handler(stdscr)
 
     # Ensure it returns the None value which indicates quit
-    none_result = None
-    assert result == none_result
+    assert result is None
 
 
 def test_on_load_game_screen():

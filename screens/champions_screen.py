@@ -12,12 +12,17 @@ from lib import local_storage
 
 
 def content_screen_handler(stdscr, navbar, elements, data):
+    """
+    The function handles the content of the champions screen.
+    """
+
     while True:
         height, width = stdscr.getmaxyx()
 
         # Clear screen
         stdscr.clear()
 
+        # Draw elements
         navbar.draw(stdscr)
         for e in elements:
             e.draw(stdscr)
@@ -49,6 +54,7 @@ def content_screen_handler(stdscr, navbar, elements, data):
 
         stdscr.refresh()
 
+        # Get user input and check for navigation change
         character = stdscr.getch()
         change, screen = navbar.update(stdscr, character)
         if change:
@@ -56,13 +62,19 @@ def content_screen_handler(stdscr, navbar, elements, data):
 
 
 def skeleton_screen_handler(stdscr, navbar, elements):
+    """
+    The function displays a loading screen while fetching champions
+    leaderboard data.
+    """
+
     color = curses.color_pair(palette.MAIN_COLOR)
     height, width = stdscr.getmaxyx()
 
+    # Clear screen
     stdscr.clear()
 
+    # Draw elements
     navbar.draw(stdscr)
-
     for e in elements:
         e.draw(stdscr)
 
@@ -76,14 +88,22 @@ def skeleton_screen_handler(stdscr, navbar, elements):
 
 
 def champions_screen_handler(stdscr):
+    """
+    Main handler for the champions screen, managing the display and
+    user interactions.
+    """
+
     color = curses.color_pair(palette.MAIN_COLOR)
 
+    # Define the elements to be displayed on the champions screen
+    # (the numbers are line's numbers)
     elements = [
         Frame(layout.FRAME_PADDING_TOP, layout.FRAME_PADDING_LEFT,
               layout.FRAME_PADDING_BOTTOM, layout.FRAME_PADDING_RIGHT),
         CenteredText("  CHAMPIONS BOARD  ", layout.FRAME_PADDING_TOP, color)
     ]
 
+    # Create the navbar with navigation actions
     navbar = Navbar(
         NavAction("h", screens.HOME_SCREEN, "Home  "),
         NavAction("g", screens.GAME_SCREEN, "Game  "),
@@ -95,4 +115,8 @@ def champions_screen_handler(stdscr):
 
 
 def on_load_champions_screen(w):
+    """
+    Wrapper function for setting up the champions screen.
+    """
+
     return w(champions_screen_handler)

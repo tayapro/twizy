@@ -10,23 +10,18 @@ from config import screens, palette
 from lib.spreadsheet_storage import init_storage
 
 
-# Configure logging for the application
 logging.basicConfig(
     filename="twizy.log",
     encoding="utf-8",
     filemode="a",
-    format="{asctime} - {levelname} - {message}",
-    style="{",
+    format='%(asctime)s  %(levelname)-8s [%(filename)s:%(lineno)d]  %(message)s',
     datefmt="%Y-%m-%d %H:%M",
-    level=logging.DEBUG,
+    level=logging.DEBUG
 )
-
 
 def main():
     """
-    The main function that initializes the game and handles screen navigation.
-
-    This function sets up initial configurations, manages screen transitions
+    The function sets up initial configurations, manages screen transitions
     based on user actions, and handles exceptions by logging errors and
     displaying an error screen if necessary.
     """
