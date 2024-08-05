@@ -18,7 +18,6 @@ def fetch_quiz_data():
     """
     The function fetches quiz data from the "quiz" spreadsheet.
     """
-
     return [
         (question, int(correct_option),
          option_0, optiopn_1, option_2, option_3)
@@ -31,7 +30,6 @@ def get_quiz():
     """
     The function shuffles and returns a list of 10 quiz questions.
     """
-
     data = fetch_quiz_data()
     random.shuffle(data)
 
@@ -136,7 +134,6 @@ def skeleton_screen_handler(stdscr, navbar, elements):
     """
     The function displays a loading screen while fetching quiz data.
     """
-
     color = curses.color_pair(palette.MAIN_COLOR)
     height, width = stdscr.getmaxyx()
 
@@ -162,7 +159,6 @@ def game_screen_handler(stdscr):
     Main handler for the game screen, managing the display and
     user interactions.
     """
-
     color = curses.color_pair(palette.MAIN_COLOR)
 
     # Create the navbar with navigation actions
@@ -196,5 +192,4 @@ def on_load_game_screen(w):
     """
     Wrapper function for setting up the game screen.
     """
-
     return w(game_screen_handler)

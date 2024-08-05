@@ -45,7 +45,6 @@ def test_outcome_screen_handler(
     screen. It also checks interactions with mocked functions and verifies
     correct function calls.
     """
-
     # Mock the standard screen and its methods
     stdscr = MagicMock()
     stdscr.getmaxyx.return_value = (24, 80)  # Mock screen dimensions
@@ -102,7 +101,6 @@ def test_outcome_screen_handler_no_user(mock_clear, mock_get_item):
     `local_storage`.
     It verifies that an exception is raised due to the missing user name.
     """
-
     # Mock the standard screen and its methods
     stdscr = MagicMock()
     stdscr.getmaxyx.return_value = (24, 80)  # Mock screen dimensions

@@ -12,7 +12,6 @@ def test_right_text_draw(mock_initscr):
     screen and verifies that the `addstr` method is called with the correct
     parameters.
     """
-
     # Mock stdscr
     mock_stdscr = MagicMock()
     mock_stdscr.getmaxyx.return_value = (20, 40)  # height = 20, width = 40

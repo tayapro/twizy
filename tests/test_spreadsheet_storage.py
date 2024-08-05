@@ -15,7 +15,6 @@ def mock_gspread_client():
     to simulate interactions with Google Sheets without needing actual
     API calls.
     """
-
     with mock.patch.object(spreadsheet_storage,
                            'gspread', autospec=True) as mock_gspread, \
          mock.patch.object(spreadsheet_storage, 'Credentials',
@@ -36,7 +35,6 @@ def test_init_storage(mock_gspread_client):
     The test verifies that `init_storage` sets up the gspread client
     and opens the 'twizy' spreadsheet.
     """
-
     spreadsheet_storage.init_storage()
     mock_gspread_client.open.assert_called_once_with('twizy')
 
@@ -46,7 +44,6 @@ def test_get_column(mock_gspread_client):
     The test verifies that `get_column` retrieves the correct column data
     from the worksheet.
     """
-
     mock_worksheet = mock_gspread_client.open().worksheet()
     mock_worksheet.col_values.return_value = ["Header", "Value1", "Value2"]
 
@@ -62,7 +59,6 @@ def test_set_column(mock_gspread_client):
     The test verifies that `set_column` updates the worksheet
     with the correct column data.
     """
-
     mock_worksheet = mock_gspread_client.open().worksheet()
     spreadsheet_storage.init_storage()
 
@@ -77,7 +73,6 @@ def test_get_table(mock_gspread_client):
     The test verifies that `get_table` retrieves the entire table from
     the worksheet correctly.
     """
-
     mock_worksheet = mock_gspread_client.open().worksheet()
     mock_worksheet.get_all_values.return_value = [["Header1", "Header2"],
                                                   ["Value1", "Value2"]]
@@ -94,7 +89,6 @@ def test_set_table(mock_gspread_client):
     The test verifies that `set_table` updates the worksheet with the correct
     table data.
     """
-
     mock_worksheet = mock_gspread_client.open().worksheet()
     spreadsheet_storage.init_storage()
 

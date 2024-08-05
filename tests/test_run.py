@@ -35,7 +35,6 @@ def test_main_flow(mock_curses_wrapper,
     - Initialization functions `init_storage` and `init_colors`
       are called once.
     """
-
     # Simulate the sequence of screens
     mock_on_load_login_screen.return_value = screens.HOME_SCREEN
     mock_on_load_home_screen.return_value = screens.GAME_SCREEN
@@ -74,7 +73,6 @@ def test_login_screen_exception(mock_curses_wrapper, mock_on_load_error_screen,
     It also simulates that the error screen will cause the program to exit
     by returning `None`.
     """
-
     # Simulate an exception in the login screen
     mock_on_load_login_screen.side_effect = Exception("Login error")
     mock_on_load_error_screen.side_effect = [None]
@@ -104,7 +102,6 @@ def test_home_screen_exception(mock_curses_wrapper,
     - The error screen is displayed after the exception.
     - The main function handles the exception and retries as expected.
     """
-
     # Set up the screens to transition from login to home
     mock_on_load_login_screen.return_value = screens.HOME_SCREEN
     mock_on_load_home_screen.side_effect = Exception("Home screen error")

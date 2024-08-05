@@ -12,7 +12,6 @@ def next_screen():
     The function determines the next screen to navigate to based on
     the user's login status.
     """
-
     user = local_storage.get_item("user")
     logging.info(f"Username: {user}")
 
@@ -30,7 +29,6 @@ def error_screen_handler(stdscr):
     Main handler for the error screen, managing the display and
     user interactions.
     """
-
     user = local_storage.get_item("user")
     local_storage.clear()
     local_storage.set_item("user", user)
@@ -85,5 +83,4 @@ def on_load_error_screen(w):
     """
     Wrapper function for setting up the error screen.
     """
-
     return w(error_screen_handler)

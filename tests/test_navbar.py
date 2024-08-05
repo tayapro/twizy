@@ -20,7 +20,6 @@ def test_navbar_draw(mock_color_pair):
     on the screen.
     It checks that the background color and text are displayed as expected.
     """
-
     # Mock return values for color pairs
     mock_color_pair.return_value = 10
 
@@ -62,7 +61,6 @@ def test_navbar_update():
     The test verifies that the `update` method correctly processes key inputs
     and returns the appropriate result and screen.
     """
-
     # Create NavAction instances
     action1 = NavAction(key='a', screen='screen1', message='Action 1')
     action2 = NavAction(key='b', screen='screen2', message='Action 2')

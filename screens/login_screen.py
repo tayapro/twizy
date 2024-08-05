@@ -12,7 +12,6 @@ def login_screen_handler(stdscr):
     Main handler for the login screen, managing the display and
     user interactions.
     """
-
     # Clear any existing user data
     local_storage.clear()
 

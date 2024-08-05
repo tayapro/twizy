@@ -8,9 +8,9 @@ SHEET = None
 
 def init_storage():
     """
-    Initialize the Google Sheets client.
+    The function initializes the Google Sheets client.
 
-    This function sets up the connection to a Google Sheets document using
+    It sets up the connection to a Google Sheets document using
     service account credentials stored in 'creds.json'. It also specifies
     the scope of access permissions needed for the operations.
     """
@@ -30,7 +30,7 @@ def init_storage():
 
 def get_column(worksheet_name, col_num):
     """
-    Retrieve a specific column of data from a worksheet.
+    The function retrieves a specific column of data from a worksheet.
     """
     page = SHEET.worksheet(worksheet_name)
     return [i for i in page.col_values(col_num)[1:]]
@@ -38,7 +38,7 @@ def get_column(worksheet_name, col_num):
 
 def set_column(worksheet_name, col_num, data):
     """
-    Update a specific column of data in a worksheet.
+    The function updates a specific column of data in a worksheet.
     """
     page = SHEET.worksheet(worksheet_name)
     r = column_to_range(col_num, data)
@@ -47,7 +47,8 @@ def set_column(worksheet_name, col_num, data):
 
 def column_to_range(col_num, data):
     """
-    Convert a column number and data length to an A1 notation range.
+    The function converts a column number and data length to an A1 notation 
+    range.
     """
     letter_code = ord('A') + col_num - 1
     letter = chr(letter_code)
@@ -56,7 +57,7 @@ def column_to_range(col_num, data):
 
 def get_table(worksheet_name):
     """
-    Retrieve the entire table of data from a worksheet.
+    The function retrieves the entire table of data from a worksheet.
     """
     page = SHEET.worksheet(worksheet_name)
     return [[row for row in col] for col in page.get_all_values()]
@@ -64,7 +65,7 @@ def get_table(worksheet_name):
 
 def set_table(worksheet_name, table):
     """
-    Update an entire table of data in a worksheet.
+    The function update an entire table of data in a worksheet.
     """
     start_letter = 'A'
     end_letter = chr(ord('A') + len(table[0]) - 1)

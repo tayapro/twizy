@@ -16,7 +16,6 @@ def test_home_screen_handler(mock_color_pair, mock_get_item):
     It also ensures that the user name is fetched, and the screen is
     properly cleared and refreshed.
     """
-
     # Mock the standard screen and its methods
     stdscr = MagicMock()
     stdscr.getmaxyx.return_value = (24, 80)  # Mock screen dimensions
@@ -57,7 +56,6 @@ def test_home_screen_handler_no_user(mock_color_pair, mock_get_item):
     that the function properly handles the case where the user name is not
     set.
     """
-
     # Mock the standard screen and its methods
     stdscr = MagicMock()
     stdscr.getmaxyx.return_value = (24, 80)  # Mock screen dimensions

@@ -9,7 +9,6 @@ def test_frame_draw():
     the curses library to draw a rectangle with the expected dimensions
     and at the expected screen coordinates.
     """
-
     # Mock the stdscr object to simulate curses screen
     mock_stdscr = MagicMock()
     mock_stdscr.getmaxyx.return_value = (20, 40)  # Mock screen dimensions

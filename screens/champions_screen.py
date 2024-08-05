@@ -15,7 +15,6 @@ def content_screen_handler(stdscr, navbar, elements, data):
     """
     The function handles the content of the champions screen.
     """
-
     while True:
         height, width = stdscr.getmaxyx()
 
@@ -66,7 +65,6 @@ def skeleton_screen_handler(stdscr, navbar, elements):
     The function displays a loading screen while fetching champions
     leaderboard data.
     """
-
     color = curses.color_pair(palette.MAIN_COLOR)
     height, width = stdscr.getmaxyx()
 
@@ -92,7 +90,6 @@ def champions_screen_handler(stdscr):
     Main handler for the champions screen, managing the display and
     user interactions.
     """
-
     color = curses.color_pair(palette.MAIN_COLOR)
 
     # Define the elements to be displayed on the champions screen
@@ -118,5 +115,4 @@ def on_load_champions_screen(w):
     """
     Wrapper function for setting up the champions screen.
     """
-
     return w(champions_screen_handler)

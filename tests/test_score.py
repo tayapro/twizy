@@ -17,7 +17,6 @@ def test_get_score():
     The test verifies that the returned score matches the expected
     results for each case.
     """
-
     # Test case 1: No mistakes, minimal time
     assert get_score(total_mistakes=0, max_mistakes=10,
                      total_time=0, max_time=60) == 1000
@@ -41,7 +40,6 @@ def test_get_score_and_tier():
     The test verifies that the returned score and tier match the expected
     results for each case.
     """
-
     # Test case 1: Score above 700+ should be 3-star
     assert get_score_and_tier(total_mistakes=4, total_time=10) == (716, 3)
 

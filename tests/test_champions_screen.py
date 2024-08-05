@@ -97,7 +97,6 @@ def test_skeleton_screen_handler():
     returns champion data for the screen. It ensures that the function returns
     the mock data and that the screen is refreshed.
     """
-
     stdscr = MagicMock()
     stdscr.getmaxyx.return_value = (20, 40)
 
@@ -118,7 +117,6 @@ def test_champions_screen_handler(mock_skeleton_handler):
     user input and returns the expected result. Specifically, it checks that
     pressing 'q' results in quitting the screen.
     """
-
     stdscr = MagicMock()
     stdscr.getmaxyx.return_value = (20, 40)
     stdscr.getch.side_effect = [ord('q')]  # Simulate pressing 'q' to quit
@@ -132,7 +130,6 @@ def test_on_load_champions_screen():
     The test verifies that `on_load_champions_screen` correctly sets up
     the handler for the champions screen.
     """
-
     mock_w = MagicMock()
     mock_handler = MagicMock()
 

@@ -14,8 +14,7 @@ def mock_curses():
     initialization, and `curses.wrapper` to simulate the curses initialization
     function.
     """
-
-    """Fixture to mock curses module functions."""
+    #Fixture to mock curses module functions
     with mock.patch('curses.init_pair') as mock_init_pair, \
          mock.patch('curses.COLOR_WHITE', new=15), \
          mock.patch('curses.COLOR_BLACK', new=0), \
@@ -35,7 +34,6 @@ def test_init_colors(mock_curses):
     It also ensures that the `curses.wrapper` function is called with
     a function that initializes the colors.
     """
-
     # Mock stdscr
     mock_stdscr = mock.Mock()
 

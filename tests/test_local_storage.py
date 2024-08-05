@@ -9,7 +9,6 @@ def test_set_and_get_item():
     storage and then retrieved. It ensures that the value stored matches
     the value retrieved.
     """
-
     # Set an item in the storage
     local_storage.set_item("user", "John")
 
@@ -22,7 +21,6 @@ def test_get_item_nonexistent_key():
     The test verifies that attempting to retrieve an item with a key that
     does not exist in the local storage returns `None`.
     """
-
     # Get an item with a nonexistent key
     assert local_storage.get_item("invalid_user_key") is None
 
@@ -33,7 +31,6 @@ def test_clear_storage():
     It ensures that after clearing, any previously set items can no longer
     be retrieved.
     """
-
     # Set an item in the storage
     local_storage.set_item("user", "John")
 
@@ -49,7 +46,6 @@ def test_clear_storage_empty():
     The test verifies that calling the clear function on an already empty
     storage does not raise any exceptions and that the storage remains empty.
     """
-
     # Clear the storage when it's already empty
     local_storage.clear()
 

@@ -8,7 +8,6 @@ def mock_stdscr():
     """
     Fixture to create a mocked `stdscr` object for testing.
     """
-
     # Create a mock stdscr object
     mock = MagicMock()
     mock.getmaxyx.return_value = (10, 40)  # Mock screen height and width
@@ -22,7 +21,6 @@ def test_centered_text_draw(mock_stdscr):
     vertical position (`y`), and then calls `addstr` with the correct
     parameters.
     """
-
     # Instantiate CenteredText
     message = "Hello"
     y = 5

@@ -14,7 +14,6 @@ def home_screen_handler(stdscr):
     Main handler for the home screen, managing the display and
     user interactions.
     """
-
     color = curses.color_pair(palette.ACCENT_COLOR_INV)
 
     # Create the navbar with navigation actions

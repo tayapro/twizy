@@ -25,7 +25,6 @@ def test_login_screen_handler(mock_color_pair, mock_set_item, mock_clear):
     - Correctly saves the username entered by the user to local storage.
     - Clears and refreshes the screen.
     """
-
     # Mock the standard screen and its methods
     stdscr = MagicMock()
     stdscr.getmaxyx.return_value = (20, 40)  # Mock screen dimensions

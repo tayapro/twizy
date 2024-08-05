@@ -9,7 +9,6 @@ def test_text_draw():
     It then calls the draw method and asserts that stdscr.addstr was called
     with the correct arguments (message, y, x).
     """
-
     # Create an instance of the Text class
     message = "Hello, World!"
     y = 5
@@ -33,7 +32,6 @@ def test_text_draw_with_attributes():
     asserts that stdscr.addstr was called with the correct arguments
     (message, y, x, attr).
     """
-
     # Create an instance of the Text class with additional attributes
     message = "Hello, World!"
     y = 5

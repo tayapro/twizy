@@ -49,7 +49,6 @@ def mock_imports_and_configs(monkeypatch):
     game settings, and screen configurations. It also mocks data retrieval
     functions to provide controlled test data for the quiz and user storage.
     """
-
     monkeypatch.setattr('config.layout', MockLayout)
     monkeypatch.setattr('config.palette', MockPalette)
     monkeypatch.setattr('config.game', MockGame)
@@ -67,7 +66,6 @@ def test_content_screen_handler():
     The test verifies that the `content_screen_handler` function properly
     handles transitions based on user input and updates the screen accordingly.
     """
-
     stdscr = MagicMock()
     stdscr.getmaxyx.return_value = (20, 40)
     stdscr.getch.side_effect = [ord('a')]  # Simulate pressing 'a' to quit
@@ -94,7 +92,6 @@ def test_skeleton_screen_handler():
     retrieves and returns quiz data. It also ensures that the screen was
     refreshed during the operation.
     """
-
     stdscr = MagicMock()
     stdscr.getmaxyx.return_value = (20, 40)
 
@@ -120,7 +117,6 @@ def test_game_screen_handler(mock_skeleton_handler):
     The test verifies that the `game_screen_handler` function processes
     user input correctly and handles quitting operations as expected.
     """
-
     stdscr = MagicMock()
     stdscr.getmaxyx.return_value = (20, 40)
     stdscr.getch.side_effect = [ord('q')]  # Simulate pressing 'q' to quit
@@ -138,7 +134,6 @@ def test_on_load_game_screen():
     wraps the game screen handler and sets it up to be used with a provided
     wrapper function.
     """
-
     mock_w = MagicMock()
     mock_handler = MagicMock()
 

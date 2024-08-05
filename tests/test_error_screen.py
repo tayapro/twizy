@@ -20,7 +20,6 @@ def test_error_screen_handler(
     2. Clears and refreshes the screen.
     3. Transitions to the home screen based on user input.
     """
-
     # Mock the standard screen and its methods
     stdscr = MagicMock()
     stdscr.getmaxyx.return_value = (20, 40)

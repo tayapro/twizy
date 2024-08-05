@@ -22,7 +22,6 @@ def test_menu_draw(mock_color_pair):
     It checks that the title and menu options are displayed with
     the correct colors.
     """
-
     # Mock return values for color pairs
     mock_color_pair.side_effect = [10, 20]  # Normal and selected colors
 
@@ -55,7 +54,6 @@ def test_menu_update():
     The test verifies that the `update` method correctly handles navigation
     input and updates the selected menu item accordingly.
     """
-
     options = ["Option 1", "Option 2", "Option 3"]
     menu = Menu(5, 10, "", False, *options)
 

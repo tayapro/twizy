@@ -15,7 +15,6 @@ def get_quiz_outcome():
     The function retrieves the quiz outcome details including score,
     tier, place, and correct answers.
     """
-
     # Get the quiz results from local storage
     user_name = local_storage.get_item("user")
     if user_name is None or len(user_name) == 0:
@@ -56,7 +55,6 @@ def content_screen_handler(stdscr, navbar, elements, data):
     """
     The function handles the content of the outcome screen.
     """
-
     color = curses.color_pair(palette.MAIN_COLOR)
     color_yellow = curses.color_pair(palette.ACCENT_COLOR_INV)
 
@@ -112,7 +110,6 @@ def skeleton_screen_handler(stdscr, navbar, elements):
     The function displays a loading screen while fetching the quiz
     outcome data.
     """
-
     color = curses.color_pair(palette.MAIN_COLOR)
     height, width = stdscr.getmaxyx()
 
@@ -139,7 +136,6 @@ def outcome_screen_handler(stdscr):
     Main handler for the outcome screen, managing the display and
     user interactions.
     """
-
     color = curses.color_pair(palette.MAIN_COLOR)
 
     height, width = stdscr.getmaxyx()
@@ -179,5 +175,4 @@ def on_load_outcome_screen(w):
     """
     Wrapper function for setting up the outcome screen.
     """
-
     return w(outcome_screen_handler)
