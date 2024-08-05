@@ -1,5 +1,32 @@
 # tWIZY CLI application
 
-![Website Mock Up](assets/images/readme/mockup.png)
+![Website Mock Up](readme/mockup.png)
 
 ## Table of Contents
+
+- [Project Description](#project-description)
+- [Purpose](#purpose)
+- [User Demographics](#user-demographics)
+- [UX Design](#ux-design)
+  - [User Stories](#user-stories)
+  - [Structure](#structure)
+- [Features](#features)
+  - [Existing Features](#existing-features)
+  - [Future Features](#future-features)
+- [Technical Overview](#technical-overview)
+  - [Architecture](#project-architecture)
+  - [Flowchart](#flowchart)
+  - [Data Model](#data-model)
+- [Technologies](#technologies)
+- [Deployment](#deployment)
+  - [Github](#github)
+  - [Heroku](#heroku)
+- [Testing](#testing)
+  - [User Stories Testing](#user-stories-testing)
+  - [Manual Testing](#manual-testing)
+  - [Unit Testing](#unit-testing)
+  - [Automated Testing](#automated-testing)
+- [Credits](#credits)
+  - [Media](#media)
+  - [Code](#code)
+- [Acknowledgements](#acknowledgements)
