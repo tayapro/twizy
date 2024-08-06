@@ -1,18 +1,16 @@
 import pytest
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
 from components import champions
+import logging
 
 
-# Patching lib.spreadsheet_storage functions for testing
-@patch('lib.spreadsheet_storage.get_table')
-@patch('lib.spreadsheet_storage.set_table')
-def test_fetch_champions(mock_set_table, mock_get_table):
+@pytest.fixture
+def mock_get_table(monkeypatch):
     """
-    The test verifies that `fetch_champions` correctly retrieves and formats
-    champion data from the spreadsheet storage.
+    Fixture to mock the `get_table` function from `spreadsheet_storage`
+    to return a predefined champions table.
     """
-    # Setup the mock to return a specific table structure
-    mock_get_table.return_value = [
+    champions_table = [
         ['name', 'score', 'timestamp'],
         ['Bob', '900', 1722262477],
         ['Dave', '800', 1722262475],
@@ -20,11 +18,28 @@ def test_fetch_champions(mock_set_table, mock_get_table):
         ['Charlie', '767', 1722262476],
         ['Eve', '720', 1722262474],
     ]
+    m = MagicMock(return_value=champions_table)
+    monkeypatch.setattr('lib.spreadsheet_storage.get_table', m)
+    return m
 
-    # Call the function to test
+
+@pytest.fixture
+def mock_set_table(monkeypatch):
+    """
+    Fixture to mock the `set_table` function from `spreadsheet_storage`
+    to prevent actual updates to the champions table.
+    """
+    m = MagicMock()
+    monkeypatch.setattr('lib.spreadsheet_storage.set_table', m)
+    return m
+
+
+def test_fetch_champions(mock_get_table):
+    """
+    The test verifies that `fetch_champions` correctly retrieves and formats
+    champion data from the spreadsheet storage.
+    """
     c = champions.fetch_champions()
-
-    # Expected result
     expected_champions = [
         ('Bob', 900, 1722262477),
         ('Dave', 800, 1722262475),
@@ -32,18 +47,14 @@ def test_fetch_champions(mock_set_table, mock_get_table):
         ('Charlie', 767, 1722262476),
         ('Eve', 720, 1722262474),
     ]
-
-    # Assert that the function returns the expected result
     assert c == expected_champions
 
 
-@patch('lib.spreadsheet_storage.set_table')
 def test_update_champions(mock_set_table):
     """
     The test verifies that `update_champions` correctly updates the champions
     data in the spreadsheet storage with new data.
     """
-    # Define the new champions data
     new_champions = [
         ('Bob', 900, 1722262477),
         ('Frank', 850, 1722262480),
@@ -51,11 +62,7 @@ def test_update_champions(mock_set_table):
         ('Alice', 780, 1722262478),
         ('Charlie', 767, 1722262476),
     ]
-
-    # Call the function to test
     champions.update_champions(new_champions)
-
-    # Assert that set_table was called with correct arguments
     mock_set_table.assert_called_once_with('champions', new_champions)
 
 
@@ -64,34 +71,19 @@ def test_turn_index_into_place():
     The test verifies that `turn_index_into_place` correctly converts index
     values to their corresponding 1-based place values.
     """
-    # Test various indices
     assert champions.turn_index_into_place(0) == 1
     assert champions.turn_index_into_place(1) == 2
     assert champions.turn_index_into_place(-1) == -1
 
 
-@patch('lib.spreadsheet_storage.get_table')
-@patch('lib.spreadsheet_storage.set_table')
 def test_record_user_score(mock_set_table, mock_get_table):
     """
     The test verifies that `record_user_score` correctly records a new user
     score, updates the leaderboard, and returns the user's rank.
     """
-    # Mock data setup: Initially, the leaderboard has 5 players.
-    mock_get_table.return_value = [
-        ['name', 'score', 'timestamp'],
-        ['Bob', '900', 1722262477],
-        ['Dave', '800', 1722262475],
-        ['Alice', '780', 1722262478],
-        ['Charlie', '767', 1722262476],
-        ['Eve', '720', 1722262474],
-    ]
-
-    # New score to be added
     new_user = ('Frank', 850, 1722262480)
     result = champions.record_user_score(*new_user)
 
-    # Expected champions after adding new user (keeping max 5 and score < 1000)
     expected_champions = [
         ('Bob', 900, 1722262477),
         ('Frank', 850, 1722262480),
@@ -99,9 +91,5 @@ def test_record_user_score(mock_set_table, mock_get_table):
         ('Alice', 780, 1722262478),
         ('Charlie', 767, 1722262476)
     ]
-
-    # Verify set_table was called correctly
     mock_set_table.assert_called_once_with('champions', expected_champions)
-
-    # Verify the new user's rank (1-based index)
-    assert result == 2  # "Frank" should be 2nd on the leaderboard
+    assert result == 2
