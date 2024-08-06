@@ -62,6 +62,19 @@ tWIZY game could be interesting for a variety of users:
 
 ## User Stories
 
+As a **user**,
+
+- I want to navigate through the app using buttons, so I can easily access different features.
+- I want to easily understand the primary objective of the tWIZY CLI app.
+- I want to view instructions, so that I understand how to play the game.
+- I want to see something personal, like my name.
+- I want to be able to start a new quiz game easily.
+- I want to navigate easily through the app using simple commands.
+- I want to abort the game at any time by pressing the button.
+- I want to see my quiz score and tier after completing a game.
+- I want to view the top scores on the Champions board.
+- I want to make sure I don't get lost on this website.
+
 ## Structure
 
 [Back to top](#table-of-contents)
