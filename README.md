@@ -56,17 +56,23 @@ tWIZY game could be interesting for a variety of users:
 - from trivia lovers, who enjoys a good game,
 - to tech enthusiasts, who are interested in learning about projects with Google Sheets and Heroku.
 
+[Back to top](#table-of-contents)
+
 # UX Design
 
 ## User Stories
 
 ## Structure
 
+[Back to top](#table-of-contents)
+
 # Features
 
 ## Existing Features
 
 ## Future Features
+
+[Back to top](#table-of-contents)
 
 # Technical Overview
 
@@ -75,6 +81,8 @@ tWIZY game could be interesting for a variety of users:
 ## Flowchart
 
 ## Data Model
+
+[Back to top](#table-of-contents)
 
 # Technologies
 
@@ -109,6 +117,8 @@ tWIZY game could be interesting for a variety of users:
 | W3C HTML Markup Validator                                    | Validate HTML code                                      |
 | W3C Jigsaw CSS Validator                                     | Validate CSS code                                       |
 | Code Institute's Python Template                             | Generate the workspace for tWIZY project                |
+
+[Back to top](#table-of-contents)
 
 # Deployment
 
@@ -156,6 +166,8 @@ Deployment steps:
 
    In the Manual deploy subsection, select the main branch and click "Deploy Branch" to deploy the app.
 
+[Back to top](#table-of-contents)
+
 # Testing
 
 ## User Stories Testing
@@ -165,6 +177,8 @@ Deployment steps:
 ## Unit Testing
 
 ## Validator testing
+
+[Back to top](#table-of-contents)
 
 # Credits
 
@@ -176,7 +190,11 @@ Deployment steps:
 
 - The setup for work with Google speadsheets is adapted from the "Love Sandwiches" lesson.
 
+[Back to top](#table-of-contents)
+
 # Acknowledgments
 
 Huge thanks to my mentor, Ronan McClelland, for all his help and advice. \
 He’s given me great tips and resources that really improved my coding and testing skills.
+
+[Back to top](#table-of-contents)
