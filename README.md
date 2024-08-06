@@ -33,7 +33,13 @@
 
 # Project Description
 
+> _In a world of graphical displays, one might ask “why bother”? \
+> It’s true that character-cell display terminals are an obsolete technology, but there are niches in which being able to do fancy things with them are still valuable._ \
+> [A.M. Kuchling, Eric S. Raymond](https://docs.python.org/3/howto/curses.html)
+
 tWIZY is a CLI-based quiz game that challenges players with a variety of common questions. Players can earn points by answering questions correctly to achieve high scores, with the goal of becoming a champion on the leaderboard.
+
+The tWIZY application uses the Python curses library, which is perfect for creating a command-line interface (CLI) quiz game. Curses helps manage the screen and handle user input, making it easy to create a dynamic and interactive experience. It allows for a clean and organized display, refreshing the screen with each new user action, such as selecting answers or navigating menus.
 
 The game uses Google Sheets as a database to store both the quiz questions and the records of top players. This setup allows for easy updates and management of data.
 
@@ -82,6 +88,30 @@ As a **user**,
 # Features
 
 ## Existing Features
+
+### F01 Navigation bar
+
+_Home_, *Champions*, *Game*, and *Outcome* screens have a sticky navigation bar at the top. \
+This bar shows the **tWIZY** app name and links to other available screens. For example, on the Home screen, you can press `c` to go to the Champions screen, `g` to start a new game, and `q` to quit the app.
+
+### F02 Login screen
+
+On the tWIZY CLI application, the first thing the user sees is a bold and vibrant tWIZY app name in yellow. It's simple yet elegant.
+A welcoming message greets the user, with a field to enter their name. This field only accepts names between 3 to 8 characters long. Users can easily edit their name by deleting and retyping letters before pressing Enter to continue.
+
+<img src="readme/login_screen.png" width="400" alt="tWIZY login screen image"/>
+
+The tWIZY application uses the Python curses library, which refreshes the screen whenever a key is pressed. To allow users to delete letters with the backspace key, a special code block was added to handle this functionality.
+
+### F03 Home screen
+
+### F04 Game screen
+
+### F05 Outcome screen
+
+### F06 Champions screen
+
+### F07 Error screen
 
 ## Future Features
 

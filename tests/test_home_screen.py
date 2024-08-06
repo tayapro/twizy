@@ -44,7 +44,8 @@ def test_home_screen_handler(mock_color_pair, mock_get_item):
 
     # Check if navbar and elements were drawn correctly
     stdscr.getmaxyx.assert_called()
-    stdscr.addch.assert_called()  # to verify any character drawing
+    # To verify any character drawing
+    stdscr.addch.assert_called()
 
 
 @patch('screens.home_screen.local_storage.get_item', return_value=None)

@@ -50,10 +50,10 @@ def test_navbar_draw(mock_color_pair):
     # Calculate the correct starting x position
     expected_x_pos = 40 - len(expected_nav_text)
 
-    # Assertions for options text
+    # Assertions for options text and background color
     mock_stdscr.addstr.assert_any_call(1, expected_x_pos,
                                        expected_nav_text, 10)
-    mock_stdscr.addstr.assert_any_call(2, 0, ' ' * 40, 10)  # background color
+    mock_stdscr.addstr.assert_any_call(2, 0, ' ' * 40, 10)
 
 
 def test_navbar_update():

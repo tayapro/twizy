@@ -42,7 +42,7 @@ def home_screen_handler(stdscr):
         CenteredText("Get ready to test your knowledge and have fun?", 9,
                      color),
         Text("RULES: ", 11, layout.MAIN_TEXT_MARGING_X, color),
-        Text("1. Read Each Question Carefully.", 13,
+        Text("1. Read Each Question Carefully", 13,
              layout.MAIN_TEXT_MARGING_X, color),
         Text("2. Select Your Answer", 14, layout.MAIN_TEXT_MARGING_X, color),
         Text("3. Earn Points", 15, layout.MAIN_TEXT_MARGING_X, color),

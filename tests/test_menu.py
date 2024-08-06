@@ -13,7 +13,8 @@ class MockPalette:
 palette = MockPalette()
 
 
-@patch('config.palette', palette)  # Mocking the palette from config
+# Mocking the palette from config
+@patch('config.palette', palette)
 @patch('curses.color_pair')
 def test_menu_draw(mock_color_pair):
     """
@@ -22,8 +23,8 @@ def test_menu_draw(mock_color_pair):
     It checks that the title and menu options are displayed with
     the correct colors.
     """
-    # Mock return values for color pairs
-    mock_color_pair.side_effect = [10, 20]  # Normal and selected colors
+    # Mock return values for color pairs: normal and selected
+    mock_color_pair.side_effect = [10, 20]
 
     # Set up the menu
     title = "Main Menu"
@@ -42,9 +43,9 @@ def test_menu_draw(mock_color_pair):
 
     # Assertions for options
     expected_calls = [
-        ((6, 10, "1. Option 1", 20),),  # Selected (cursor == 0)
-        ((7, 10, "2. Option 2", 10),),  # Normal
-        ((8, 10, "3. Option 3", 10),),  # Normal
+        ((6, 10, "1. Option 1", 20),),
+        ((7, 10, "2. Option 2", 10),),
+        ((8, 10, "3. Option 3", 10),),
     ]
     mock_stdscr.addstr.assert_has_calls(expected_calls, any_order=False)
 

@@ -45,9 +45,9 @@ def test_outcome_screen_handler(
     screen. It also checks interactions with mocked functions and verifies
     correct function calls.
     """
-    # Mock the standard screen and its methods
+    # Mock the standard screen and dimentions
     stdscr = MagicMock()
-    stdscr.getmaxyx.return_value = (24, 80)  # Mock screen dimensions
+    stdscr.getmaxyx.return_value = (24, 80)
 
     # Mock the return values of local_storage.get_item
     mock_get_item.side_effect = lambda key: {
