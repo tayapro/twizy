@@ -16,6 +16,7 @@ def init_storage():
     """
     global SHEET
 
+    # The following setup is adapted from the "Love sandwiches" lesson
     scope = [
         "https://www.googleapis.com/auth/spreadsheets",
         "https://www.googleapis.com/auth/drive.file",
