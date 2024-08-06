@@ -8,32 +8,30 @@ def mock_stdscr():
     """
     Fixture to create a mocked `stdscr` object for testing.
     """
-    # Create a mock stdscr object
     mock = MagicMock()
-    mock.getmaxyx.return_value = (10, 40)  # Mock screen height and width
+    mock.getmaxyx.return_value = (10, 40)
     return mock
 
 
-def test_centered_text_draw(mock_stdscr):
+@pytest.fixture
+def centered_text_instance():
+    """
+    Fixture to create an instance of `CenteredText` with a sample message 
+    and vertical position for testing.
+    """
+    return centered_text.CenteredText("Hello", 5)
+
+
+def test_centered_text_draw(mock_stdscr, centered_text_instance):
     """
     The test verifies that the `draw` method correctly calculates the position
     of the text to be centered horizontally on the screen at the specified
     vertical position (`y`), and then calls `addstr` with the correct
     parameters.
     """
-    # Instantiate CenteredText
-    message = "Hello"
-    y = 5
-    text = centered_text.CenteredText(message, y)
+    centered_text_instance.draw(mock_stdscr)
 
-    # Call the draw method
-    text.draw(mock_stdscr)
-
-    # Assert getmaxyx was called to get screen size
     mock_stdscr.getmaxyx.assert_called_once()
 
-    # Calculate expected x position
-    expected_x = 40 // 2 - len(message) // 2
-
-    # Assert addstr was called with correct parameters
-    mock_stdscr.addstr.assert_called_once_with(y, expected_x, message)
+    expected_x = 40 // 2 - len("Hello") // 2
+    mock_stdscr.addstr.assert_called_once_with(5, expected_x, "Hello")
