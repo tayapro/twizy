@@ -71,3 +71,24 @@ def mock_set_table(monkeypatch):
     m = MagicMock()
     monkeypatch.setattr('lib.spreadsheet_storage.set_table', m)
     return m
+
+
+@pytest.fixture
+def mock_localstorage_get_item(monkeypatch):
+    mock = MagicMock(return_value="TestUser")
+    monkeypatch.setattr('lib.local_storage.get_item', mock)
+    return mock
+
+
+@pytest.fixture
+def mock_localstorage_set_item(monkeypatch):
+    mock = MagicMock()
+    monkeypatch.setattr('lib.local_storage.set_item', mock)
+    return mock
+
+
+@pytest.fixture
+def mock_localstorage_clear(monkeypatch):
+    mock = MagicMock()
+    monkeypatch.setattr('lib.local_storage.clear', mock)
+    return mock

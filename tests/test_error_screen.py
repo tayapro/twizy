@@ -5,14 +5,10 @@ from components.navbar import Navbar, NavAction
 from screens.error_screen import error_screen_handler
 from config import screens, palette, layout, logo
 
-
-@patch('screens.error_screen.local_storage.get_item')
-@patch('screens.error_screen.local_storage.clear')
-@patch('screens.error_screen.local_storage.set_item')
-@patch('screens.error_screen.curses.color_pair')
 def test_error_screen_handler(
+    mock_stdscr,
     mock_color_pair,
-    mock_set_item, mock_clear, mock_get_item
+    mock_localstorage_get_item, mock_localstorage_set_item, mock_localstorage_clear
 ):
     """
     The test verifies that the `error_screen_handler` function correctly:
@@ -20,27 +16,17 @@ def test_error_screen_handler(
     2. Clears and refreshes the screen.
     3. Transitions to the home screen based on user input.
     """
-    # Mock the standard screen and its methods
-    stdscr = MagicMock()
-    stdscr.getmaxyx.return_value = (20, 40)
-    # Simulate pressing 'i' (any button) to home screen
-    stdscr.getch.return_value = ord('i')
 
-    # Set return values for mocked functions
-    mock_color_pair.side_effect = lambda x: x
-    mock_get_item.return_value = "TestUser"
+    # Any key to home screen
+    mock_stdscr.getch.return_value = ord('i')
 
-    # Call the error_screen_handler function
-    result = error_screen_handler(stdscr)
+    result = error_screen_handler(mock_stdscr)
 
-    # Verify that local storage was accessed correctly
-    mock_get_item.assert_called_with("user")
-    mock_clear.assert_called_once()
-    mock_set_item.assert_called_once_with("user", "TestUser")
+    mock_localstorage_get_item.assert_called_with("user")
+    mock_localstorage_clear.assert_called_once()
+    mock_localstorage_set_item.assert_called_once_with("user", "TestUser")
 
-    # Verify the correct drawing actions were called
-    stdscr.clear.assert_called_once()
-    stdscr.refresh.assert_called_once()
+    mock_stdscr.clear.assert_called_once()
+    mock_stdscr.refresh.assert_called_once()
 
-    # Verify that the handler returns the home screen
     assert result == screens.HOME_SCREEN
