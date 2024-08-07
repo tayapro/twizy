@@ -49,7 +49,7 @@ def content_screen_handler(stdscr, navbar, elements, data):
                                   gap_filler)
             score_str = str(score).rjust(len(score_header))
             stdscr.addstr(start_y + 2 + i, start_x,
-                          f"{name_str}{score_str}")
+                          f"{name_str}{score_str} ")
 
         stdscr.refresh()
 

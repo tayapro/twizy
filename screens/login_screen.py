@@ -29,7 +29,7 @@ def login_screen_handler(stdscr):
         Text("Enter your name to start.", 13, layout.FRAME_PADDING_LEFT,
              color),
         CenteredText("You can find navigation hints in the navbar on every "
-                     "screen.", 22, color),
+                     "screen", 22, color),
     ]
 
     # Add the logo lines as text elements, start from 9th line

@@ -72,14 +72,14 @@ def content_screen_handler(stdscr, navbar, elements, data):
         CenteredText(f"{'* ' * data["tier"]}", 12, color),
         CenteredText(f"Your score: {data["score"]}", 16, color),
         CenteredText(f"Correct answers: {data["correct_answers"]}", 17, color),
-        CenteredText("Do you want to play again? Press `g` button.", 20,
+        CenteredText("Do you want to play again? Press `g` button ", 20,
                      color_yellow),
     ]
 
     # Display the user's place if they made it onto the champions board
     # 14 is line by x axis
     if data["place"] != -1:
-        place_text = f"YOUR PLACE: {data["place"]} on Champions's board"
+        place_text = f"YOUR PLACE: {data["place"]} on Champions's board "
         elements.append(CenteredText(place_text, 14, color))
 
     while True:

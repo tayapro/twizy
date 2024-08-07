@@ -119,7 +119,33 @@ From the Home screen, the player has three navigation options:
 
 ### F04 Game screen
 
+Finally, the user reaches the game itself. Navigating through the answer options is intuitive,
+using the up and down buttons, and the enter button to select. Throughout the game, a helpful
+navigation hint is displayed at the bottom of the screen.
+
+<img src="readme/game_screen.png" width="400" alt="tWIZY game screen image"/>
+
+From the Game screen, the player has two navigation options:
+
+1. Press `a` to exit the current game and return to the Home screen.
+2. And if the user is ready to leave, press `q` to exit the tWIZY game.
+
 ### F05 Outcome screen
+
+After completing the quiz in tWIZY, the player is taken to the Outcome screen.
+This screen shows the final score and tier based on performance.
+If the user achieves a high enough score, they will earn a place on the champions board. \
+This screen provides a clear and satisfying summary of performance and encourages the player to
+aim for higher scores and better tiers in future games.
+
+<img src="readme/outcome_screen.png" width="400" alt="tWIZY outcome screen image"/>
+
+On Outcome screen the user has four navigation options:
+
+1. Press `h` to return to the Home screen.
+2. Press `g` to start a new quiz and try to improve a score.
+3. Press `c` to view the current Champions board.
+4. Press `q` to quit the tWIZY application.
 
 ### F06 Champions screen
 

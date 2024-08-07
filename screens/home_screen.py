@@ -46,7 +46,7 @@ def home_screen_handler(stdscr):
              layout.MAIN_TEXT_MARGING_X, color),
         Text("2. Select Your Answer", 14, layout.MAIN_TEXT_MARGING_X, color),
         Text("3. Earn Points", 15, layout.MAIN_TEXT_MARGING_X, color),
-        CenteredText("To start the game, press the `g` button.", 20, color),
+        CenteredText("To start the game, press the `g` button ", 20, color),
     ]
 
     while True:
