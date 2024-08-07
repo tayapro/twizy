@@ -37,11 +37,11 @@
 
 # Project Description
 
-tWIZY is a CLI-based quiz game that challenges players with a variety of common questions. Players can earn points by answering questions correctly to achieve high scores, with the goal of becoming a champion on the leaderboard.
+tWIZY is a CLI-based quiz game that challenges players with various common questions. Players can earn points by answering questions correctly to achieve high scores, and to become a champion on the leaderboard.
 
-The tWIZY application uses the Python curses library, which is perfect for creating a command-line interface (CLI) quiz game. Curses helps manage the screen and handle user input, making it easy to create a dynamic and interactive experience. It allows for a clean and organized display, refreshing the screen with each new user action, such as selecting answers or navigating menus.
+The tWIZY application uses the Python curses library, perfect for creating a command-line interface (CLI) quiz game. Curses help manage the screen and handle user input, making it easy to create a dynamic and interactive experience. It allows for a clean and organized display, refreshing the screen with each new user action, such as selecting answers or navigating menus.
 
-The game uses Google Sheets as a database to store both the quiz questions and the records of top players. This setup allows for easy updates and management of data.
+The game uses Google Sheets as a database to store the quiz questions and the records of top players. This setup allows for easy updates and management of data.
 
 tWIZY game is deployed on Heroku, making it accessible and convenient for players to enjoy from anywhere.
 
@@ -99,7 +99,7 @@ This bar shows the **tWIZY** app name and links to other available screens. Fo
 ### F02 Login screen
 
 On the tWIZY CLI application, the first thing the user sees is a bold and vibrant tWIZY app name in yellow. It's simple yet elegant.
-A welcoming message greets the user, with a field to enter their name. This field only accepts names between 3 to 8 characters long. Users can easily edit their name by deleting and retyping letters before pressing Enter to continue.
+A welcoming message greets the user, with a field to enter their name. This field only accepts names between 3 to 8 characters long. Users can easily edit their names by deleting and retyping letters before pressing Enter to continue.
 
 <img src="readme/login_screen.png" width="400" alt="tWIZY login screen image"/>
 
@@ -113,9 +113,9 @@ On the home screen of the tWIZY app, the user can find the rules for the tWIZY q
 
 From the Home screen, the player has three navigation options:
 
-1. Press `c` to view the current Champions board.
-2. Press `g` to start playing a game.
-3. And if the user is ready to leave, press `q` to exit the tWIZY game.
+- Press `c` to view the current Champions board.
+- Press `g` to start playing a game.
+- If the user is ready to leave, press `q` to exit the tWIZY game.
 
 ### F04 Game screen
 
@@ -127,8 +127,8 @@ navigation hint is displayed at the bottom of the screen.
 
 From the Game screen, the player has two navigation options:
 
-1. Press `a` to exit the current game and return to the Home screen.
-2. And if the user is ready to leave, press `q` to exit the tWIZY game.
+- Press `a` to exit the current game and return to the Home screen.
+- If the user is ready to leave, press `q` to exit the tWIZY game.
 
 ### F05 Outcome screen
 
@@ -140,18 +140,55 @@ aim for higher scores and better tiers in future games.
 
 <img src="readme/outcome_screen.png" width="400" alt="tWIZY outcome screen image"/>
 
-On Outcome screen the user has four navigation options:
+On the Outcome screen, the user has four navigation options:
 
-1. Press `h` to return to the Home screen.
-2. Press `g` to start a new quiz and try to improve a score.
-3. Press `c` to view the current Champions board.
-4. Press `q` to quit the tWIZY application.
+- Press `h` to return to the Home screen.
+- Press `g` to start a new quiz and try to improve a score.
+- Press `c` to view the current Champions board.
+- Press `q` to quit the tWIZY application.
 
 ### F06 Champions screen
 
+The Champions screen in tWIZY showcases the top 5 players and their scores.
+It serves as both a leaderboard and a motivator for users to achieve higher scores.
+
+<img src="readme/champions_screen.png" width="400" alt="tWIZY champions screen image"/>
+
+On the Champions screen, the user has three navigation options:
+
+- Press `h` to return to the Home screen.
+- Press `g` to start a new quiz and try to improve a score.
+- If the user is ready to leave, press `q` to exit the tWIZY application.
+
 ### F07 Error screen
 
-### F08 Skeleton screen
+### F08 Skeleton screens
+
+In tWIZY, skeleton screens help provide a smooth and intuitive experience while different parts
+of the game are loading. These screens feature a navbar, a frame with the screen's name,
+and a friendly message letting you know that content is on its way.
+
+#### Game Skeleton Screen
+
+The Game skeleton screen displays the navbar and a frame with the screen's name "tWIZY GAME" with the message,
+_Your quiz is on its way, please wait..._. This indicates that the quiz questions and answer options will appear soon.
+
+<img src="readme/game_skeleton_screen.png" width="400" alt="tWIZY game skeleton screen image"/>
+
+### Outcome Skeleton Screen
+
+The Outcome skeleton screen includes the navbar and a frame with the screen's name "GAME OUTCOME" and the message, _Your quiz outcome is on its way, please wait..._. This helps users understand that their game score and tier will be shown soon.
+
+<img src="readme/outcome_skeleton_screen.png" width="400" alt="tWIZY outcome skeleton screen image"/>
+
+#### Champions Skeleton Screen
+
+When loading the Champions screen, the user'll see skeleton screen with the navbar and a framed area with the screen's name "CHAMPIONS BOARD" along with a message saying, _The Champions board is on its way, please wait..._. This lets users know that the top 5 player scores will be displayed shortly.
+
+<img src="readme/champions_skeleton_screen.png" width="400" alt="tWIZY champions skeleton screen image"/>
+
+These skeleton screens are designed to ensure that players always know what to expect and where to find information,
+even while the content is being loaded.
 
 ## Future Features
 
