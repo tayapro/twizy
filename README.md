@@ -1,8 +1,9 @@
 # tWIZY CLI application
 
-> _In a world of graphical displays, one might ask “why bother”? \
-> It’s true that character-cell display terminals are an obsolete technology, but there are niches in which being able to do fancy things with them are still valuable._ \
-> [A.M. Kuchling, Eric S. Raymond](https://docs.python.org/3/howto/curses.html)
+<p align="right"><i>In a world of graphical displays, one might ask “why bother”? <br>
+It’s true that character-cell display terminals are an obsolete technology, <br>
+but there are niches in which being able to do fancy things with them are still valuable.</i><br>
+<a href="https://docs.python.org/3/howto/curses.html">A.M. Kuchling, Eric S. Raymond</a></p>
 
 ![Website Mock Up](readme/mockup.png)
 
