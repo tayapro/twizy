@@ -34,7 +34,6 @@ def test_init_colors(mock_curses):
     It also ensures that the `curses.wrapper` function is called with
     a function that initializes the colors.
     """
-    # Mock stdscr
     mock_stdscr = mock.Mock()
 
     # Call the function

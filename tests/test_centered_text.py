@@ -1,22 +1,13 @@
 import pytest
 from unittest.mock import MagicMock
+
 from components import centered_text
-
-
-@pytest.fixture
-def mock_stdscr():
-    """
-    Fixture to create a mocked `stdscr` object for testing.
-    """
-    mock = MagicMock()
-    mock.getmaxyx.return_value = (10, 40)
-    return mock
 
 
 @pytest.fixture
 def centered_text_instance():
     """
-    Fixture to create an instance of `CenteredText` with a sample message 
+    Fixture to create an instance of `CenteredText` with a sample message
     and vertical position for testing.
     """
     return centered_text.CenteredText("Hello", 5)

@@ -1,15 +1,16 @@
 import pytest
 from unittest.mock import MagicMock, patch
 import curses
+
 from components.navbar import Navbar, NavAction
 from screens.error_screen import error_screen_handler
 from config import screens, palette, layout, logo
 
-def test_error_screen_handler(
-    mock_stdscr,
-    mock_color_pair,
-    mock_localstorage_get_item, mock_localstorage_set_item, mock_localstorage_clear
-):
+
+def test_error_screen_handler(mock_stdscr, mock_color_pair,
+                              mock_localstorage_get_item,
+                              mock_localstorage_set_item,
+                              mock_localstorage_clear):
     """
     The test verifies that the `error_screen_handler` function correctly:
     1. Interacts with local storage to get and set user information.

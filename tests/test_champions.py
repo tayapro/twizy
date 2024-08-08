@@ -1,5 +1,6 @@
 import pytest
 from unittest.mock import patch, MagicMock
+
 from components import champions
 
 
@@ -38,7 +39,8 @@ def test_turn_index_into_place():
     assert champions.turn_index_into_place(-1) == -1
 
 
-def test_record_user_score(mock_set_table, mock_get_table, mock_champion_table):
+def test_record_user_score(mock_set_table, mock_get_table,
+                           mock_champion_table):
     """
     The test verifies that `record_user_score` correctly records a new user
     score, updates the leaderboard, and returns the user's rank.

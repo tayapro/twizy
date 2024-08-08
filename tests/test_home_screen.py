@@ -1,69 +1,38 @@
 import pytest
 from unittest.mock import MagicMock, patch
+
 from config import screens, layout, palette
 from screens.home_screen import home_screen_handler
 
-# Sample user name for testing
-mock_user_name = "TestUser"
 
-
-@patch('screens.home_screen.local_storage.get_item')
-@patch('screens.home_screen.curses.color_pair')
-def test_home_screen_handler(mock_color_pair, mock_get_item):
+def test_home_screen_handler(mock_stdscr, mock_color_pair,
+                             mock_localstorage_get_item):
     """
-    The test verifies that the `home_screen_handler` function correctly
-    transitions to the game screen when the user provides valid input.
-    It also ensures that the user name is fetched, and the screen is
-    properly cleared and refreshed.
+    The test verifies that `home_screen_handler` navigates to the game screen
+    when the 'g' key is pressed.
     """
-    # Mock the standard screen and its methods
-    stdscr = MagicMock()
-    stdscr.getmaxyx.return_value = (24, 80)  # Mock screen dimensions
+    mock_stdscr.getch.side_effect = [ord('g')]
 
-    # Set the color pair return values based on palette colors
-    mock_color_pair.side_effect = lambda x: x
+    next_screen = home_screen_handler(mock_stdscr)
 
-    # Mock the return value of local_storage.get_item to provide a username
-    mock_get_item.return_value = mock_user_name
-
-    # Simulate user input for the 'g' key to navigate to the game screen
-    stdscr.getch.side_effect = [ord('g')]
-
-    # Call the home_screen_handler function
-    next_screen = home_screen_handler(stdscr)
-
-    # Verify that the correct screen was returned
     assert next_screen == screens.GAME_SCREEN
 
-    # Verify that the username was fetched
-    mock_get_item.assert_called_once_with("user")
+    mock_localstorage_get_item.assert_called_once_with("user")
 
-    # Verify that the screen was cleared and refreshed
-    stdscr.clear.assert_called()
-    stdscr.refresh.assert_called()
+    mock_stdscr.clear.assert_called()
+    mock_stdscr.refresh.assert_called()
 
-    # Check if navbar and elements were drawn correctly
-    stdscr.getmaxyx.assert_called()
-    # To verify any character drawing
-    stdscr.addch.assert_called()
+    mock_stdscr.getmaxyx.assert_called()
+    mock_stdscr.addch.assert_called()
 
 
-@patch('screens.home_screen.local_storage.get_item', return_value=None)
-@patch('screens.home_screen.curses.color_pair')
-def test_home_screen_handler_no_user(mock_color_pair, mock_get_item):
+def test_home_screen_handler_no_user(mock_stdscr, mock_color_pair,
+                                     mock_localstorage_get_item):
     """
-    The test verifies that the `home_screen_handler` function raises an
-    exception when no user name is available in local storage. It ensures
-    that the function properly handles the case where the user name is not
-    set.
+    Test `home_screen_handler` to verify that an exception is raised if no user
+    name is set in local storage.
     """
-    # Mock the standard screen and its methods
-    stdscr = MagicMock()
-    stdscr.getmaxyx.return_value = (24, 80)  # Mock screen dimensions
+    mock_localstorage_get_item.side_effect = [None]
 
-    # Set the color pair return values based on palette colors
-    mock_color_pair.side_effect = lambda x: x
-
-    # Simulate the scenario where no username is set
     with pytest.raises(Exception, match="User name is not set"):
-        home_screen_handler(stdscr)
+        home_screen_handler(mock_stdscr)

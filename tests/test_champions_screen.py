@@ -3,9 +3,11 @@ import pytest
 import re
 
 from screens import champions_screen
-import logging
 
 class ReMatcher(str):
+    """
+    A helper class to enable regular expression matching in assertions.
+    """
     def __init__(self, s):
         self.regex = re.compile(s)
 
@@ -13,25 +15,26 @@ class ReMatcher(str):
         return self.regex.match(other)
 
 
-def test_content_screen_handler(mock_stdscr, mock_navbar, mock_screen_elements, mock_champion_table):
+def test_content_screen_handler(mock_stdscr, mock_navbar, mock_screen_elements, 
+                                mock_champion_table):
     """
-    The test verifies that `content_screen_handler` correctly handles user
-    input and updates the screen. Specifically, it tests that pressing 'q' to
-    quit results in the expected behavior.
+    The test verifies that `content_screen_handler` correctly displays the
+    champion data on the screen.
     """
     screen = champions_screen.content_screen_handler(mock_stdscr, mock_navbar,
                                                      mock_screen_elements, mock_champion_table)
 
-    mock_stdscr.addstr.assert_any_call(10, 5, ReMatcher("^Katya\s+991$"))
-    mock_stdscr.addstr.assert_any_call(11, 5, ReMatcher("^John\s+895$"))
-    mock_stdscr.addstr.assert_any_call(12, 5, ReMatcher("^Mark\s+824$"))
-    mock_stdscr.addstr.assert_any_call(13, 5, ReMatcher("^Alice\s+783$"))
-    mock_stdscr.addstr.assert_any_call(14, 5, ReMatcher("^Orla\s+777$"))
+    mock_stdscr.addstr.assert_any_call(10, 5, ReMatcher("^Katya\s+991 $"))
+    mock_stdscr.addstr.assert_any_call(11, 5, ReMatcher("^John\s+895 $"))
+    mock_stdscr.addstr.assert_any_call(12, 5, ReMatcher("^Mark\s+824 $"))
+    mock_stdscr.addstr.assert_any_call(13, 5, ReMatcher("^Alice\s+783 $"))
+    mock_stdscr.addstr.assert_any_call(14, 5, ReMatcher("^Orla\s+777 $"))
 
     assert screen is None
 
 
-def test_skeleton_screen_handler(mock_stdscr, mock_navbar, mock_screen_elements, mock_color_pair, mock_get_table, mock_champion_table):
+def test_skeleton_screen_handler(mock_stdscr, mock_navbar, mock_screen_elements, 
+                                 mock_color_pair, mock_get_table, mock_champion_table):
     """
     The test verifies that `skeleton_screen_handler` correctly retrieves and
     returns champion data for the screen. It ensures that the function returns

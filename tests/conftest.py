@@ -16,15 +16,12 @@ mock_table = [
 @pytest.fixture
 def mock_champion_table():
     return mock_table
-
-# Excluding headers
-# mock_champion_table = mock_champion_data[1:]
-
+    
 
 @pytest.fixture
 def mock_color_pair(monkeypatch):
     mock_color = MagicMock(side_effect=lambda x: x)
-    monkeypatch.setattr('screens.home_screen.curses.color_pair', mock_color)
+    monkeypatch.setattr('curses.color_pair', mock_color)
     return mock_color
 
 
