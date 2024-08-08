@@ -1,7 +1,6 @@
 import pytest
 import curses
 
-from unittest.mock import MagicMock, patch
 from components.navbar import Navbar, NavAction
 
 

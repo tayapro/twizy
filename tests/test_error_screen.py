@@ -1,8 +1,7 @@
 import pytest
 
-from components.navbar import Navbar, NavAction
 from screens.error_screen import error_screen_handler
-from config import screens, palette, layout, logo
+from config import screens
 
 
 def test_error_screen_handler(mock_stdscr, mock_color_pair,

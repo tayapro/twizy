@@ -1,7 +1,6 @@
 import pytest
-from unittest.mock import MagicMock, patch
 
-from config import screens, layout, palette
+from config import screens
 from screens.home_screen import home_screen_handler
 
 

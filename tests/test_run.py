@@ -1,7 +1,12 @@
 import pytest
 from unittest.mock import patch, MagicMock
 from run import main
-from config import screens
+from screens.login_screen import on_load_login_screen
+from screens.home_screen import on_load_home_screen
+from screens.game_screen import on_load_game_screen
+from screens.champions_screen import on_load_champions_screen
+from screens.outcome_screen import on_load_outcome_screen
+from screens.error_screen import on_load_error_screen
 
 
 # Mock initialization functions and screen loading functions
