@@ -71,7 +71,7 @@ tWIZY game could be interesting for a variety of users:
 As a **user**,
 
 - I want to navigate through the app using buttons, so I can easily access different features.
-- I want to easily understand the primary objective of the tWIZY CLI app.
+- I want a skeleton screen to appear when a page loads if needed. This will let me know the content is coming and the app isn't stuck.
 - I want to view instructions, so that I understand how to play the game.
 - I want to see something personal, like my name.
 - I want to be able to start a new quiz game easily.
