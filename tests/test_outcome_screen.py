@@ -62,8 +62,8 @@ def test_outcome_screen_handler(
     mock_stdscr.getmaxyx.assert_called()
 
 
-def test_outcome_screen_handler_no_user(mock_localstorage_clear, mock_localstorage_get_item, mock_stdscr):
-    mock_localstorage_get_item.return_value = None
+def test_outcome_screen_handler_no_user(mock_localstorage_get_item, mock_color_pair, mock_stdscr):
+    mock_localstorage_get_item.side_effect = [None]
 
     with pytest.raises(Exception, match="User name is not set"):
         outcome_screen_handler(mock_stdscr)

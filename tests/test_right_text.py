@@ -1,32 +1,21 @@
 import pytest
-from unittest.mock import MagicMock, patch
-from components.right_text import RightText
+
+from components import right_text
 
 
-@patch('curses.initscr')
-def test_right_text_draw(mock_initscr):
+@pytest.fixture
+def right_text_instance():
     """
-    The test checks if the `RightText` instance correctly calculates
-    the position for drawing text aligned to the right with a specified right
-    margin. The function mocks the `stdscr` object to simulate the terminal
-    screen and verifies that the `addstr` method is called with the correct
-    parameters.
+    Fixture to create an instance of the `RightText` component with a simple
+    message and screen positions.
     """
-    # Mock stdscr
-    mock_stdscr = MagicMock()
-    mock_stdscr.getmaxyx.return_value = (20, 40)
+    return right_text.RightText("Hello", 5, 3)
 
-    # Create RightText instance
-    message = "Hello"
-    y = 5
-    right_margin = 3
-    right_text = RightText(message, y, right_margin)
 
-    # Draw the text
-    right_text.draw(mock_stdscr)
+def test_right_text_draw(mock_stdscr, right_text_instance):
+    right_text_instance.draw(mock_stdscr)
 
-    # Expected position calculation
-    expected_x = 40 - len(message) - right_margin
+    mock_stdscr.getmaxyx.assert_called_once()
 
-    # Assert addstr was called with correct parameters
-    mock_stdscr.addstr.assert_called_once_with(y, expected_x, message)
+    expected_x = 40 - len("Hello") - 3
+    mock_stdscr.addstr.assert_called_once_with(5, expected_x, "Hello")

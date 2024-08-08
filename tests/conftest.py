@@ -3,6 +3,18 @@ from unittest.mock import MagicMock
 from config import screens
 from screens.home_screen import home_screen_handler
 
+
+# Mock data for the logo
+mock_logo = """
+  +---------+
+  | tWIZY   |
+  +---------+
+"""
+
+@pytest.fixture
+def mock_twizy_logo():
+    return mock_logo
+
 # Including headers
 mock_table = [
     ("name", "score", "timestamp"),
@@ -16,7 +28,7 @@ mock_table = [
 @pytest.fixture
 def mock_champion_table():
     return mock_table
-    
+
 
 @pytest.fixture
 def mock_color_pair(monkeypatch):

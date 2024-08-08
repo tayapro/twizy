@@ -1,6 +1,4 @@
 import pytest
-from unittest.mock import MagicMock, patch
-import curses
 
 from components.navbar import Navbar, NavAction
 from screens.error_screen import error_screen_handler

@@ -1,130 +1,91 @@
 import pytest
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock, ANY
 from screens import game_screen
+from config import screens
 
 
-# Mock configurations for layout, palette, game, and screens
-class MockLayout:
-    FRAME_PADDING_TOP = 6
-    FRAME_PADDING_LEFT = 5
-    FRAME_PADDING_BOTTOM = 3
-    FRAME_PADDING_RIGHT = 5
-    MAIN_TEXT_MARGIN_X = 20
+@pytest.fixture
+def mock_quiz_table():
+    header = [
+        ("question", "correct option", "option_0", "option_1",
+        "option_2", "option_3")
+    ]
+    table = [
+        ("What is 2+2?", 0, "3", "4", "5", "6"),
+        ("What is the capital of France?", 0, "Berlin", "Madrid", "Paris", "Rome"),
+        ("What is the boiling point of water?", 1, "90", "100", "80", "110"),
+    ]
+    table.sort(key=lambda x: x[0])
+    return header + table
+
+@pytest.fixture
+def mock_game_screen_navbar():
+    def navbar_update(stdscr, c):
+        if c == ord('a'):
+            return (True, 0)
+        else:
+            raise Exception("test error")
+
+    navbar = MagicMock()
+    navbar.update.side_effect = navbar_update
+    return navbar
+
+@pytest.fixture
+def mock_game_screen_get_table(monkeypatch, mock_quiz_table):
+    mock = MagicMock(return_value=mock_quiz_table)
+    monkeypatch.setattr('lib.spreadsheet_storage.get_table', mock)
+    return mock
 
 
-class MockPalette:
-    MAIN_COLOR = 1
-
-
-class MockGame:
-    TOTAL_QUESTIONS = 10
-
-
-class MockScreens:
-    HOME_SCREEN = 0
-    GAME_SCREEN = 1
-    OUTCOME_SCREEN = 3
-
-
-# Mock data for quiz questions
-mock_quiz_table = [
-    ("question", "correct option", "option_0", "option_1",
-     "option_2", "option_3"),
-    ("What is 2+2?", 0, "3", "4", "5", "6"),
-    ("What is the capital of France?", 0, "Berlin", "Madrid", "Paris", "Rome"),
-    ("What is the boiling point of water?", 1, "90", "100", "80", "110"),
-]
-
-mock_quiz_data = mock_quiz_table[1:]
-mock_quiz_data.sort(key=lambda x: x[0])
-
-
-# Mock fixture to patch configurations and data
-@pytest.fixture(autouse=True)
-def mock_imports_and_configs(monkeypatch):
-    """
-    Fixture to mock external dependencies and configurations for testing.
-
-    This fixture mocks various components, including layout, palette,
-    game settings, and screen configurations. It also mocks data retrieval
-    functions to provide controlled test data for the quiz and user storage.
-    """
-    monkeypatch.setattr('config.layout', MockLayout)
-    monkeypatch.setattr('config.palette', MockPalette)
-    monkeypatch.setattr('config.game', MockGame)
-    monkeypatch.setattr('config.screens', MockScreens)
-    monkeypatch.setattr('lib.spreadsheet_storage.get_table',
-                        lambda x: mock_quiz_table)
-    monkeypatch.setattr('lib.local_storage.get_item', lambda x: "Test User"
-                        if x == "user" else None)
-    monkeypatch.setattr('lib.local_storage.set_item', lambda x, y: None)
-    monkeypatch.setattr('screens.game_screen.curses.color_pair', lambda x: x)
-
-
-def test_content_screen_handler():
+def test_content_screen_handler(mock_color_pair, mock_stdscr, mock_screen_elements, mock_quiz_table, mock_game_screen_navbar):
     """
     The test verifies that the `content_screen_handler` function properly
     handles transitions based on user input and updates the screen accordingly.
     """
-    stdscr = MagicMock()
-    stdscr.getmaxyx.return_value = (20, 40)
-    stdscr.getch.side_effect = [ord('a')]  # Simulate pressing 'a' to quit
 
-    navbar = MagicMock()
-    # Mock update returning a screen switch
-    navbar.update.return_value = (True, 0)
-
-    elements = [MagicMock()]
-    data = mock_quiz_data
+    # Simulate pressing 'a' to abort
+    mock_stdscr.getch.side_effect = [ord('a')]
 
     # Call the content screen handler
-    screen = game_screen.content_screen_handler(stdscr, navbar, elements, data)
+    screen = game_screen.content_screen_handler(mock_stdscr, mock_game_screen_navbar, mock_screen_elements, mock_quiz_table[1:])
 
     # Ensure it returns the outcome screen
-    assert screen == MockScreens.HOME_SCREEN
+    assert screen == screens.HOME_SCREEN
     # Check that addstr was called to ensure drawing operations
-    stdscr.addstr.assert_called()
+    mock_stdscr.addstr.assert_any_call(13, 20, ANY, ANY)
+    mock_stdscr.addstr.assert_any_call(14, 20, ANY, ANY)
+    mock_stdscr.addstr.assert_any_call(15, 20, ANY, ANY)
+    mock_stdscr.addstr.assert_any_call(16, 20, ANY, ANY)
+    mock_stdscr.addstr.assert_any_call(10, 14, ANY, ANY)
 
 
-def test_skeleton_screen_handler():
+def test_skeleton_screen_handler(mock_color_pair, mock_stdscr, mock_quiz_table, mock_game_screen_get_table, mock_screen_elements, mock_game_screen_navbar):
     """
     The test verifies that the `skeleton_screen_handler` function correctly
     retrieves and returns quiz data. It also ensures that the screen was
     refreshed during the operation.
     """
-    stdscr = MagicMock()
-    stdscr.getmaxyx.return_value = (20, 40)
-
     navbar = MagicMock()
-    elements = [MagicMock()]
 
     # Call the skeleton screen handler
-    result = game_screen.skeleton_screen_handler(stdscr, navbar, elements)
+    result = game_screen.skeleton_screen_handler(mock_stdscr, navbar, mock_screen_elements)
 
-    # Ensure the returned quiz data matches mock data
-    # Sort to overcome shuffle
     result.sort(key=lambda x: x[0])
-    assert result == mock_quiz_data
+    assert result == mock_quiz_table[1:]
 
-    # Check that refresh was called to ensure drawing operations
-    stdscr.refresh.assert_called()
+    mock_stdscr.refresh.assert_called()
 
 
-@patch('screens.game_screen.skeleton_screen_handler',
-       return_value=mock_quiz_data)
-def test_game_screen_handler(mock_skeleton_handler):
+def test_game_screen_handler(mock_stdscr, mock_quiz_table, mock_color_pair, mock_localstorage_get_item, mock_get_table):
     """
     The test verifies that the `game_screen_handler` function processes
     user input correctly and handles quitting operations as expected.
     """
-    stdscr = MagicMock()
-    stdscr.getmaxyx.return_value = (20, 40)
-    stdscr.getch.side_effect = [ord('q')]  # Simulate pressing 'q' to quit
+    mock_get_table.side_effect = lambda x: mock_quiz_table
+    # Simulate pressing 'q' to quit
+    mock_stdscr.getch.side_effect = [ord('q')] 
 
-    # Call the game screen handler
-    result = game_screen.game_screen_handler(stdscr)
-
-    # Ensure it returns the None value which indicates quit
+    result = game_screen.game_screen_handler(mock_stdscr)
     assert result is None
 
 
