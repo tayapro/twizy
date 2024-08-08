@@ -7,7 +7,7 @@ from screens.champions_screen import on_load_champions_screen
 from screens.outcome_screen import on_load_outcome_screen
 from screens.error_screen import on_load_error_screen
 from config import screens, palette
-from lib.spreadsheet_storage import init_storage
+from lib import spreadsheet_storage
 
 
 logging.basicConfig(
@@ -29,7 +29,7 @@ def main():
     screen = screens.LOGIN_SCREEN
 
     # Initialize storage and palette configurations
-    init_storage()
+    spreadsheet_storage.init_storage()
     palette.init_colors()
 
     # Main loop for handling different screens

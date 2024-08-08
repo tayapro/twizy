@@ -1,5 +1,6 @@
 import pytest
 from unittest import mock
+
 from config import palette
 
 
@@ -14,7 +15,7 @@ def mock_curses():
     initialization, and `curses.wrapper` to simulate the curses initialization
     function.
     """
-    #Fixture to mock curses module functions
+    # Fixture to mock curses module functions
     with mock.patch('curses.init_pair') as mock_init_pair, \
          mock.patch('curses.COLOR_WHITE', new=15), \
          mock.patch('curses.COLOR_BLACK', new=0), \

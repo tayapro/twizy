@@ -31,6 +31,13 @@ def mock_champion_table():
 
 
 @pytest.fixture
+def mock_init_colors(monkeypatch):
+    mock = MagicMock()
+    monkeypatch.setattr('config.palette.init_colors', mock)
+    return mock
+
+
+@pytest.fixture
 def mock_color_pair(monkeypatch):
     mock_color = MagicMock(side_effect=lambda x: x)
     monkeypatch.setattr('curses.color_pair', mock_color)
@@ -59,6 +66,12 @@ def mock_screen_elements():
 def mock_skeleton_handler():
     return MagicMock(return_value=mock_table[1:])
 
+
+@pytest.fixture
+def mock_init_storage(monkeypatch):
+    mock = MagicMock()
+    monkeypatch.setattr('lib.spreadsheet_storage.init_storage', mock)
+    return mock
 
 @pytest.fixture
 def mock_get_table(monkeypatch):

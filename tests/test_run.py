@@ -1,6 +1,8 @@
 import pytest
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock
+
 from run import main
+from config import screens
 from screens.login_screen import on_load_login_screen
 from screens.home_screen import on_load_home_screen
 from screens.game_screen import on_load_game_screen
@@ -9,17 +11,49 @@ from screens.outcome_screen import on_load_outcome_screen
 from screens.error_screen import on_load_error_screen
 
 
-# Mock initialization functions and screen loading functions
-@patch('run.init_storage')
-@patch('run.palette.init_colors')
-@patch('run.on_load_login_screen')
-@patch('run.on_load_home_screen')
-@patch('run.on_load_game_screen')
-@patch('run.on_load_champions_screen')
-@patch('run.on_load_outcome_screen')
-@patch('run.on_load_error_screen')
-@patch('run.curses.wrapper')
-def test_main_flow(mock_curses_wrapper,
+@pytest.fixture
+def mock_on_load_login_screen(monkeypatch):
+    mock = MagicMock()
+    monkeypatch.setattr('run.on_load_login_screen', mock)
+    return mock
+
+
+@pytest.fixture
+def mock_on_load_error_screen(monkeypatch):
+    mock = MagicMock()
+    monkeypatch.setattr('run.on_load_error_screen', mock)
+    return mock
+
+
+@pytest.fixture
+def mock_on_load_outcome_screen(monkeypatch):
+    mock = MagicMock()
+    monkeypatch.setattr('run.on_load_outcome_screen', mock)
+    return mock
+
+
+@pytest.fixture
+def mock_on_load_champions_screen(monkeypatch):
+    mock = MagicMock()
+    monkeypatch.setattr('run.on_load_champions_screen', mock)
+    return mock
+
+
+@pytest.fixture
+def mock_on_load_game_screen(monkeypatch):
+    mock = MagicMock()
+    monkeypatch.setattr('run.on_load_game_screen', mock)
+    return mock
+
+
+@pytest.fixture
+def mock_on_load_home_screen(monkeypatch):
+    mock = MagicMock()
+    monkeypatch.setattr('run.on_load_home_screen', mock)
+    return mock
+
+
+def test_main_flow(
                    mock_on_load_error_screen,
                    mock_on_load_outcome_screen,
                    mock_on_load_champions_screen,
@@ -61,12 +95,7 @@ def test_main_flow(mock_curses_wrapper,
     mock_init_colors.assert_called_once()
 
 
-@patch('run.init_storage')
-@patch('run.palette.init_colors')
-@patch('run.on_load_login_screen')
-@patch('run.on_load_error_screen')
-@patch('run.curses.wrapper')
-def test_login_screen_exception(mock_curses_wrapper, mock_on_load_error_screen,
+def test_login_screen_exception(mock_on_load_error_screen,
                                 mock_on_load_login_screen, mock_init_colors,
                                 mock_init_storage):
     """
@@ -89,14 +118,7 @@ def test_login_screen_exception(mock_curses_wrapper, mock_on_load_error_screen,
     mock_on_load_error_screen.assert_called_once()
 
 
-@patch('run.init_storage')
-@patch('run.palette.init_colors')
-@patch('run.on_load_login_screen')
-@patch('run.on_load_home_screen')
-@patch('run.on_load_error_screen')
-@patch('run.curses.wrapper')
-def test_home_screen_exception(mock_curses_wrapper,
-                               mock_on_load_error_screen,
+def test_home_screen_exception(mock_on_load_error_screen,
                                mock_on_load_home_screen,
                                mock_on_load_login_screen,
                                mock_init_colors,

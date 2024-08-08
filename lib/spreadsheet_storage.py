@@ -1,5 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
+import logging
 
 
 # Global variable to hold the Google Sheets client instance
@@ -15,6 +16,8 @@ def init_storage():
     the scope of access permissions needed for the operations.
     """
     global SHEET
+
+    logging.info("Init_storage calling")
 
     # The following setup is adapted from the "Love sandwiches" lesson
     scope = [
