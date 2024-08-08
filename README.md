@@ -162,6 +162,17 @@ On the Champions screen, the user has three navigation options:
 
 ### F07 Error screen
 
+If, for any reason (such as a Google spreadsheet connection error), the user encounters a special Error screen.
+
+<img src="readme/error_screen.png" width="400" alt="tWIZY error screen image"/>
+
+Upon reaching this error page, all records associated with this account will be deleted, except for the login, if it was already present.
+
+- If the login is not defined or its length is 0, the user will be redirected to the Login screeb to enter the login credentials.
+- If a valid login is present, the user will be redirected to the Home screen.
+
+Additionally, the user always has the option to exit the tWIZY application, by clicking `q`.
+
 ### F08 Skeleton screens
 
 In tWIZY, skeleton screens help provide a smooth and intuitive experience while different parts
