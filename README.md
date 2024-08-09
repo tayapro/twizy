@@ -76,7 +76,6 @@ As a **user**,
 - I want to view instructions, so that I understand how to play the game.
 - I want to see something personal, like my name.
 - I want to be able to start a new quiz game easily.
-- I want to navigate easily through the app using simple commands.
 - I want to abort the game at any time by pressing the button.
 - I want to see my quiz score and tier after completing a game.
 - I want to view the top scores on the Champions board.
@@ -108,7 +107,7 @@ The tWIZY application uses the Python curses library, which refreshes the screen
 
 ### F03 Home screen
 
-On the home screen of the tWIZY app, the user can find the rules for the tWIZY quiz game. They also see the username they entered on the previous login screen. This screen features a frame that surrounds the rules and a navigation hint.
+On the home screen of the tWIZY app, the user can find the rules for the tWIZY quiz game. They also see the username they entered on the previous login screen (it also applicable for Game and Outcome screens). This screen features a frame that surrounds the rules and a navigation hint.
 
 <img src="readme/home_screen.png" width="400" alt="tWIZY home screen image"/>
 
@@ -169,7 +168,7 @@ If, for any reason (such as a Google spreadsheet connection error), the user enc
 
 Upon reaching this error page, all records associated with this account will be deleted, except for the login, if it was already present.
 
-- If the login is not defined or its length is 0, the user will be redirected to the Login screeb to enter the login credentials.
+- If the login is not defined or its length is 0, the user will be redirected to the Login screen to enter the login credentials.
 - If a valid login is present, the user will be redirected to the Home screen.
 
 Additionally, the user always has the option to exit the tWIZY application, by clicking `q`.
@@ -303,6 +302,57 @@ Deployment steps:
 # Testing
 
 ## User Stories Testing
+
+This section shows the connection between [Features](#features) and [UX design](#ux-design) sections.
+
+### As a user,
+
+- I want to navigate through the app using buttons, so I can easily access different features.
+
+  > Each screen includes a set of buttons for easy navigation. These navigation options help users move between different parts of the tWIZY app. \
+  > For more details, see the **F01 Navigation bar** feature section.
+
+- I want a skeleton screen to appear when a page loads if needed. This will let me know the content is coming and the app isn't stuck.
+
+  > The Game, Outcome, and Champions screens have skeleton screens that appear when a page is loading. These provide feedback to the user that the content is on its way and that the application is responsive. \
+  > For more details, see the **F08 Skeleton screens** feature section.
+
+- I want to view instructions, so that I understand how to play the game.
+
+  > Users can easily learn the game rules on the Home screen, where everything is clearly and simply explained. \
+  > For more details, see the **F03 Home screen** feature section.
+
+- I want to see something personal, like my name.
+
+  > On the Home, Game, and Outcome screens, a player can see their name in the top right corner. The name displayed will be the same as the one entered in the Login screen. \
+  > For more details, see the **F02 Login screen**, and the **F03 Home screen** feature sections.
+
+- I want to be able to start a new quiz game easily.
+
+  > The user is able to start a new game from Home, Champions and Outcome screens,
+  > just pressing a `g` button. \
+  > For more details, see the **F03 Home screen**, the **F04 Game screen** and the **F05 Outcome screen** feature sections.
+
+- I want to abort the game at any time by pressing the button.
+
+  > If the player does not feel okay to continue a current game, they always have the option to abort it by pressing the 'A' button. The tWIZY app will redirect to the Home screen.
+  > For more details, see the **F04 Game screen**, feature sections.
+
+- I want to see my quiz score and tier after completing a game.
+
+  > The Outcome screen provides a summary of the user's results, including their tier, score,
+  > and potential placement on the Champions board. \
+  > For more details, see the **FF05 Outcome screen**, feature sections.
+
+- I want to view the top scores on the Champions board.
+
+  > The Champions screen shows a leaderboard featuring the top 5 scores achieved by players. \
+  > For more details, see the **F06 Champions screen** feature section.
+
+- I want to make sure I don't get lost on this website.
+
+  > If the user finds themselves on the Error screen, they can easily find concise instructions on how to return to the tWIZY Home screen. \
+  > For more details, see the **F07 Error screen** features section.
 
 ## Manual Testing
 

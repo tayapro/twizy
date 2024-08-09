@@ -4,8 +4,9 @@ from components.frame import Frame
 from components.navbar import Navbar, NavAction
 from components.centered_text import CenteredText
 from components.right_text import RightText
-from components.score import get_score_and_tier
-from components.champions import record_user_score
+# from components.score import get_score_and_tier
+# from components.champions import record_user_score
+from components import champions, score
 from config import screens, layout, palette
 from lib import local_storage
 
@@ -38,13 +39,13 @@ def get_quiz_outcome():
         raise Exception("Timestamp is not set")
 
     # Calculate the score and tier
-    score, tier = get_score_and_tier(total_miskates, quiz_time)
-    place = record_user_score(user_name, score, timestamp)
-    logging.info(f"Score: {score}", f"Tier: {tier}")
+    the_score, tier = score.get_score_and_tier(total_miskates, quiz_time)
+    place = champions.record_user_score(user_name, the_score, timestamp)
+    logging.info(f"Score: {the_score}", f"Tier: {tier}")
     logging.info(f"Place: {place}")
 
     return {
-        "score": score,
+        "score": the_score,
         "tier": tier,
         "place": place,
         "correct_answers": correct_answers
