@@ -4,8 +4,6 @@ from components.frame import Frame
 from components.navbar import Navbar, NavAction
 from components.centered_text import CenteredText
 from components.right_text import RightText
-# from components.score import get_score_and_tier
-# from components.champions import record_user_score
 from components import champions, score
 from config import screens, layout, palette
 from lib import local_storage
