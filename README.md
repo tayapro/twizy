@@ -205,16 +205,39 @@ even while the content is being loaded.
 
 - Option to pause the game.
 - Get hints or clues, when a user is stuck.
+- Race conditions for Google's spreadsheet.
 
 [Back to top](#table-of-contents)
 
 # Technical Overview
 
+The tWIZY app is a command-line interface (CLI) game created with Python. It uses a modular architecture to manage different screens including login, home, game, and outcome. The app utilizes curses for a terminal-based UI, providing a dynamic and interactive user experience. It employs imperative programming principles to ensure smooth navigation and clear decision-making processes. Data is managed through local storage and external components, such as spreadsheet storage for high scores and quiz data. The app is thoroughly tested using pytest to ensure that each part functions correctly and efficiently.
+
 ## Architecture
 
 ## Flowchart
 
+<table>
+<tr>
+<td><img src="readme/flowchart.png" width="500" alt="tWIZY flowchart image"/></td>
+<td><img src="readme/navigation_flowchart.png" width="185" alt="tWIZY navigation flowchart image"/></td>
+</tr>
+</table>
+
 ## Data Model
+
+tWIZY app uses a combination of local storage and Google Sheets to manage and persist data effectively.
+
+**Local storage** is employed to store user-specific data in a key-value format for username, score, tier, quiz_time etc.
+These values are stored locally during gameplay and are used to manage the user's progress and state within the app.
+
+**Google Sheets** is used as a backend service to maintain a centralized record of the game's champions and quiz questions.
+The _champions_ sheet stores the top players' names, scores, and timestamps, while the _quiz_ sheet contains the questions,
+options, and correct answers used during the game.
+
+At runtime, the tWIZY app fetches quiz data from Google Sheets and updates the champions list with the player's score after
+the game ends.<br>
+This integration allows for easy data management and retrieval, ensuring that the app scales efficiently as more users play the game.
 
 [Back to top](#table-of-contents)
 
@@ -402,7 +425,12 @@ To check unit tests coverage, run the following command in terminal from tWIZY r
 ## Code
 
 - The setup for work with Google speadsheets is adapted from the "Love Sandwiches" lesson.
-- [Github-Markdown.md](https://gist.github.com/nikhilnayyar002/7a35e653d3d590e317c829243e73b110) formating.
+- Knowledge of Python classes with [RealPython](https://realpython.com/python-classes/).
+- Understanding of Python logging library with [RealPython](https://realpython.com/python-logging/).
+- Knowledge of Python curses library with [short Youtube course](https://www.youtube.com/playlist?list=PLzMcBGfZo4-n2TONAOImWL4sgZsmyMBc8).
+- Understanding of skeleton screen concept with [uxdesign.cc](https://uxdesign.cc/what-you-should-know-about-skeleton-screens-a820c45a571a).
+- Understanding of Markdown formating for Githib, [Github-Markdown.md](https://gist.github.com/nikhilnayyar002/7a35e653d3d590e317c829243e73b110).
+- Understanding of pytest with [Python testing with pytest by Brian Okken](https://tisten.ir/blog/wp-content/uploads/2019/01/Python-Testing-with-pytest-Pragmatic-Bookshelf-2017-Brian-Okken.pdf).
 
 [Back to top](#table-of-contents)
 

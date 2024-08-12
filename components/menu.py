@@ -1,7 +1,7 @@
 import sys
 import curses
-
 from curses.textpad import rectangle
+
 from config import palette
 
 
