@@ -4,6 +4,7 @@ import re
 
 from screens import champions_screen
 
+
 class ReMatcher(str):
     """
     A helper class to enable regular expression matching in assertions.
@@ -15,14 +16,15 @@ class ReMatcher(str):
         return self.regex.match(other)
 
 
-def test_content_screen_handler(mock_stdscr, mock_navbar, mock_screen_elements, 
+def test_content_screen_handler(mock_stdscr, mock_navbar, mock_screen_elements,
                                 mock_champion_table):
     """
     The test verifies that `content_screen_handler` correctly displays the
     champion data on the screen.
     """
     screen = champions_screen.content_screen_handler(mock_stdscr, mock_navbar,
-                                                     mock_screen_elements, mock_champion_table)
+                                                     mock_screen_elements,
+                                                     mock_champion_table)
 
     mock_stdscr.addstr.assert_any_call(10, 5, ReMatcher("^Katya\s+991 $"))
     mock_stdscr.addstr.assert_any_call(11, 5, ReMatcher("^John\s+895 $"))
@@ -33,20 +35,24 @@ def test_content_screen_handler(mock_stdscr, mock_navbar, mock_screen_elements,
     assert screen is None
 
 
-def test_skeleton_screen_handler(mock_stdscr, mock_navbar, mock_screen_elements, 
-                                 mock_color_pair, mock_get_table, mock_champion_table):
+def test_skeleton_screen_handler(mock_stdscr, mock_navbar,
+                                 mock_screen_elements,
+                                 mock_color_pair, mock_get_table,
+                                 mock_champion_table):
     """
     The test verifies that `skeleton_screen_handler` correctly retrieves and
     returns champion data for the screen. It ensures that the function returns
     the mock data and that the screen is refreshed.
     """
 
-    result = champions_screen.skeleton_screen_handler(mock_stdscr, mock_navbar, mock_screen_elements)
+    result = champions_screen.skeleton_screen_handler(mock_stdscr, mock_navbar,
+                                                      mock_screen_elements)
     assert result == mock_champion_table[1:]
     mock_stdscr.refresh.assert_called()
 
 
-def test_champions_screen_handler(mock_stdscr, mock_color_pair, mock_get_table):
+def test_champions_screen_handler(mock_stdscr, mock_color_pair,
+                                  mock_get_table):
     """
     The test verifies that `champions_screen_handler` correctly handles
     user input and returns the expected result. Specifically, it checks that
@@ -55,7 +61,7 @@ def test_champions_screen_handler(mock_stdscr, mock_color_pair, mock_get_table):
 
     mock_stdscr.getch.side_effect = [ord('q')]
     result = champions_screen.champions_screen_handler(mock_stdscr)
-    assert result is None 
+    assert result is None
 
 
 def test_on_load_champions_screen():

@@ -1,10 +1,11 @@
 import curses
+import logging
+
 from config import screens, layout, palette, logo
 from components.navbar import Navbar, NavAction
 from components.text import Text
 from components.centered_text import CenteredText
 from lib import local_storage
-import logging
 
 
 def next_screen():

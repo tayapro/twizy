@@ -13,6 +13,9 @@ from screens.error_screen import on_load_error_screen
 
 @pytest.fixture
 def mock_on_load_login_screen(monkeypatch):
+    """
+    Fixture to mock the `on_load_login_screen` function.
+    """
     mock = MagicMock()
     monkeypatch.setattr('run.on_load_login_screen', mock)
     return mock
@@ -20,6 +23,9 @@ def mock_on_load_login_screen(monkeypatch):
 
 @pytest.fixture
 def mock_on_load_error_screen(monkeypatch):
+    """
+    Fixture to mock the `on_load_error_screen` function.
+    """
     mock = MagicMock()
     monkeypatch.setattr('run.on_load_error_screen', mock)
     return mock
@@ -27,6 +33,9 @@ def mock_on_load_error_screen(monkeypatch):
 
 @pytest.fixture
 def mock_on_load_outcome_screen(monkeypatch):
+    """
+    Fixture to mock the `on_load_outcome_screen` function.
+    """
     mock = MagicMock()
     monkeypatch.setattr('run.on_load_outcome_screen', mock)
     return mock
@@ -34,6 +43,9 @@ def mock_on_load_outcome_screen(monkeypatch):
 
 @pytest.fixture
 def mock_on_load_champions_screen(monkeypatch):
+    """
+    Fixture to mock the `on_load_champions_screen` function.
+    """
     mock = MagicMock()
     monkeypatch.setattr('run.on_load_champions_screen', mock)
     return mock
@@ -41,6 +53,9 @@ def mock_on_load_champions_screen(monkeypatch):
 
 @pytest.fixture
 def mock_on_load_game_screen(monkeypatch):
+    """
+    Fixture to mock the `on_load_game_screen` function.
+    """
     mock = MagicMock()
     monkeypatch.setattr('run.on_load_game_screen', mock)
     return mock
@@ -48,6 +63,9 @@ def mock_on_load_game_screen(monkeypatch):
 
 @pytest.fixture
 def mock_on_load_home_screen(monkeypatch):
+    """
+    Fixture to mock the `on_load_home_screen` function.
+    """
     mock = MagicMock()
     monkeypatch.setattr('run.on_load_home_screen', mock)
     return mock

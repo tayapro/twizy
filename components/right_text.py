@@ -1,6 +1,7 @@
 class RightText(object):
     """
-    A class for displaying text aligned to the right side of the screen on a curses screen.
+    A class for displaying text aligned to the right side of the screen on
+    a curses screen.
 
     Attributes:
         message (str): The text message to display.

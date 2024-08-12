@@ -1,4 +1,5 @@
 import curses
+
 from config import palette
 
 

@@ -1,5 +1,6 @@
 import curses
 import logging
+
 from config import screens, layout, palette, logo
 from components.navbar import Navbar, NavAction
 from components.text import Text

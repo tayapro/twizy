@@ -21,14 +21,12 @@ def test_get_item_nonexistent_key():
     assert local_storage.get_item("invalid_user_key") is None
 
 
-# def test_clear_storage(mock_localstorage_get_item, mock_localstorage_set_item):
 def test_clear_storage():
     """
     The test verifies that clearing the local storage removes all items.
     It ensures that after clearing, any previously set items can no longer
     be retrieved.
     """
-    # mock_localstorage_set_item.assert_called_with("user", "TestUser")
     local_storage.set_item("user", "John")
 
     local_storage.clear()

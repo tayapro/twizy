@@ -1,5 +1,6 @@
 import curses
 import logging
+
 from config import screens, layout, palette
 from components.text import Text
 from components.frame import Frame

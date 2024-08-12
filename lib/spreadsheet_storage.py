@@ -51,7 +51,7 @@ def set_column(worksheet_name, col_num, data):
 
 def column_to_range(col_num, data):
     """
-    The function converts a column number and data length to an A1 notation 
+    The function converts a column number and data length to an A1 notation
     range.
     """
     letter_code = ord('A') + col_num - 1

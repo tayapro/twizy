@@ -14,7 +14,7 @@ def get_item(key):
     The function retrieves a value from the in-memory storage by key.
     """
     return storage.get(key)
-  
+
 
 def clear():
     """

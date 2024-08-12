@@ -1,6 +1,7 @@
+import curses
+
 from curses.textpad import rectangle
 from config import layout
-import curses
 
 
 class Frame(object):

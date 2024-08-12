@@ -2,6 +2,7 @@ import sys
 import curses
 import gspread
 from google.oauth2.service_account import Credentials
+
 from config import screens, layout, palette
 from components.navbar import Navbar, NavAction
 from components.centered_text import CenteredText

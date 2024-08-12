@@ -10,9 +10,7 @@ ACCENT_COLOR_INV = 4
 
 def init_colors():
     """
-    The function initializes color pairs for the UI.
-
-    It sets up color pairs using the curses library, which can be
+    The function sets up color pairs using the curses library, which can be
     used to style text in the terminal. The color pairs are defined globally
     and include both regular and inverse color schemes for the main and
     accent colors.

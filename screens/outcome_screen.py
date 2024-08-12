@@ -1,5 +1,6 @@
 import curses
 import logging
+
 from components.frame import Frame
 from components.navbar import Navbar, NavAction
 from components.centered_text import CenteredText
