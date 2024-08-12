@@ -372,16 +372,16 @@ This section shows the connection between [Features](#features) and [UX design](
 <ul>
   <li>Install the project's dependencies <code>pip3 install -r requirements.txt</code></li>
   <li>and run in the terminal <code>pytest</code></li>
-  <li>
-    <details><summary><b>pytest screenshot</b></summary>
-   </details>
-  </li>
 </ul>
+<details><summary><b>pytest screenshot</b></summary>
+   <img src="readme/pytest.png" alt="pytest image" width="400">
+</details><br>
 
 To check unit tests coverage, run the following command in terminal from tWIZY root directory: <br>
-<code>pytest --cov=. tests/</code> <br>
+<code>pytest --cov=. tests/</code>
 
 <details><summary><b>pytest coverage screenshot</b></summary>
+<img src="readme/pytest_coverage.png" alt="pytest coverage image" width="400">
 </details>
 
 </td>
