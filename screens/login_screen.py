@@ -30,7 +30,7 @@ def login_screen_handler(stdscr):
         Text("Enter your name to start.", 13, layout.FRAME_PADDING_LEFT,
              color),
         CenteredText("Please log in first. Quit option is available "
-                    "on the next screen", 21, color),
+                     "on the next screen", 21, color),
         CenteredText("You can find navigation hints in the navbar on every "
                      "screen", 22, color),
     ]

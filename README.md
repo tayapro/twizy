@@ -105,6 +105,10 @@ A welcoming message greets the user, with a field to enter their name. This fiel
 
 The tWIZY application uses the Python curses library, which refreshes the screen whenever a key is pressed. To allow users to delete letters with the backspace key, a special code block was added to handle this functionality.
 
+The username must be between 3 and 8 letters long. Only alphabetic characters are allowed — no numbers, spaces, or special symbols.
+This ensures the username is simple and unique, making it easy to recognize during gameplay. <br>
+If the input doesn't meet these criteria, an error message `Error: username too short` will appear for shorter than 3 letters name or a hint message `Hint: Only letters please` for not allowed characters.
+
 ### F03 Home screen
 
 On the home screen of the tWIZY app, the user can find the rules for the tWIZY quiz game. They also see the username they entered on the previous login screen (it also applicable for Game and Outcome screens). This screen features a frame that surrounds the rules and a navigation hint.
