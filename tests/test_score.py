@@ -1,5 +1,6 @@
 import pytest
 from unittest.mock import patch, MagicMock
+
 from components.score import get_score, get_score_and_tier
 
 

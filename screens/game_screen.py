@@ -3,6 +3,7 @@ import curses
 import random
 import time
 import logging
+
 from curses.textpad import rectangle
 from config import screens, layout, palette, game
 from components.navbar import Navbar, NavAction

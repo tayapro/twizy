@@ -1,6 +1,7 @@
 import pytest
 import curses
 from unittest.mock import MagicMock, patch
+
 from components.menu import Menu
 
 
