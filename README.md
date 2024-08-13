@@ -215,7 +215,38 @@ The tWIZY app is a command-line interface (CLI) game created with Python. It use
 
 ## Architecture
 
-## Flowchart
+The tWIZY project architecture has three abstraction layers, each serving a specific purpose to ensure the app is organized, maintainable, and easily expandable:
+
+<img src="readme/architecture.png" width="800" alt="tWIZY architecture image"/>
+
+**MAIN LAYER** (1 level):
+This layer functions as the central controller of the application. It sets up the app, manages the overall flow, and handles the transitions between different screens. The run.py file is responsible for initializing the environment, including colors and storage, and managing runtime exceptions. It determines which screen to display based on user actions or game state, forming the backbone of the application's logic.
+
+**SCREENS LAYER** (2 level):
+This layer contains the primary UI logic for the app, with each file representing a specific screen or state in the user journey. Each screen file is responsible for displaying its particular view, handling user input, and passing control to the appropriate next screen based on user actions or game outcomes. For instance, `login_screen.py` manages the login process, while `game_screen.py` oversees the main gameplay. This separation allows focused development and testing of individual screens without impacting others.
+
+**COMPONENTS LAYER** (3 level):
+This layer provides reusable components and utilities that support the screens and the main application logic. Components in this layer handle specific tasks, such as displaying centered text (`centered_text.py`), managing the champions leaderboard (`champions.py`), rendering menus (`menu.py`), and calculating scores (`score.py`). By abstracting these functionalities into separate components, the app encourages code reuse and simplifies the development of new features or screens. This modular approach also makes the app easier to maintain and extend, as common functionalities are centralized and can be updated independently of the screens that use them.
+
+**LIBRARIES**
+
+The Libraries layer is responsible for handling interactions with external resources, such as storage systems.
+For instance, `spreadsheet_storage.py` is used to connect with Google's spreadsheets to store and retrieve data, such as the list
+of champions and quiz content. <br>
+On the other hand, `local_storage.py` manages the storage and retrieval of key-value pairs in the local storage, for instance,
+usernames, scores, and tiers. This layer abstracts the intricacies of data management, making it easier to swap out or modify
+these services without impacting the rest of the tWIZY application.
+
+**CONFIG**
+
+The Config file contains constants and settings used throughout the tWIZY app. These configurations include game settings, color schemes,
+and other global variables that control the tWIZY app's behavior.
+Centralizing configurations allows for easy modification and consistent access across different parts of the application.
+
+## Flowcharts
+
+Flowcharts for the tWIZY app show the user journey and app logic. They outline how users move from login to different screens
+like home, game, and outcome. Key choices, like selecting options or answering quiz questions, are highlighted to show how the app reacts.
 
 <table>
 <tr>
@@ -266,6 +297,7 @@ This integration allows for easy data management and retrieval, ensuring that th
 | [Ezgif](https://ezgif.com/)                                  | Video editor                                            |
 | [Websitemockupgenerator](https://websitemockupgenerator.com) | Create the README Mockup image                          |
 | [LucidChart](https://lucid.app)                              | Create flowcharts                                       |
+| [Figma](https://www.figma.com)                               | Create architecture abstraction layers image            |
 | Balsamiq                                                     | Build interface website wireframes                      |
 | Git                                                          | Use for version control                                 |
 | GitHub                                                       | Store the source code and deploy and host the live site |
