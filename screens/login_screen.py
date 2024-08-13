@@ -29,6 +29,8 @@ def login_screen_handler(stdscr):
         Text("TO THE tWIZY QUIZ!", 11, layout.FRAME_PADDING_LEFT, color),
         Text("Enter your name to start.", 13, layout.FRAME_PADDING_LEFT,
              color),
+        CenteredText("Please log in first. Quit option is available "
+                    "on the next screen", 21, color),
         CenteredText("You can find navigation hints in the navbar on every "
                      "screen", 22, color),
     ]
@@ -68,10 +70,13 @@ def login_screen_handler(stdscr):
             len(user_element.message) < 8
         ):
             user_element.message += character
+        else:
+            error_element.message = "Hint: Only letters please"
 
         # Handle backspace
         if code in [263, curses.KEY_BACKSPACE]:
             user_element.message = user_element.message[:-1]
+            error_element.message = ""
             continue
 
         # Handle Enter key
