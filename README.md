@@ -207,9 +207,15 @@ even while the content is being loaded.
 
 ## Future Features
 
-- Option to pause the game.
-- Get hints or clues, when a user is stuck.
-- Race conditions for Google's spreadsheet.
+- Implement Redis to manage race conditions, ensuring that the champions' board is accurately updated even when two
+  players submit scores simultaneously. This prevents conflicts and ensures all high scores are recorded correctly.
+- Include an option to pause the game so that players can take breaks without worrying about time-sensitive elements
+  or score loss.
+- Provide hints or clues to users when they are stuck on a quiz question, helping them progress without frustration.
+- Introduce a database for storing user information, including usernames and passwords. This will improve security
+  and enable features like user authentication and personalized game experiences.
+- Add multi-language support, allowing players from different regions to enjoy the game in their preferred language,
+  enhancing accessibility and user engagement.
 
 [Back to top](#table-of-contents)
 
@@ -246,7 +252,7 @@ these services without impacting the rest of the tWIZY application.
 
 **CONFIG**
 
-The Config file contains constants and settings used throughout the tWIZY app. These configurations include game settings, color schemes,
+The Config files contain constants and settings used throughout the tWIZY app. These configurations include game settings, color schemes,
 and other global variables that control the tWIZY app's behavior.
 Centralizing configurations allows for easy modification and consistent access across different parts of the application.
 

@@ -1,3 +1,4 @@
+#  In-memory storage dictionary to hold key-value pairs
 storage = {}
 
 
