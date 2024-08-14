@@ -50,6 +50,7 @@ def error_screen_handler(stdscr):
         Text("SOMETHING WRONG...", 12, layout.FRAME_PADDING_LEFT, color),
         Text("Press any key", 13, layout.FRAME_PADDING_LEFT,
              color),
+        CenteredText("To exit the tWIZY app, press `q` ", 21, color)
     ]
 
     # Add the logo lines as text elements,
@@ -59,7 +60,7 @@ def error_screen_handler(stdscr):
                              accent_color))
 
     # Add hint text on 14th line
-    elements.append(Text("start from home screen.", 14,
+    elements.append(Text("start from home screen ", 14,
                     layout.FRAME_PADDING_LEFT, color))
 
     # Clear screen
