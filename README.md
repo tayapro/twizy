@@ -99,7 +99,7 @@ This bar shows the **tWIZY** app name and links to other available screens. Fo
 ### F02 Login screen
 
 On the tWIZY CLI application, the first thing the user sees is a bold and vibrant tWIZY app name in yellow. It's simple yet elegant.
-A welcoming message greets the user, with a field to enter their name. This field only accepts names between 3 to 8 characters long. Users can easily edit their names by deleting and retyping letters before pressing Enter to continue.
+A welcoming message greets the user, with a field to enter their name. This field only accepts names between 3 to 8 characters long. Users can easily edit their names by deleting and retyping letters before pressing Enter to continue, to Home screen.
 
 <img src="readme/login_screen.png" width="400" alt="tWIZY login screen image"/>
 
@@ -123,11 +123,17 @@ From the Home screen, the player has three navigation options:
 
 ### F04 Game screen
 
-Finally, the user reaches the game itself. Navigating through the answer options is intuitive,
-using the up and down buttons, and the enter button to select. Throughout the game, a helpful
-navigation hint is displayed at the bottom of the screen.
+Finally, the user reaches the game itself.
+The Game screen presents a quiz where players answer a series of 10 questions.
+Each question appears one at a time with multiple-choice options, and users select their answer by pressing Enter.
+The selected answer option is highlighted with inversive colors (the background and letter colors are swapped), making it easy to see which choice user has made.
+After answering the 10th question, the game transitions to the Outcome screen, where results are displayed, giving a summary of how well player performed.
 
 <img src="readme/game_screen.png" width="400" alt="tWIZY game screen image"/>
+
+Navigating through the answer options is intuitive,
+using the up and down buttons, and the Enter button to select. Throughout the game, a helpful
+navigation hint is displayed at the bottom of the screen.
 
 From the Game screen, the player has two navigation options:
 
@@ -190,7 +196,7 @@ _Your quiz is on its way, please wait..._. This indicates that the quiz question
 
 <img src="readme/game_skeleton_screen.png" width="400" alt="tWIZY game skeleton screen image"/>
 
-### Outcome Skeleton Screen
+#### Outcome Skeleton Screen
 
 The Outcome skeleton screen includes the navbar and a frame with the screen's name "GAME OUTCOME" and the message, _Your quiz outcome is on its way, please wait..._. This helps users understand that their game score and tier will be shown soon.
 
