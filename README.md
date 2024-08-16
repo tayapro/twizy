@@ -224,7 +224,11 @@ even while the content is being loaded.
 
 # Technical Overview
 
-The tWIZY app is a command-line interface (CLI) game created with Python. It uses a modular architecture to manage different screens including login, home, game, and outcome. The app utilizes curses for a terminal-based UI, providing a dynamic and interactive user experience. It employs imperative programming principles to ensure smooth navigation and clear decision-making processes. Data is managed through local storage and external components, such as spreadsheet storage for high scores and quiz data. The app is thoroughly tested using pytest to ensure that each part functions correctly and efficiently.
+The tWIZY app is a command-line interface (CLI) game created with Python. It uses a modular architecture to manage different screens including Login, Home, Game, Champions and Outcome. <br>
+The app utilizes curses for a terminal-based UI, providing a dynamic and interactive user experience. It employs imperative programming principles to ensure smooth navigation and clear decision-making processes. <br>
+Data is managed through local storage and external components, such as spreadsheet storage for high scores and quiz data. <br>
+The app use a Python logging module that tracks events and errors, helping with debugging and monitoring performance. This logging system will be especially useful if tWIZY is deployed to a cloud platform (for instance, _AWS Amazon CloudWatch_), where logs can be easily checked and analyzed. <br> The app also has robust exception handling to manage unexpected issues, ensuring stability and providing useful feedback in case of errors.
+The app is thoroughly tested using pytest to ensure that each part functions correctly and efficiently.
 
 ## Architecture
 
