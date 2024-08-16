@@ -29,7 +29,7 @@ but there are niches in which being able to do fancy things with them are still 
   - [User Stories Testing](#user-stories-testing)
   - [Manual Testing](#manual-testing)
   - [Unit Testing](#unit-testing)
-  - [Automated Testing](#automated-testing)
+  - [Code Validation testing](#code-validator-testing)
 - [Credits](#credits)
   - [Media](#media)
   - [Code](#code)
@@ -247,7 +247,7 @@ The tWIZY project architecture has three abstraction layers, each serving a spec
 <img src="readme/architecture.png" width="800" alt="tWIZY architecture image"/>
 
 **MAIN LAYER** (1 level):
-This layer functions as the central controller of the application. It sets up the app, manages the overall flow, and handles the transitions between different screens. The run.py file is responsible for initializing the environment, including colors and storage, and managing runtime exceptions. It determines which screen to display based on user actions or game state, forming the backbone of the application's logic.
+This layer functions as the central controller of the application. It sets up the app, manages the overall flow, and handles the transitions between different screens. The `run.py` file is responsible for initializing the environment, including colors and storage, and managing runtime exceptions. It determines which screen to display based on user actions or game state, forming the backbone of the application's logic.
 
 **SCREENS LAYER** (2 level):
 This layer contains the primary UI logic for the app, with each file representing a specific screen or state in the user journey. Each screen file is responsible for displaying its particular view, handling user input, and passing control to the appropriate next screen based on user actions or game outcomes. For instance, `login_screen.py` manages the login process, while `game_screen.py` oversees the main gameplay. This separation allows focused development and testing of individual screens without impacting others.
@@ -257,6 +257,9 @@ This layer contains the primary UI logic for the app, with each file representin
 
 **COMPONENTS LAYER** (3 level):
 This layer provides reusable components and utilities that support the screens and the main application logic. Components in this layer handle specific tasks, such as displaying centered text (`centered_text.py`), managing the champions leaderboard (`champions.py`), rendering menus (`menu.py`), and calculating scores (`score.py`). By abstracting these functionalities into separate components, the app encourages code reuse and simplifies the development of new features or screens. This modular approach also makes the app easier to maintain and extend, as common functionalities are centralized and can be updated independently of the screens that use them.
+
+> [!NOTE]
+> There are no horizontal dependencies at this levels. The screen py files depend only on components py files.
 
 **LIBRARIES**
 
@@ -487,7 +490,7 @@ To check unit tests coverage, run the following command in terminal from tWIZY r
 </tr>
 </table>
 
-## Validator testing
+## Code Validation testing
 
 [Back to top](#table-of-contents)
 
