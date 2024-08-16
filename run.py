@@ -48,9 +48,14 @@ def main():
                 screen = on_load_outcome_screen(curses.wrapper)
             else:
                 return  # Exit if anything else (we use None)
+                
             logging.info(f"Screen transitioned to: {screen}")
+
+        except KeyboardInterrupt:
+            logging.info("The user interrupts the execution of a program")
+            return
         except Exception as e:
-            logging.error(f"Error on {screen} screen: {e}")
+            logging.critical(f"Error on {screen} screen: {e}")
             screen = on_load_error_screen(curses.wrapper)
 
 
