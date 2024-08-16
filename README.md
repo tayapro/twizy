@@ -14,7 +14,6 @@ but there are niches in which being able to do fancy things with them are still 
   - [User Demographics](#user-demographics)
 - [UX Design](#ux-design)
   - [User Stories](#user-stories)
-  - [Structure](#structure)
 - [Features](#features)
   - [Existing Features](#existing-features)
   - [Future Features](#future-features)
@@ -80,8 +79,6 @@ As a **user**,
 - I want to see my quiz score and tier after completing a game.
 - I want to view the top scores on the Champions board.
 - I want to make sure I don't get lost on this website.
-
-## Structure
 
 [Back to top](#table-of-contents)
 
@@ -330,6 +327,9 @@ This integration allows for easy data management and retrieval, ensuring that th
 
 # Deployment
 
+Code Institute has made it easier for others to access the project by providing a [template](https://github.com/Code-Institute-Org/python-essentials-template) to display the terminal
+view of this backend application in a modern web browser on Heroku.
+
 ## How to clone
 
 1. Visit the [tWIZY repository](https://github.com/tayapro/twizy) on GitHub.
@@ -432,6 +432,17 @@ This section shows the connection between [Features](#features) and [UX design](
   > For more details, see the **F07 Error screen** features section.
 
 ## Manual Testing
+
+The tWIZY app underwent comprehensive feature testing to ensure smooth gameplay and accurate scoring.
+All key functionalities, including quiz flow, score calculations, and screen transitions, were tested and passed
+successfully without any critical issues, [link to Google sheet](https://docs.google.com/spreadsheets/d/191EvvpGPkVgskTXMwpqk6Uv7IbMwSZuCgMlu29p5Xcc/edit?gid=29067541#gid=29067541).
+
+  <details><summary>manual test results</summary>
+    <img src="readme/manual_test_results1.png" width="1000" alt="manual test results">
+    <img src="readme/manual_test_results2.png" width="1000" alt="manual test results">
+    <img src="readme/manual_test_results3.png" width="1000" alt="manual test results">
+    <img src="readme/manual_test_results4.png" width="1000" alt="manual test results">
+  </details>
 
 ## Unit Testing
 
