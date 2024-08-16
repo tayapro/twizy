@@ -208,6 +208,16 @@ When loading the Champions screen, the user'll see skeleton screen with the navb
 These skeleton screens are designed to ensure that players always know what to expect and where to find information,
 even while the content is being loaded.
 
+### F09 Python Logging Module
+
+tWIZY has a logging feature. It helps capture detailed information about how the app runs.
+This is super useful for keeping track of events, troubleshooting issues, and understanding how users interact with the app.
+
+  <details><summary>Logs example for one game</summary>
+    <img src="readme/logging1.png" width="800" alt="tWIZY logging 1 image"/>
+    <img src="readme/logging2.png" width="800" alt="tWIZY logging 2 image"/>
+  </details>
+
 ## Future Features
 
 - Implement Redis to manage race conditions, ensuring that the champions' board is accurately updated even when two
