@@ -29,7 +29,7 @@ but there are niches in which being able to do fancy things with them are still 
   - [User Stories Testing](#user-stories-testing)
   - [Manual Testing](#manual-testing)
   - [Unit Testing](#unit-testing)
-  - [Code Validation testing](#code-validator-testing)
+  - [Code Validation Testing](#code-validation-testing)
 - [Credits](#credits)
   - [Media](#media)
   - [Code](#code)
@@ -237,7 +237,7 @@ This is super useful for keeping track of events, troubleshooting issues, and un
 The tWIZY app is a command-line interface (CLI) game created with Python. It uses a modular architecture to manage different screens including Login, Home, Game, Champions and Outcome. <br>
 The app utilizes curses for a terminal-based UI, providing a dynamic and interactive user experience. It employs imperative programming principles to ensure smooth navigation and clear decision-making processes. <br>
 Data is managed through local storage and external components, such as spreadsheet storage for high scores and quiz data. <br>
-The app use a Python logging module that tracks events and errors, helping with debugging and monitoring performance. This logging system will be especially useful if tWIZY is deployed to a cloud platform (for instance, _AWS Amazon CloudWatch_), where logs can be easily checked and analyzed. <br> The app also has robust exception handling to manage unexpected issues, ensuring stability and providing useful feedback in case of errors.
+The app use a Python logging module that tracks events and errors, helping with debugging and monitoring performance. This logging system will be especially useful if tWIZY is deployed to a cloud platform (for instance, _AWS Amazon CloudWatch_), where logs can be easily checked and analyzed. <br> The app also has robust exception handling to manage unexpected issues, ensuring stability and providing useful feedback in case of errors. <br>
 The app is thoroughly tested using pytest to ensure that each part functions correctly and efficiently.
 
 ## Architecture
@@ -490,7 +490,195 @@ To check unit tests coverage, run the following command in terminal from tWIZY r
 </tr>
 </table>
 
-## Code Validation testing
+## Code Validation Testing
+
+### HTML
+
+The W3C Markup Validation Service was employed to check the HTML of the website.
+Only `layout.html` has been changed.
+
+<details><summary><code>layout.html</code> page passed without any errors or warnings.</summary>
+<img src="readme/W3HTML_validation_layout.png" width="500" alt="W3C layout.html validation image">
+</details>
+
+### Python
+
+All files passed without any errors or warnings on [CI Python Linter](https://pep8ci.herokuapp.com/),
+except `test_champions_screen.py` where 3 warnings about `regexp`.
+
+<details><summary><code>run.py</code></summary>
+<img src="readme/PEP8_run.png" width="500" alt="PEP8 run validation image">
+</details>
+
+#### Components
+
+<details><summary><code>centered_text.py</code></summary>
+<img src="readme/PEP8_centered_text.png" width="500" alt="PEP8 centered_text validation image">
+</details>
+
+<details><summary><code>champions.py</code></summary>
+<img src="readme/PEP8_champions.png" width="500" alt="PEP8 champions validation image">
+</details>
+
+<details><summary><code>frame.py</code></summary>
+<img src="readme/PEP8_frame.png" width="500" alt="PEP8 frame validation image">
+</details>
+
+<details><summary><code>menu.py</code></summary>
+<img src="readme/PEP8_menu.png" width="500" alt="PEP8 menu validation image">
+</details>
+
+<details><summary><code>navbar.py</code></summary>
+<img src="readme/PEP8_navbar.png" width="500" alt="PEP8 navbar validation image">
+</details>
+
+<details><summary><code>right_text.py</code></summary>
+<img src="readme/PEP8_right_text.png" width="500" alt="PEP8 right_text validation image">
+</details>
+
+<details><summary><code>score.py</code></summary>
+<img src="readme/PEP8_score.png" width="500" alt="PEP8 score validation image">
+</details>
+
+<details><summary><code>text.py</code></summary>
+<img src="readme/PEP8_text.png" width="500" alt="PEP8 text validation image">
+</details>
+
+#### Config
+
+<details><summary><code>game.py</code></summary>
+<img src="readme/PEP8_game.png" width="500" alt="PEP8 game validation image">
+</details>
+
+<details><summary><code>layout.py</code></summary>
+<img src="readme/PEP8_layout.png" width="500" alt="PEP8 layout validation image">
+</details>
+
+<details><summary><code>logo.py</code></summary>
+<img src="readme/PEP8_logo.png" width="500" alt="PEP8 logo validation image">
+</details>
+
+<details><summary><code>palette.py</code></summary>
+<img src="readme/PEP8_palette.png" width="500" alt="PEP8 palette validation image">
+</details>
+
+<details><summary><code>screens.py</code></summary>
+<img src="readme/PEP8_screens.png" width="500" alt="PEP8 screens validation image">
+</details>
+
+#### Lib
+
+<details><summary><code>local_storage.py</code></summary>
+<img src="readme/PEP8_local_storage.png" width="500" alt="PEP8 local_storage validation image">
+</details>
+
+<details><summary><code>spreadsheet_storage.py</code></summary>
+<img src="readme/PEP8_spreadsheet_storage.png" width="500" alt="PEP8 spreadsheet_storage validation image">
+</details>
+
+#### Screens
+
+<details><summary><code>champions_screen.py</code></summary>
+<img src="readme/PEP8_champions_screen.png" width="500" alt="PEP8 champions_screen validation image">
+</details>
+
+<details><summary><code>error_screen.py</code></summary>
+<img src="readme/PEP8_error_screen.png" width="500" alt="PEP8 error_screen validation image">
+</details>
+
+<details><summary><code>game_screen.py</code></summary>
+<img src="readme/PEP8_game_screen.png" width="500" alt="PEP8 game_screen validation image">
+</details>
+
+<details><summary><code>home_screen.py</code></summary>
+<img src="readme/PEP8_home_screen.png" width="500" alt="PEP8 home_screen validation image">
+</details>
+
+<details><summary><code>login_screen.py</code></summary>
+<img src="readme/PEP8_login_screen.png" width="500" alt="PEP8 login_screen validation image">
+</details>
+
+<details><summary><code>outcome_screen.py</code></summary>
+<img src="readme/PEP8_champions_screen.png" width="500" alt="PEP8 outcome_screen validation image">
+</details>
+
+#### Tests
+
+<details><summary><code>conftest.py</code></summary>
+<img src="readme/PEP8_conftest.png" width="500" alt="PEP8 conftest validation image">
+</details>
+
+<details><summary><code>test_centered_text.py</code></summary>
+<img src="readme/PEP8_test_centered_text.png" width="500" alt="PEP8 test_centered_text validation image">
+</details>
+
+<details><summary><code>test_champions.py</code></summary>
+<img src="readme/PEP8_test_champions.png" width="500" alt="PEP8 test_champions validation image">
+</details>
+
+<details><summary><code>test_champions_screen.py</code></summary>
+<img src="readme/PEP8_test_champions_screen.png" width="500" alt="PEP8 test_champions_screen validation image">
+</details>
+
+<details><summary><code>test_champions.py</code></summary>
+<img src="readme/PEP8_test_champions.png" width="500" alt="PEP8 test_champions validation image">
+</details>
+
+<details><summary><code>test_error_screen.py</code></summary>
+<img src="readme/PEP8_test_error_screen.png" width="500" alt="PEP8 test_error_screen validation image">
+</details>
+
+<details><summary><code>test_frame.py</code></summary>
+<img src="readme/PEP8_test_frame.png" width="500" alt="PEP8 test_frame validation image">
+</details>
+
+<details><summary><code>test_game_screen.py</code></summary>
+<img src="readme/PEP8_test_game_screen.png" width="500" alt="PEP8 test_game_screen validation image">
+</details>
+
+<details><summary><code>test_home_screen.py</code></summary>
+<img src="readme/PEP8_test_home_screen.png" width="500" alt="PEP8 test_home_screen validation image">
+</details>
+
+<details><summary><code>test_local_storage.py</code></summary>
+<img src="readme/PEP8_test_local_storage.png" width="500" alt="PEP8 test_local_storage validation image">
+</details>
+
+<details><summary><code>test_menu.py</code></summary>
+<img src="readme/PEP8_test_menu.png" width="500" alt="PEP8 test_menu validation image">
+</details>
+
+<details><summary><code>test_navbar.py</code></summary>
+<img src="readme/PEP8_test_navbar.png" width="500" alt="PEP8 test_navbar validation image">
+</details>
+
+<details><summary><code>test_outcome_screen.py</code></summary>
+<img src="readme/PEP8_test_outcome_screen.png" width="500" alt="PEP8 test_outcome_screen validation image">
+</details>
+
+<details><summary><code>test_palette.py</code></summary>
+<img src="readme/PEP8_test_palette.png" width="500" alt="PEP8 test_palette validation image">
+</details>
+
+<details><summary><code>test_right_text.py</code></summary>
+<img src="readme/PEP8_test_right_text.png" width="500" alt="PEP8 test_right_text validation image">
+</details>
+
+<details><summary><code>test_run.py</code></summary>
+<img src="readme/PEP8_test_run.png" width="500" alt="PEP8 test_run validation image">
+</details>
+
+<details><summary><code>test_score.py</code></summary>
+<img src="readme/PEP8_test_score.png" width="500" alt="PEP8 test_score validation image">
+</details>
+
+<details><summary><code>test_spreadsheet_storage.py</code></summary>
+<img src="readme/PEP8_test_spreadsheet_storage.png" width="500" alt="PEP8 test_spreadsheet_storage validation image">
+</details>
+
+<details><summary><code>test_text.py</code></summary>
+<img src="readme/PEP8_test_text.png" width="500" alt="PEP8 test_text validation image">
+</details>
 
 [Back to top](#table-of-contents)
 

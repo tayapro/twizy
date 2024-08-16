@@ -14,10 +14,11 @@ logging.basicConfig(
     filename="twizy.log",
     encoding="utf-8",
     filemode="a",
-    format='%(asctime)s  %(levelname)-8s [%(filename)s:%(lineno)d]  %(message)s',
+    format='%(asctime)s %(levelname)-8s [%(filename)s:%(lineno)d] %(message)s',
     datefmt="%Y-%m-%d %H:%M",
     level=logging.DEBUG
 )
+
 
 def main():
     """
@@ -48,7 +49,7 @@ def main():
                 screen = on_load_outcome_screen(curses.wrapper)
             else:
                 return  # Exit if anything else (we use None)
-                
+
             logging.info(f"Screen transitioned to: {screen}")
 
         except KeyboardInterrupt:
