@@ -10,6 +10,7 @@ but there are niches in which being able to do fancy things with them are still 
 ## Table of Contents
 
 - [Project Description](#project-description)
+  - [How To Play](#how-to-play)
   - [Purpose](#purpose)
   - [User Demographics](#user-demographics)
 - [UX Design](#ux-design)
@@ -48,6 +49,14 @@ tWIZY game is deployed on Heroku, making it accessible and convenient for player
 The tWIZY CLI app is built using Python and a little HTML, CSS as a Portfolio Project#3 for the Code Institute's Full Stack Developer(e-Commerce) course.
 
 [The live tWIZY CLI application](https://twizy-60a6fbc7304c.herokuapp.com/)
+
+## How To Play
+
+To start the game, a user needs to click "RUN PROGRAM" on [Heroku](https://twizy-60a6fbc7304c.herokuapp.com/). When the app launches, a player will see a login screen where they can enter a username consisting of only letters and with a length between 3 and 8 characters. This username will be used to track their progress and scores in the game. <br>
+On the home screen, a user can familiarize themselves with the quiz rules and start the game by pressing `g` button. <br>
+During the game, questions will be presented one at a time, and a player can select their answer using the arrow keys and submit it by pressing Enter. <br>
+As a user answers each question, the game will track their score and progress. After answering the 10th question, a player will be automatically taken to the Outcome screen where their final score, tier, and ranking on the champions board (if applicable) will be displayed. High scores are saved for future reference. <br>
+To exit the game, the player can press `q` on any screen (except Login) or use the `CTRL+C` command.
 
 ## Purpose
 
@@ -89,7 +98,7 @@ As a **user**,
 ### F01 Navigation bar
 
 _Home_, *Champions*, *Game*, and *Outcome* screens have a sticky navigation bar at the top. \
-This bar shows the **tWIZY** app name and links to other available screens. For example, on the Home screen, you can press `c` to go to the Champions screen, `g` to start a new game, and `q` to quit the app.
+This bar shows the **tWIZY** app name and links to other available screens. For example, on the Home screen, a player can press `c` to go to the Champions screen, `g` to start a new game, and `q` to quit the app.
 
 <img src="readme/navbar.png" width="400" alt="tWIZY navbar image"/>
 
@@ -184,7 +193,7 @@ Additionally, the user always has the option to exit the tWIZY application, by c
 
 In tWIZY, skeleton screens help provide a smooth and intuitive experience while different parts
 of the game are loading. These screens feature a navbar, a frame with the screen's name,
-and a friendly message letting you know that content is on its way.
+and a friendly message letting a player know that content is on its way.
 
 #### Game Skeleton Screen
 
@@ -259,7 +268,7 @@ This layer contains the primary UI logic for the app, with each file representin
 This layer provides reusable components and utilities that support the screens and the main application logic. Components in this layer handle specific tasks, such as displaying centered text (`centered_text.py`), managing the champions leaderboard (`champions.py`), rendering menus (`menu.py`), and calculating scores (`score.py`). By abstracting these functionalities into separate components, the app encourages code reuse and simplifies the development of new features or screens. This modular approach also makes the app easier to maintain and extend, as common functionalities are centralized and can be updated independently of the screens that use them.
 
 > [!NOTE]
-> There are no horizontal dependencies at this levels. The screen py files depend only on components py files.
+> There are no horizontal dependencies at this levels. The screen py files depend only on config and libraries py files.
 
 **LIBRARIES**
 
