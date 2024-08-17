@@ -181,7 +181,7 @@ If, for any reason (such as a Google spreadsheet connection error), the user enc
 
 <img src="readme/error_screen.png" width="400" alt="tWIZY error screen image"/>
 
-Upon reaching this error page, all records associated with this account will be deleted, except for the login, if it was already present.
+Upon reaching this Error page, all records associated with this account will be deleted, except for the login, if it was already present.
 
 - If the login is not defined or its length is 0, the user will be redirected to the Login screen to enter the login credentials.
 - If a valid login is present, the user will be redirected to the Home screen.
@@ -242,9 +242,9 @@ This is super useful for keeping track of events, troubleshooting issues, and un
 
 # Technical Overview
 
-The tWIZY app is a command-line interface (CLI) game created with Python. It uses a modular architecture to manage different screens including Login, Home, Game, Champions and Outcome. <br>
+The tWIZY app is a command-line interface (CLI) game created with Python. It uses a modular architecture to manage different screens including Login, Home, Game, Champions, Outcome, Error and skeletons screens. <br>
 The app utilizes curses for a terminal-based UI, providing a dynamic and interactive user experience. It employs imperative programming principles to ensure smooth navigation and clear decision-making processes. <br>
-Data is managed through local storage and external components, such as spreadsheet storage for high scores and quiz data. <br>
+Data is managed through local storage and external component, such as spreadsheet storage for high scores and quiz data. <br>
 The app use a Python logging module that tracks events and errors, helping with debugging and monitoring performance. This logging system will be especially useful if tWIZY is deployed to a cloud platform (for instance, _AWS Amazon CloudWatch_), where logs can be easily checked and analyzed. <br> The app also has robust exception handling to manage unexpected issues, ensuring stability and providing useful feedback in case of errors. <br>
 The app is thoroughly tested using pytest to ensure that each part functions correctly and efficiently.
 
@@ -261,13 +261,13 @@ This layer functions as the central controller of the application. It sets up th
 This layer contains the primary UI logic for the app, with each file representing a specific screen or state in the user journey. Each screen file is responsible for displaying its particular view, handling user input, and passing control to the appropriate next screen based on user actions or game outcomes. For instance, `login_screen.py` manages the login process, while `game_screen.py` oversees the main gameplay. This separation allows focused development and testing of individual screens without impacting others.
 
 > [!NOTE]
-> There are no horizontal dependencies at this levels. The screen py files depend only on components py files.
+> There are no horizontal dependencies at this levels. The screens py files depend only on components py files.
 
 **COMPONENTS LAYER** (3 level):
 This layer provides reusable components and utilities that support the screens and the main application logic. Components in this layer handle specific tasks, such as displaying centered text (`centered_text.py`), managing the champions leaderboard (`champions.py`), rendering menus (`menu.py`), and calculating scores (`score.py`). By abstracting these functionalities into separate components, the app encourages code reuse and simplifies the development of new features or screens. This modular approach also makes the app easier to maintain and extend, as common functionalities are centralized and can be updated independently of the screens that use them.
 
 > [!NOTE]
-> There are no horizontal dependencies at this levels. The screen py files depend only on config and libraries py files.
+> There are no horizontal dependencies at this levels. The components py files depend only on config and libraries py files.
 
 **LIBRARIES**
 
@@ -323,30 +323,24 @@ This integration allows for easy data management and retrieval, ensuring that th
 
 ## Frameworks, Libraries & Apps
 
-| Name                                                         | Purpose                                                 |
-| :----------------------------------------------------------- | :------------------------------------------------------ |
-| Heroku                                                       | Launch and host the CLI app                             |
-| Google Spreadsheets API                                      | Store data                                              |
-| Python Pytest                                                | Unit-testing                                            |
-| Favicon.cc                                                   | Create website favicon                                  |
-| [Dreamstudio.ai](https://beta.dreamstudio.ai)                | Create the tWIZY background image                       |
-| [Photopea](https://www.photopea.com/)                        | Work with images (resize, convert, etc)                 |
-| [GoDaddy](https://www.godaddy.com/)                          | Generate WIZY logo                                      |
-| [Vmake.ai](https://vmake.ai/image-outpainting)               | Expand the image                                        |
-| [Imagecolorpicker](https://imagecolorpicker.com)             | Color picker                                            |
-| [Coolors](https://coolors.co)                                | Color pallete                                           |
-| [Ezgif](https://ezgif.com/)                                  | Video editor                                            |
-| [Websitemockupgenerator](https://websitemockupgenerator.com) | Create the README Mockup image                          |
-| [LucidChart](https://lucid.app)                              | Create flowcharts                                       |
-| [Figma](https://www.figma.com)                               | Create architecture abstraction layers image            |
-| Balsamiq                                                     | Build interface website wireframes                      |
-| Git                                                          | Use for version control                                 |
-| GitHub                                                       | Store the source code and deploy and host the live site |
-| GitPod                                                       | Set up and run project code                             |
-| [Pep8ci.herokuapp](https://pep8ci.herokuapp.com)             | Validate Python code                                    |
-| W3C HTML Markup Validator                                    | Validate HTML code                                      |
-| W3C Jigsaw CSS Validator                                     | Validate CSS code                                       |
-| Code Institute's Python Template                             | Generate the workspace for tWIZY project                |
+| Name                                                         | Purpose                                      |
+| :----------------------------------------------------------- | :------------------------------------------- |
+| Heroku                                                       | Launch and host the CLI app                  |
+| Google Spreadsheets API                                      | Store data                                   |
+| Python Pytest                                                | Unit-testing                                 |
+| Favicon.cc                                                   | Create website favicon                       |
+| [Dreamstudio.ai](https://beta.dreamstudio.ai)                | Create the tWIZY background image            |
+| [Photopea](https://www.photopea.com/)                        | Work with images (resize, convert, etc)      |
+| [GoDaddy](https://www.godaddy.com/)                          | Generate WIZY logo                           |
+| [Vmake.ai](https://vmake.ai/image-outpainting)               | Expand the image                             |
+| [Websitemockupgenerator](https://websitemockupgenerator.com) | Create the README Mockup image               |
+| [LucidChart](https://lucid.app)                              | Create flowcharts                            |
+| [Figma](https://www.figma.com)                               | Create architecture abstraction layers image |
+| Git                                                          | Use for version control                      |
+| GitHub                                                       | Store the source code                        |
+| [Pep8ci.herokuapp](https://pep8ci.herokuapp.com)             | Validate Python code                         |
+| W3C HTML Markup Validator                                    | Validate HTML code                           |
+| Code Institute's Python Template                             | Generate the workspace for tWIZY project     |
 
 [Back to top](#table-of-contents)
 
