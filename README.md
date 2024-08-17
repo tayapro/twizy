@@ -31,6 +31,7 @@ but there are niches in which being able to do fancy things with them are still 
   - [Manual Testing](#manual-testing)
   - [Unit Testing](#unit-testing)
   - [Code Validation Testing](#code-validation-testing)
+  - [Known Issues](#known-issues)
 - [Credits](#credits)
   - [Media](#media)
   - [Code](#code)
@@ -681,6 +682,10 @@ except `test_champions_screen.py` where 3 warnings about `regexp`.
 <details><summary><code>test_text.py</code></summary>
 <img src="readme/PEP8_test_text.png" width="500" alt="PEP8 test_text validation image">
 </details>
+
+## Known Issues
+
+It's impossible to hide the cursor on Heroku terminal. This means that the cursor will always be visible on the screen. Therefore, it's important to plan the order of drawing elements on the terminal screen carefully. Placing the elements in the correct sequence ensures that the cursor does not disrupt the gameplay experience, keeping the screen clean and user-friendly despite the cursor's presence.
 
 [Back to top](#table-of-contents)
 

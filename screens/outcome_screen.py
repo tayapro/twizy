@@ -61,7 +61,7 @@ def content_screen_handler(stdscr, navbar, elements, data):
     # Retrieve the user name from local storage
     user_name = local_storage.get_item("user")
 
-    # # Define the elements to be displayed on the outcome screen
+    # Define the elements to be displayed on the outcome screen
     # (the numbers are line's numbers)
     elements = [
         Frame(layout.FRAME_PADDING_TOP, layout.FRAME_PADDING_LEFT,
