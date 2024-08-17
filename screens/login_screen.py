@@ -40,10 +40,11 @@ def login_screen_handler(stdscr):
         elements.append(Text(line, 9 + i, layout.MAIN_TEXT_MARGING_X + 15,
                              accent_color))
 
+    # Error text on 15th line
     error_element = Text("", 15, layout.FRAME_PADDING_LEFT, color)
     elements.append(error_element)
 
-    # Add the prompt and input field for the username
+    # Add the prompt and input field for the username on 14th line
     # Easy way to ensure cursor position on the screen
     elements.append(Text(prompt, 14, layout.FRAME_PADDING_LEFT, color))
     user_element = Text("", 14, layout.FRAME_PADDING_LEFT + len(prompt), color)

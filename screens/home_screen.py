@@ -37,8 +37,8 @@ def home_screen_handler(stdscr):
     elements = [
         Frame(layout.FRAME_PADDING_TOP, layout.FRAME_PADDING_LEFT,
               layout.FRAME_PADDING_BOTTOM, layout.FRAME_PADDING_RIGHT),
-        RightText(f"  USER : {user_name}  ", layout.FRAME_PADDING_TOP, 10,
-                  color),
+        RightText(f"  USER : {user_name}  ", layout.FRAME_PADDING_TOP,
+                  layout.FRAME_PADDING_RIGHT * 2, color),
         CenteredText("   HOME   ", layout.FRAME_PADDING_TOP, color),
         CenteredText("Get ready to test your knowledge and have fun?", 9,
                      color),

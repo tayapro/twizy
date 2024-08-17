@@ -49,7 +49,7 @@ def content_screen_handler(stdscr, navbar, elements, data):
     correct_answers_counter = 0
     question, corrent_option_index, *options = data[0]
 
-    # Initialize the menu (line 10) and question text (from line 13)
+    # Initialize the question text (line 10) and menu (from line 13)
     options_menu = Menu(13, layout.MAIN_TEXT_MARGING_X, "", True, *options)
     # Draw it last to move cursor's position from options
     question_text = CenteredText(question + " ", 10, color)
@@ -77,7 +77,8 @@ def content_screen_handler(stdscr, navbar, elements, data):
 
         # Question_counter is different for every draw cycle, when we hit Enter
         Text(f"  QUESTION : {question_counter + 1} / {game.TOTAL_QUESTIONS} ",
-             layout.FRAME_PADDING_TOP, 10).draw(stdscr)
+             layout.FRAME_PADDING_TOP,
+             layout.FRAME_PADDING_LEFT * 2).draw(stdscr)
 
         # Draw options and question
         options_menu.draw(stdscr)
@@ -175,12 +176,11 @@ def game_screen_handler(stdscr):
     logging.info(f"Username: {user_name}")
 
     # Define the elements to be displayed on the game screen
-    # (the numbers are line's numbers)
     elements = [
         Frame(layout.FRAME_PADDING_TOP, layout.FRAME_PADDING_LEFT,
               layout.FRAME_PADDING_BOTTOM, layout.FRAME_PADDING_RIGHT),
-        RightText(f"  USER : {user_name}  ",
-                  layout.FRAME_PADDING_TOP, 10, color),
+        RightText(f"  USER : {user_name}  ", layout.FRAME_PADDING_TOP,
+                  layout.FRAME_PADDING_RIGHT * 2, color),
         CenteredText("   tWIZY GAME   ", layout.FRAME_PADDING_TOP, color)
     ]
 
