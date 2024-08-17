@@ -105,15 +105,15 @@ This bar shows the **tWIZY** app name and links to other available screens. Fo
 ### F02 Login screen
 
 On the tWIZY CLI application, the first thing the user sees is a bold and vibrant tWIZY app name in yellow. It's simple yet elegant.
-A welcoming message greets the user, with a field to enter their name. This field only accepts names between 3 to 8 characters long. Users can easily edit their names by deleting and retyping letters before pressing Enter to continue, to Home screen.
+A welcoming message greets the user, with a field to enter their name. This field only accepts names between 3 to 8 characters long.
+Only alphabetic characters are allowed — no numbers, spaces, or special symbols.
+This ensures the username is simple and unique, making it easy to recognize during gameplay. <br>
+If the input doesn't meet these criteria, an error message `Error: username too short` will appear for shorter than 3 letters name or a hint message `Hint: Only letters please` for not allowed characters.
 
 <img src="readme/login_screen.png" width="400" alt="tWIZY login screen image"/>
 
+Users can easily edit their names by deleting and retyping letters before pressing Enter to continue, to Home screen.
 The tWIZY application uses the Python curses library, which refreshes the screen whenever a key is pressed. To allow users to delete letters with the backspace key, a special code block was added to handle this functionality.
-
-The username must be between 3 and 8 letters long. Only alphabetic characters are allowed — no numbers, spaces, or special symbols.
-This ensures the username is simple and unique, making it easy to recognize during gameplay. <br>
-If the input doesn't meet these criteria, an error message `Error: username too short` will appear for shorter than 3 letters name or a hint message `Hint: Only letters please` for not allowed characters.
 
 ### F03 Home screen
 
@@ -131,15 +131,14 @@ From the Home screen, the player has three navigation options:
 
 Finally, the user reaches the game itself.
 The Game screen presents a quiz where players answer a series of 10 questions.
-Each question appears one at a time with multiple-choice options, and users select their answer by pressing Enter.
+Each question appears one at a time with multiple-choice options. Navigating through the answer options is intuitive, using the up and down buttons, and the Enter button to select.
 The selected answer option is highlighted with inversive colors (the background and letter colors are swapped), making it easy to see which choice user has made.
-After answering the 10th question, the game transitions to the Outcome screen, where results are displayed, giving a summary of how well player performed.
 
 <img src="readme/game_screen.png" width="400" alt="tWIZY game screen image"/>
 
-Navigating through the answer options is intuitive,
-using the up and down buttons, and the Enter button to select. Throughout the game, a helpful
-navigation hint is displayed at the bottom of the screen.
+Throughout the game, a helpful navigation hint is displayed at the bottom of the screen.
+
+After answering the 10th question, the game transitions to the Outcome screen, where results are displayed, giving a summary of how well player performed.
 
 From the Game screen, the player has two navigation options:
 

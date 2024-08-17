@@ -69,9 +69,9 @@ def content_screen_handler(stdscr, navbar, elements, data):
         RightText(f"  USER : {user_name}  ",
                   layout.FRAME_PADDING_TOP, 10, color),
         CenteredText("   GAME RESULTS   ", layout.FRAME_PADDING_TOP, color),
-        CenteredText(f"{'* ' * data["tier"]}", 12, color),
-        CenteredText(f"Your score: {data["score"]}", 16, color),
-        CenteredText(f"Correct answers: {data["correct_answers"]}", 17, color),
+        CenteredText(f"{'* ' * data["tier"]}", 9, color),
+        CenteredText(f"Your score: {data["score"]}", 13, color),
+        CenteredText(f"Correct answers: {data["correct_answers"]}", 14, color),
         CenteredText("Do you want to play again? Press `g` button ", 20,
                      color_yellow),
     ]
@@ -80,7 +80,7 @@ def content_screen_handler(stdscr, navbar, elements, data):
     # 14 is line by x axis
     if data["place"] != -1:
         place_text = f"YOUR PLACE: {data["place"]} on Champions's board "
-        elements.append(CenteredText(place_text, 14, color))
+        elements.append(CenteredText(place_text, 11, color))
 
     while True:
         # Clear screen
