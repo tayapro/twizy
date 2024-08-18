@@ -43,7 +43,7 @@ tWIZY is a CLI-based quiz game that challenges players with various common quest
 
 The tWIZY application uses the Python curses library, perfect for creating a command-line interface (CLI) quiz game. Curses help manage the screen and handle user input, making it easy to create a dynamic and interactive experience. It allows for a clean and organized display, refreshing the screen with each new user action, such as selecting answers or navigating menus.
 
-The game uses Google Sheets as a database to store the quiz questions and the records of top players. This setup allows for easy updates and management of data.
+The game uses Google Sheets as a database to store [the quiz questions](https://docs.google.com/spreadsheets/d/1eh0zRgNrCcoQwLexdF6YZQIx3nqO2zZgtwXcUa1CNrQ/edit?gid=1996565274#gid=1996565274) and [the records of top players](https://docs.google.com/spreadsheets/d/1eh0zRgNrCcoQwLexdF6YZQIx3nqO2zZgtwXcUa1CNrQ/edit?gid=0#gid=0). This setup allows for easy updates and management of data.
 
 tWIZY game is deployed on Heroku, making it accessible and convenient for players to enjoy from anywhere.
 
@@ -245,7 +245,7 @@ This is super useful for keeping track of events, troubleshooting issues, and un
 
 The tWIZY app is a command-line interface (CLI) game created with Python. It uses a modular architecture to manage different screens including Login, Home, Game, Champions, Outcome, Error and skeletons screens. <br>
 The app utilizes curses for a terminal-based UI, providing a dynamic and interactive user experience. It employs imperative programming principles to ensure smooth navigation and clear decision-making processes. <br>
-Data is managed through local storage and external component, such as spreadsheet storage for high scores and quiz data. <br>
+Data is managed through local storage and external component, such as spreadsheet storage for [high scores](https://docs.google.com/spreadsheets/d/1eh0zRgNrCcoQwLexdF6YZQIx3nqO2zZgtwXcUa1CNrQ/edit?gid=0#gid=0) and [quiz data](https://docs.google.com/spreadsheets/d/1eh0zRgNrCcoQwLexdF6YZQIx3nqO2zZgtwXcUa1CNrQ/edit?gid=1996565274#gid=1996565274). <br>
 The app use a Python logging module that tracks events and errors, helping with debugging and monitoring performance. This logging system will be especially useful if tWIZY is deployed to a cloud platform (for instance, _AWS Amazon CloudWatch_), where logs can be easily checked and analyzed. <br> The app also has robust exception handling to manage unexpected issues, ensuring stability and providing useful feedback in case of errors. <br>
 The app is thoroughly tested using pytest to ensure that each part functions correctly and efficiently.
 
@@ -274,7 +274,7 @@ This layer provides reusable components and utilities that support the screens a
 
 The Libraries layer is responsible for handling interactions with external resources, such as storage systems.
 For instance, `spreadsheet_storage.py` is used to connect with Google's spreadsheets to store and retrieve data, such as the list
-of champions and quiz content. <br>
+of [champions](https://docs.google.com/spreadsheets/d/1eh0zRgNrCcoQwLexdF6YZQIx3nqO2zZgtwXcUa1CNrQ/edit?gid=0#gid=0) and [quiz content](https://docs.google.com/spreadsheets/d/1eh0zRgNrCcoQwLexdF6YZQIx3nqO2zZgtwXcUa1CNrQ/edit?gid=1996565274#gid=1996565274). <br>
 On the other hand, `local_storage.py` manages the storage and retrieval of key-value pairs in the local storage, for instance,
 usernames, scores, and tiers. This layer abstracts the intricacies of data management, making it easier to swap out or modify
 these services without impacting the rest of the tWIZY application.
@@ -305,7 +305,7 @@ tWIZY app uses a combination of local storage and Google Sheets to manage and pe
 These values are stored locally during gameplay and are used to manage the user's progress and state within the app.
 
 **Google Sheets** is used as a backend service to maintain a centralized record of the game's champions and quiz questions.
-The _champions_ sheet stores the top players' names, scores, and timestamps, while the _quiz_ sheet contains the questions,
+The [_champions_ sheet](https://docs.google.com/spreadsheets/d/1eh0zRgNrCcoQwLexdF6YZQIx3nqO2zZgtwXcUa1CNrQ/edit?gid=0#gid=0) stores the top players' names, scores, and timestamps, while the [_quiz_ sheet](https://docs.google.com/spreadsheets/d/1eh0zRgNrCcoQwLexdF6YZQIx3nqO2zZgtwXcUa1CNrQ/edit?gid=1996565274#gid=1996565274) contains the questions,
 options, and correct answers used during the game.
 
 At runtime, the tWIZY app fetches quiz data from Google Sheets and updates the champions list with the player's score after
@@ -439,7 +439,7 @@ This section shows the connection between [Features](#features) and [UX design](
 
   > The Outcome screen provides a summary of the user's results, including their tier, score,
   > and potential placement on the Champions board. \
-  > For more details, see the **FF05 Outcome screen**, feature sections.
+  > For more details, see the **F05 Outcome screen**, feature sections.
 
 - I want to view the top scores on the Champions board.
 
@@ -498,7 +498,7 @@ To check unit tests coverage, run the following command in terminal from tWIZY r
 ### HTML
 
 The W3C Markup Validation Service was employed to check the HTML of the website.
-Only `layout.html` has been changed.
+Only `layout.html` has been slightly changed.
 
 <details><summary><code>layout.html</code> page passed without any errors or warnings.</summary>
 <img src="readme/W3HTML_validation_layout.png" width="500" alt="W3C layout.html validation image">
@@ -507,7 +507,7 @@ Only `layout.html` has been changed.
 ### Python
 
 All files passed without any errors or warnings on [CI Python Linter](https://pep8ci.herokuapp.com/),
-except `test_champions_screen.py` where 3 warnings about `regexp`.
+except `test_champions_screen.py` with 3 warnings about `regexp`.
 
 <details><summary><code>run.py</code></summary>
 <img src="readme/PEP8_run.png" width="500" alt="PEP8 run validation image">
@@ -685,7 +685,7 @@ except `test_champions_screen.py` where 3 warnings about `regexp`.
 
 ## Known Issues
 
-It's impossible to hide the cursor on Heroku terminal. This means that the cursor will always be visible on the screen. Therefore, it's important to plan the order of drawing elements on the terminal screen carefully. Placing the elements in the correct sequence ensures that the cursor does not disrupt the gameplay experience, keeping the screen clean and user-friendly despite the cursor's presence.
+It's impossible to hide the curses cursor on Heroku terminal. This means that the cursor will always be visible on the screen. Therefore, it's important to plan the order of drawing elements on the terminal screen carefully. Placing the elements in the correct sequence ensures that the cursor does not disrupt the gameplay experience, keeping the screen clean and user-friendly despite the cursor's presence.
 
 [Back to top](#table-of-contents)
 
@@ -699,6 +699,7 @@ It's impossible to hide the cursor on Heroku terminal. This means that the curso
 ## Code
 
 - The setup for work with Google speadsheets is adapted from the "Love Sandwiches" lesson.
+- Knowledge of Python curses with [docs.python.org](https://docs.python.org/3/howto/curses.html#).
 - Knowledge of Python classes with [RealPython](https://realpython.com/python-classes/).
 - Understanding of Python logging library with [RealPython](https://realpython.com/python-logging/).
 - Knowledge of Python curses library with [short Youtube course](https://www.youtube.com/playlist?list=PLzMcBGfZo4-n2TONAOImWL4sgZsmyMBc8).
