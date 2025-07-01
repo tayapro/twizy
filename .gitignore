@@ -8,3 +8,5 @@ node_modules/
 .github/
 creds.json
 twizy.log
+myenv/
+index.js.json
