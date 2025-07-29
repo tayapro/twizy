@@ -9,33 +9,35 @@ but there are niches in which being able to do fancy things with them are still 
 
 ## Table of Contents
 
-- [Project Description](#project-description)
-  - [How To Play](#how-to-play)
-  - [Purpose](#purpose)
-  - [User Demographics](#user-demographics)
-- [UX Design](#ux-design)
-  - [User Stories](#user-stories)
-- [Features](#features)
-  - [Existing Features](#existing-features)
-  - [Future Features](#future-features)
-- [Technical Overview](#technical-overview)
-  - [Architecture](#architecture)
-  - [Flowcharts](#flowcharts)
-  - [Data Model](#data-model)
-- [Technologies](#technologies)
-- [Deployment](#deployment)
-  - [Github](#github)
-  - [Heroku](#heroku)
-- [Testing](#testing)
-  - [User Stories Testing](#user-stories-testing)
-  - [Manual Testing](#manual-testing)
-  - [Unit Testing](#unit-testing)
-  - [Code Validation Testing](#code-validation-testing)
-  - [Known Issues](#known-issues)
-- [Credits](#credits)
-  - [Media](#media)
-  - [Code](#code)
-- [Acknowledgments](#acknowledgments)
+-   [Project Description](#project-description)
+    -   [How To Play](#how-to-play)
+    -   [Purpose](#purpose)
+    -   [User Demographics](#user-demographics)
+-   [UX Design](#ux-design)
+    -   [User Stories](#user-stories)
+-   [Features](#features)
+    -   [Existing Features](#existing-features)
+    -   [Future Features](#future-features)
+-   [Technical Overview](#technical-overview)
+    -   [Architecture](#architecture)
+    -   [Flowcharts](#flowcharts)
+    -   [Data Model](#data-model)
+-   [Technologies](#technologies)
+-   [Deployment](#deployment)
+    -   [Github How to clone](#github-how-to-clone)
+    -   [VPS (Virtual Private Server)](#vps-virtual-private-server)
+    -   [Heroku](#heroku)
+    -   [Google Sheets API Setup (`creds.json`)](#google-sheets-api-setup-credsjson)
+-   [Testing](#testing)
+    -   [User Stories Testing](#user-stories-testing)
+    -   [Manual Testing](#manual-testing)
+    -   [Unit Testing](#unit-testing)
+    -   [Code Validation Testing](#code-validation-testing)
+    -   [Known Issues](#known-issues)
+-   [Credits](#credits)
+    -   [Media](#media)
+    -   [Code](#code)
+-   [Acknowledgments](#acknowledgments)
 
 # Project Description
 
@@ -45,15 +47,15 @@ The tWIZY application uses the Python curses library, perfect for creating a com
 
 The game uses Google Sheets as a database to store [the quiz questions](https://docs.google.com/spreadsheets/d/1eh0zRgNrCcoQwLexdF6YZQIx3nqO2zZgtwXcUa1CNrQ/edit?gid=1996565274#gid=1996565274) and [the records of top players](https://docs.google.com/spreadsheets/d/1eh0zRgNrCcoQwLexdF6YZQIx3nqO2zZgtwXcUa1CNrQ/edit?gid=0#gid=0). This setup allows for easy updates and management of data.
 
-tWIZY game is deployed on Heroku, making it accessible and convenient for players to enjoy from anywhere.
+The tWIZY game now runs in a Docker container on a VPS, providing full control over the environment and making it accessible from anywhere.
 
 The tWIZY CLI app is built using Python and a little HTML, CSS as a Portfolio Project#3 for the Code Institute's Full Stack Developer(e-Commerce) course.
 
-[The live tWIZY CLI application](https://twizy-60a6fbc7304c.herokuapp.com/)
+[The live tWIZY CLI application](https://twizy.tayadev.com/)
 
 ## How To Play
 
-To start the game, a user needs to click "RUN PROGRAM" on [Heroku](https://twizy-60a6fbc7304c.herokuapp.com/). When the app launches, a player will see a login screen where they can enter a username consisting of only letters and with a length between 3 and 8 characters. This username will be used to track their progress and scores in the game. <br>
+To start the game, a user needs to click "RUN PROGRAM" in terminal [link](https://twizy.tayadev.com/). When the app launches, a player will see a login screen where they can enter a username consisting of only letters and with a length between 3 and 8 characters. This username will be used to track their progress and scores in the game. <br>
 On the home screen, a user can familiarize themselves with the quiz rules and start the game by pressing `g` button. <br>
 During the game, questions will be presented one at a time, and a player can select their answer using the arrow keys and submit it by pressing Enter. <br>
 As a user answers each question, the game will track their score and progress. After answering the 10th question, a player will be automatically taken to the Outcome screen where their final score, tier, and ranking on the champions board (if applicable) will be displayed. High scores are saved for future reference. <br>
@@ -63,14 +65,14 @@ To exit the game, the player can press `q` on any screen (except Login) or use t
 
 tWIZY is a quiz game that’s easy to play and manage. It’s perfect for anyone who wants to test their knowledge, learn new things, and enjoy some friendly competition.
 
-The app was created as part of a project portfolio to demonstrate the development and deployment of a CLI-based quiz game. It showcases skills in coding, database integration, and deployment on platforms like Heroku.
+The app was created as part of a project portfolio to demonstrate the development and deployment of a CLI-based quiz game. It highlights skills in coding, database integration, and deployment using platforms such as Heroku and a VPS.
 
 ## User Demographics
 
 tWIZY game could be interesting for a variety of users:
 
-- from trivia lovers, who enjoys a good game,
-- to tech enthusiasts, who are interested in learning about projects with Google Sheets and Heroku.
+-   from trivia lovers, who enjoys a good game,
+-   to tech enthusiasts, who are interested in learning about projects with Google Sheets, Heroku and VPS.
 
 [Back to top](#table-of-contents)
 
@@ -80,15 +82,15 @@ tWIZY game could be interesting for a variety of users:
 
 As a **user**,
 
-- I want to navigate through the app using buttons, so I can easily access different features.
-- I want a skeleton screen to appear when a page loads if needed. This will let me know the content is coming and the app isn't stuck.
-- I want to view instructions, so that I understand how to play the game.
-- I want to see something personal, like my name.
-- I want to be able to start a new quiz game easily.
-- I want to abort the game at any time by pressing the button.
-- I want to see my quiz score and tier after completing a game.
-- I want to view the top scores on the Champions board.
-- I want to make sure I don't get lost on this website.
+-   I want to navigate through the app using buttons, so I can easily access different features.
+-   I want a skeleton screen to appear when a page loads if needed. This will let me know the content is coming and the app isn't stuck.
+-   I want to view instructions, so that I understand how to play the game.
+-   I want to see something personal, like my name.
+-   I want to be able to start a new quiz game easily.
+-   I want to abort the game at any time by pressing the button.
+-   I want to see my quiz score and tier after completing a game.
+-   I want to view the top scores on the Champions board.
+-   I want to make sure I don't get lost on this website.
 
 [Back to top](#table-of-contents)
 
@@ -124,9 +126,9 @@ On the home screen of the tWIZY app, the user can find the rules for the tWIZY q
 
 From the Home screen, the player has three navigation options:
 
-- Press `c` to view the current Champions board.
-- Press `g` to start playing a game.
-- If the user is ready to leave, press `q` to exit the tWIZY game.
+-   Press `c` to view the current Champions board.
+-   Press `g` to start playing a game.
+-   If the user is ready to leave, press `q` to exit the tWIZY game.
 
 ### F04 Game screen
 
@@ -143,8 +145,8 @@ After answering the 10th question, the game transitions to the Outcome screen, w
 
 From the Game screen, the player has two navigation options:
 
-- Press `a` to exit the current game and return to the Home screen.
-- If the user is ready to leave, press `q` to exit the tWIZY game.
+-   Press `a` to exit the current game and return to the Home screen.
+-   If the user is ready to leave, press `q` to exit the tWIZY game.
 
 ### F05 Outcome screen
 
@@ -158,10 +160,10 @@ aim for higher scores and better tiers in future games.
 
 On the Outcome screen, the user has four navigation options:
 
-- Press `h` to return to the Home screen.
-- Press `g` to start a new quiz and try to improve a score.
-- Press `c` to view the current Champions board.
-- Press `q` to quit the tWIZY application.
+-   Press `h` to return to the Home screen.
+-   Press `g` to start a new quiz and try to improve a score.
+-   Press `c` to view the current Champions board.
+-   Press `q` to quit the tWIZY application.
 
 ### F06 Champions screen
 
@@ -172,9 +174,9 @@ It serves as both a leaderboard and a motivator for users to achieve higher scor
 
 On the Champions screen, the user has three navigation options:
 
-- Press `h` to return to the Home screen.
-- Press `g` to start a new quiz and try to improve a score.
-- If the user is ready to leave, press `q` to exit the tWIZY application.
+-   Press `h` to return to the Home screen.
+-   Press `g` to start a new quiz and try to improve a score.
+-   If the user is ready to leave, press `q` to exit the tWIZY application.
 
 ### F07 Error screen
 
@@ -184,8 +186,8 @@ If, for any reason (such as a Google spreadsheet connection error), the user enc
 
 Upon reaching this Error page, all records associated with this account will be deleted, except for the login, if it was already present.
 
-- If the login is not defined or its length is 0, the user will be redirected to the Login screen to enter the login credentials.
-- If a valid login is present, the user will be redirected to the Home screen.
+-   If the login is not defined or its length is 0, the user will be redirected to the Login screen to enter the login credentials.
+-   If a valid login is present, the user will be redirected to the Home screen.
 
 Additionally, the user always has the option to exit the tWIZY application, by clicking `q`.
 
@@ -229,15 +231,15 @@ This is super useful for keeping track of events, troubleshooting issues, and un
 
 ## Future Features
 
-- Implement Redis to manage race conditions, ensuring that the champions' board is accurately updated even when two
-  players submit scores simultaneously. This prevents conflicts and ensures all high scores are recorded correctly.
-- Include an option to pause the game so that players can take breaks without worrying about time-sensitive elements
-  or score loss.
-- Provide hints or clues to users when they are stuck on a quiz question, helping them progress without frustration.
-- Introduce a database for storing user information, including usernames and passwords. This will improve security
-  and enable features like user authentication and personalized game experiences.
-- Add multi-language support, allowing players from different regions to enjoy the game in their preferred language,
-  enhancing accessibility and user engagement.
+-   Implement Redis to manage race conditions, ensuring that the champions' board is accurately updated even when two
+    players submit scores simultaneously. This prevents conflicts and ensures all high scores are recorded correctly.
+-   Include an option to pause the game so that players can take breaks without worrying about time-sensitive elements
+    or score loss.
+-   Provide hints or clues to users when they are stuck on a quiz question, helping them progress without frustration.
+-   Introduce a database for storing user information, including usernames and passwords. This will improve security
+    and enable features like user authentication and personalized game experiences.
+-   Add multi-language support, allowing players from different regions to enjoy the game in their preferred language,
+    enhancing accessibility and user engagement.
 
 [Back to top](#table-of-contents)
 
@@ -318,30 +320,32 @@ This integration allows for easy data management and retrieval, ensuring that th
 
 ## Languages
 
-- Python
-- HTML5
-- CSS
+-   Python
+-   HTML5
+-   CSS
 
 ## Frameworks, Libraries & Apps
 
-| Name                                                         | Purpose                                      |
-| :----------------------------------------------------------- | :------------------------------------------- |
-| Heroku                                                       | Launch and host the CLI app                  |
-| Google Spreadsheets API                                      | Store data                                   |
-| Python Pytest                                                | Unit-testing                                 |
-| Favicon.cc                                                   | Create website favicon                       |
-| [Dreamstudio.ai](https://beta.dreamstudio.ai)                | Create the tWIZY background image            |
-| [Photopea](https://www.photopea.com/)                        | Work with images (resize, convert, etc)      |
-| [GoDaddy](https://www.godaddy.com/)                          | Generate WIZY logo                           |
-| [Vmake.ai](https://vmake.ai/image-outpainting)               | Expand the image                             |
-| [Websitemockupgenerator](https://websitemockupgenerator.com) | Create the README Mockup image               |
-| [LucidChart](https://lucid.app)                              | Create flowcharts                            |
-| [Figma](https://www.figma.com)                               | Create architecture abstraction layers image |
-| Git                                                          | Use for version control                      |
-| GitHub                                                       | Store the source code                        |
-| [Pep8ci.herokuapp](https://pep8ci.herokuapp.com)             | Validate Python code                         |
-| W3C HTML Markup Validator                                    | Validate HTML code                           |
-| Code Institute's Python Template                             | Generate the workspace for tWIZY project     |
+| Name                                                         | Purpose                                        |
+| :----------------------------------------------------------- | :--------------------------------------------- |
+| Heroku                                                       | Launch and host the CLI app                    |
+| VPS (Contabo)                                                | Host the app in a custom server environment    |
+| Docker                                                       | Containerize the app for consistent deployment |
+| Google Spreadsheets API                                      | Store data                                     |
+| Python Pytest                                                | Unit-testing                                   |
+| Favicon.cc                                                   | Create website favicon                         |
+| [Dreamstudio.ai](https://beta.dreamstudio.ai)                | Create the tWIZY background image              |
+| [Photopea](https://www.photopea.com/)                        | Work with images (resize, convert, etc)        |
+| [GoDaddy](https://www.godaddy.com/)                          | Generate WIZY logo                             |
+| [Vmake.ai](https://vmake.ai/image-outpainting)               | Expand the image                               |
+| [Websitemockupgenerator](https://websitemockupgenerator.com) | Create the README Mockup image                 |
+| [LucidChart](https://lucid.app)                              | Create flowcharts                              |
+| [Figma](https://www.figma.com)                               | Create architecture abstraction layers image   |
+| Git                                                          | Use for version control                        |
+| GitHub                                                       | Store the source code                          |
+| [Pep8ci.herokuapp](https://pep8ci.herokuapp.com)             | Validate Python code                           |
+| W3C HTML Markup Validator                                    | Validate HTML code                             |
+| Code Institute's Python Template                             | Generate the workspace for tWIZY project       |
 
 [Back to top](#table-of-contents)
 
@@ -350,7 +354,7 @@ This integration allows for easy data management and retrieval, ensuring that th
 Code Institute has made it easier for others to access the project by providing a [template](https://github.com/Code-Institute-Org/python-essentials-template) to display the terminal
 view of this backend application in a modern web browser on Heroku.
 
-## How to clone
+## Github How to clone
 
 1. Visit the [tWIZY repository](https://github.com/tayapro/twizy) on GitHub.
 2. Click the **Code** button on the right side of the screen, select **HTTPs**, and copy the provided link.
@@ -361,6 +365,76 @@ view of this backend application in a modern web browser on Heroku.
 > To get everything set up, install the packages listed in the requirements.txt file. Run the command in the terminal:
 > `pip3 install -r requirements.txt`
 > This project uses confidential credentials, like `CREDS.json` to work with Google's spreadsheets, make sure to add it manually.
+
+## VPS (Virtual Private Server)
+
+The tWIZY game is deployed on a VPS using Docker and Caddy for a lightweight, self-hosted setup.
+
+### Setup Instructions
+
+1. Build the Docker image:
+
+```
+docker build . --tag <YOUR_DOCKERHUB_ACCOUNT>/twizy:1.0.0
+```
+
+Optionally, push the image to Docker Hub:
+
+```
+docker push <YOUR_DOCKERHUB_ACCOUNT>/twizy:1.0.0
+```
+
+2. Place credentials file as:
+
+```
+twizy/creds.json
+```
+
+3. Create `docker-compose.yml`, example:
+
+```
+networks:
+  mynet:
+
+services:
+  caddy:
+    image: caddy:latest
+    container_name: caddy
+    ports:
+      - 443:443
+      - 80:80
+    volumes:
+      - ${PWD}/caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ${PWD}/caddy/data:/data
+    networks:
+      - mynet
+    restart: unless-stopped
+
+  twizy:
+    image: <YOUR_DOCKERHUB_ACCOUNT>/twizy:1.0.0
+    container_name: twizy
+    volumes:
+      - ${PWD}/twizy/creds.json:/app/creds.json
+    networks:
+      - mynet
+    restart: unless-stopped
+```
+
+4. Create `Caddyfile` (`caddy/Caddyfile`), example:
+
+```
+twizy.<YOUR_HOST>.com {
+  reverse_proxy http://twizy:8000
+}
+```
+
+5. Run the containers
+
+```
+docker-compose up -d
+```
+
+Then visit `https://twizy.<YOUR_HOST>.com` to verify it’s working.
 
 ## Heroku
 
@@ -381,18 +455,51 @@ Deployment steps:
    In the Settings tab:
    Add the required environmental variables in the Config Vars section:
 
-   - `CREDS`: Google service account credentials. \
-      How to get it, see Google's [service account credentials](https://cloud.google.com/iam/docs/service-account-creds) documentation.
-   - `PORT`: Set this to `8000`.
+    - `CREDS`: Google service account credentials. \
+       How to get it, see Google's [service account credentials](https://cloud.google.com/iam/docs/service-account-creds) documentation.
+    - `PORT`: Set this to `8000`.
 
-   In the Buildpacks subsection, set the buildpacks in the following order: `Python` **first**, then `Node.js`.
+    In the Buildpacks subsection, set the buildpacks in the following order: `Python` **first**, then `Node.js`.
 
 5. Deploy the App:
    In the Deploy tab:
 
-   - Under App connected to GitHub, configure GitHub integration.
+    - Under App connected to GitHub, configure GitHub integration.
 
-   In the Manual deploy subsection, select the main branch and click "Deploy Branch" to deploy the app.
+    In the Manual deploy subsection, select the main branch and click "Deploy Branch" to deploy the app.
+
+## Google Sheets API Setup (`creds.json`)
+
+To enable your project to access the Google Sheets API:
+
+1. Create a Google Cloud Project
+
+-   Go to Google Cloud Console
+-   Create a new project or select an existing one
+
+2. Enable the API
+
+-   Navigate to APIs & Services > Library
+-   Search for Google Sheets API and click Enable
+
+3. Create a Service Account
+
+-   Go to APIs & Services > Credentials
+-   Click Create Credentials > Service Account
+-   Follow the steps and complete the creation
+
+4. Download the Credentials File
+
+-   After creating the service account, open it
+-   Go to the Keys tab > Add Key > Create new key
+-   Select `JSON` and download the file
+-   Save it as `creds.json` in your project directory
+
+5. Grant Sheet Access
+
+-   Open your Google Sheet
+-   Click Share and add the service account’s email address (found in `creds.json`)
+-   Grant Editor access to allow reading and writing
 
 [Back to top](#table-of-contents)
 
@@ -404,52 +511,52 @@ This section shows the connection between [Features](#features) and [UX design](
 
 ### As a user,
 
-- I want to navigate through the app using buttons, so I can easily access different features.
+-   I want to navigate through the app using buttons, so I can easily access different features.
 
-  > Each screen includes a set of buttons for easy navigation. These navigation options help users move between different parts of the tWIZY app. \
-  > For more details, see the **F01 Navigation bar** feature section.
+    > Each screen includes a set of buttons for easy navigation. These navigation options help users move between different parts of the tWIZY app. \
+    > For more details, see the **F01 Navigation bar** feature section.
 
-- I want a skeleton screen to appear when a page loads if needed. This will let me know the content is coming and the app isn't stuck.
+-   I want a skeleton screen to appear when a page loads if needed. This will let me know the content is coming and the app isn't stuck.
 
-  > The Game, Outcome, and Champions screens have skeleton screens that appear when a page is loading. These provide feedback to the user that the content is on its way and that the application is responsive. \
-  > For more details, see the **F08 Skeleton screens** feature section.
+    > The Game, Outcome, and Champions screens have skeleton screens that appear when a page is loading. These provide feedback to the user that the content is on its way and that the application is responsive. \
+    > For more details, see the **F08 Skeleton screens** feature section.
 
-- I want to view instructions, so that I understand how to play the game.
+-   I want to view instructions, so that I understand how to play the game.
 
-  > Users can easily learn the game rules on the Home screen, where everything is clearly and simply explained. \
-  > For more details, see the **F03 Home screen** feature section.
+    > Users can easily learn the game rules on the Home screen, where everything is clearly and simply explained. \
+    > For more details, see the **F03 Home screen** feature section.
 
-- I want to see something personal, like my name.
+-   I want to see something personal, like my name.
 
-  > On the Home, Game, and Outcome screens, a player can see their name in the top right corner. The name displayed will be the same as the one entered in the Login screen. \
-  > For more details, see the **F02 Login screen**, and the **F03 Home screen** feature sections.
+    > On the Home, Game, and Outcome screens, a player can see their name in the top right corner. The name displayed will be the same as the one entered in the Login screen. \
+    > For more details, see the **F02 Login screen**, and the **F03 Home screen** feature sections.
 
-- I want to be able to start a new quiz game easily.
+-   I want to be able to start a new quiz game easily.
 
-  > The user is able to start a new game from Home, Champions and Outcome screens,
-  > just pressing a `g` button. \
-  > For more details, see the **F03 Home screen**, the **F04 Game screen** and the **F05 Outcome screen** feature sections.
+    > The user is able to start a new game from Home, Champions and Outcome screens,
+    > just pressing a `g` button. \
+    > For more details, see the **F03 Home screen**, the **F04 Game screen** and the **F05 Outcome screen** feature sections.
 
-- I want to abort the game at any time by pressing the button.
+-   I want to abort the game at any time by pressing the button.
 
-  > If the player does not feel okay to continue a current game, they always have the option to abort it by pressing the 'A' button. The tWIZY app will redirect to the Home screen.
-  > For more details, see the **F04 Game screen**, feature sections.
+    > If the player does not feel okay to continue a current game, they always have the option to abort it by pressing the 'A' button. The tWIZY app will redirect to the Home screen.
+    > For more details, see the **F04 Game screen**, feature sections.
 
-- I want to see my quiz score and tier after completing a game.
+-   I want to see my quiz score and tier after completing a game.
 
-  > The Outcome screen provides a summary of the user's results, including their tier, score,
-  > and potential placement on the Champions board. \
-  > For more details, see the **F05 Outcome screen**, feature sections.
+    > The Outcome screen provides a summary of the user's results, including their tier, score,
+    > and potential placement on the Champions board. \
+    > For more details, see the **F05 Outcome screen**, feature sections.
 
-- I want to view the top scores on the Champions board.
+-   I want to view the top scores on the Champions board.
 
-  > The Champions screen shows a leaderboard featuring the top 5 scores achieved by players. \
-  > For more details, see the **F06 Champions screen** feature section.
+    > The Champions screen shows a leaderboard featuring the top 5 scores achieved by players. \
+    > For more details, see the **F06 Champions screen** feature section.
 
-- I want to make sure I don't get lost on this website.
+-   I want to make sure I don't get lost on this website.
 
-  > If the user finds themselves on the Error screen, they can easily find concise instructions on how to return to the tWIZY Home screen. \
-  > For more details, see the **F07 Error screen** features section.
+    > If the user finds themselves on the Error screen, they can easily find concise instructions on how to return to the tWIZY Home screen. \
+    > For more details, see the **F07 Error screen** features section.
 
 ## Manual Testing
 
@@ -469,8 +576,8 @@ successfully without any critical issues, [link to Google sheet](https://docs.go
 <table>
 <tr>
 <td><img src="readme/unit_tests.png" alt="unit tests all green fun image" width="400"></td>
-<td>To ensure the tWIZY CLI app works correctly, unit testing was performed using <code>pytest</code>. <br> 
-  <code>Pytest fixtures</code> were utilized to set up and reuse common test data across multiple tests, 
+<td>To ensure the tWIZY CLI app works correctly, unit testing was performed using <code>pytest</code>. <br>
+  <code>Pytest fixtures</code> were utilized to set up and reuse common test data across multiple tests,
   which helps maintain organization and efficiency in tWIZY tests. <br>
   To run the tests:
 
@@ -693,19 +800,19 @@ It's impossible to hide the curses cursor on Heroku terminal. This means that th
 
 ## Media
 
-- Background image has been generated by [dreamstudio.ai](https://beta.dreamstudio.ai/).
-- [Unit testing all green](https://www.threads.net/@testingil/post/C9Ki-rHtGHW) picture.
+-   Background image has been generated by [dreamstudio.ai](https://beta.dreamstudio.ai/).
+-   [Unit testing all green](https://www.threads.net/@testingil/post/C9Ki-rHtGHW) picture.
 
 ## Code
 
-- The setup for work with Google speadsheets is adapted from the "Love Sandwiches" lesson.
-- Knowledge of Python curses with [docs.python.org](https://docs.python.org/3/howto/curses.html#).
-- Knowledge of Python classes with [RealPython](https://realpython.com/python-classes/).
-- Understanding of Python logging library with [RealPython](https://realpython.com/python-logging/).
-- Knowledge of Python curses library with [short Youtube course](https://www.youtube.com/playlist?list=PLzMcBGfZo4-n2TONAOImWL4sgZsmyMBc8).
-- Understanding of skeleton screen concept with [uxdesign.cc](https://uxdesign.cc/what-you-should-know-about-skeleton-screens-a820c45a571a).
-- Understanding of Markdown formating for Githib, [Github-Markdown.md](https://gist.github.com/nikhilnayyar002/7a35e653d3d590e317c829243e73b110).
-- Understanding of pytest with [Python testing with pytest by Brian Okken](https://tisten.ir/blog/wp-content/uploads/2019/01/Python-Testing-with-pytest-Pragmatic-Bookshelf-2017-Brian-Okken.pdf).
+-   The setup for work with Google speadsheets is adapted from the "Love Sandwiches" lesson.
+-   Knowledge of Python curses with [docs.python.org](https://docs.python.org/3/howto/curses.html#).
+-   Knowledge of Python classes with [RealPython](https://realpython.com/python-classes/).
+-   Understanding of Python logging library with [RealPython](https://realpython.com/python-logging/).
+-   Knowledge of Python curses library with [short Youtube course](https://www.youtube.com/playlist?list=PLzMcBGfZo4-n2TONAOImWL4sgZsmyMBc8).
+-   Understanding of skeleton screen concept with [uxdesign.cc](https://uxdesign.cc/what-you-should-know-about-skeleton-screens-a820c45a571a).
+-   Understanding of Markdown formating for Githib, [Github-Markdown.md](https://gist.github.com/nikhilnayyar002/7a35e653d3d590e317c829243e73b110).
+-   Understanding of pytest with [Python testing with pytest by Brian Okken](https://tisten.ir/blog/wp-content/uploads/2019/01/Python-Testing-with-pytest-Pragmatic-Bookshelf-2017-Brian-Okken.pdf).
 
 [Back to top](#table-of-contents)
 
@@ -715,3 +822,7 @@ Huge thanks to my mentor, Ronan McClelland, for all his help and advice. \
 He’s given me great tips and resources that really improved my coding and testing skills.
 
 [Back to top](#table-of-contents)
+
+```
+
+```
