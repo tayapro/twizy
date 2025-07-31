@@ -1,7 +1,7 @@
 # tWIZY CLI application
 
 <p align="right"><i>In a world of graphical displays, one might ask “why bother”? <br>
-It’s true that character-cell display terminals are an obsolete technology, <br>
+It's true that character-cell display terminals are an obsolete technology, <br>
 but there are niches in which being able to do fancy things with them are still valuable.</i><br>
 <a href="https://docs.python.org/3/howto/curses.html">A.M. Kuchling, Eric S. Raymond</a></p>
 
@@ -63,7 +63,7 @@ To exit the game, the player can press `q` on any screen (except Login) or use t
 
 ## Purpose
 
-tWIZY is a quiz game that’s easy to play and manage. It’s perfect for anyone who wants to test their knowledge, learn new things, and enjoy some friendly competition.
+tWIZY is a quiz game that's easy to play and manage. It's perfect for anyone who wants to test their knowledge, learn new things, and enjoy some friendly competition.
 
 The app was created as part of a project portfolio to demonstrate the development and deployment of a CLI-based quiz game. It highlights skills in coding, database integration, and deployment using platforms such as Heroku and a VPS.
 
@@ -370,71 +370,110 @@ view of this backend application in a modern web browser on Heroku.
 
 The tWIZY game is deployed on a VPS using Docker and Caddy for a lightweight, self-hosted setup.
 
-### Setup Instructions
+### Pre-requirements
 
-1. Build the Docker image:
+Before proceeding, ensure the following are set up:
 
-```
-docker build . --tag <YOUR_DOCKERHUB_ACCOUNT>/twizy:1.0.0
-```
+-   A running VPS
+-   Docker and Docker Compose installed on the VPS
+-   Git client installed on the VPS
+-   Ports 80 and 443 are open on the VPS
+-   A public domain with an A and/or AAAA DNS record pointing to the VPS
 
-Optionally, push the image to Docker Hub:
+### Deployment Steps on VPS
 
-```
-docker push <YOUR_DOCKERHUB_ACCOUNT>/twizy:1.0.0
-```
+1.  Create required folders
 
-2. Place credentials file as:
+    ```
+    mkdir -p twizy caddy
+    ```
 
-```
-twizy/creds.json
-```
+2.  Clone tWIZY repository and move to twizy folder
 
-3. Create `docker-compose.yml`, example:
+    ```
+    git clone https://github.com/tayapro/twizy.git && cd twizy
+    ```
 
-```
-networks:
-  mynet:
+3.  Create `creds.json` file inside the `twizy/` folder.
+    For more details check [Google Sheets API Setup (`creds.json`)](#google-sheets-api-setup-credsjson).
 
-services:
-  caddy:
-    image: caddy:latest
-    container_name: caddy
-    ports:
-      - 443:443
-      - 80:80
-    volumes:
-      - ${PWD}/caddy/Caddyfile:/etc/caddy/Caddyfile
-      - ${PWD}/caddy/data:/data
+4.  Build the Docker Image
+
+    ```
+    docker build . --tag twizy:1.0.0
+    ```
+
+> [!NOTE]
+> The example use Docker Hub.  
+> If you're using another container registry, you may need to adjust the image tag and use the appropriate login command.
+
+5.  Create `docker-compose.yml` in the root directory
+
+    ```
     networks:
-      - mynet
-    restart: unless-stopped
+      mynet:
 
-  twizy:
-    image: <YOUR_DOCKERHUB_ACCOUNT>/twizy:1.0.0
-    container_name: twizy
-    volumes:
-      - ${PWD}/twizy/creds.json:/app/creds.json
-    networks:
-      - mynet
-    restart: unless-stopped
-```
+    services:
+      caddy:
+        image: caddy:latest
+        networks:
+          - mynet
+        ports:
+          - 443:443
+          - 80:80
+        volumes:
+          - ${PWD}/caddy/Caddyfile:/etc/caddy/Caddyfile
+          - ${PWD}/caddy/data:/data
+        container_name: caddy
+        restart: unless-stopped
+      twizy:
+        image: twizy:1.0.0
+        networks:
+          - mynet
+        container_name: twizy
+        volumes:
+          - ${PWD}/twizy/creds.json:/app/creds.json
+        restart: unless-stopped
+    ```
 
-4. Create `Caddyfile` (`caddy/Caddyfile`), example:
+6.  Create the `Caddyfile` in the `caddy/` folder, example:
 
-```
-twizy.<YOUR_HOST>.com {
-  reverse_proxy http://twizy:8000
-}
-```
+    ```
+    twizy.<YOUR_DOMAIN> {
+        reverse_proxy twizy:8000
+    }
+    ```
 
-5. Run the containers
+> [!NOTE]
+> Replace **`<YOUR_DOMAIN>`** with your actual domain.
+> By default, the Dockerfile uses EXPOSE 8000. If you want to use a different port:
+>
+> -   Update the port in the Dockerfile
+> -   Rebuild the Docker image
+> -   Restart the container
+> -   And update the Caddyfile to match the new port
 
-```
-docker-compose up -d
-```
+6.  Run the container:
 
-Then visit `https://twizy.<YOUR_HOST>.com` to verify it’s working.
+    ```
+    docker-compose up -d
+    ```
+
+Then visit `https://twizy.<YOUR_DOMAIN>` to verify it's working.
+
+#### File Structure
+
+The project directory on the VPS should look like this:
+
+    ```
+    root@vps:~# tree
+    .
+    ├── caddy
+    │   └── Caddyfile
+    ├── docker-compose.yml
+    └── twizy
+        └── creds.json
+    ```
 
 ## Heroku
 
@@ -498,8 +537,25 @@ To enable your project to access the Google Sheets API:
 5. Grant Sheet Access
 
 -   Open your Google Sheet
--   Click Share and add the service account’s email address (found in `creds.json`)
+-   Click Share and add the service account's email address (found in `creds.json`)
 -   Grant Editor access to allow reading and writing
+
+## Google Spreadsheet Setup
+
+This app uses a Google Spreadsheet to store quiz questions and high scores.
+To connect your own spreadsheet, follow these steps:
+
+1. Create the Spreadsheet
+   Go to Google Sheets and create a new spreadsheet named _twizy_.
+
+2. Create the Tabs (Worksheets)
+   Add a tab named quiz with the following columns in row 1:
+
+question | correct option | option_0 | option_1 | option_2 | option_3
+
+Add another tab named champions with these columns in row 1:
+
+name | score | timestamp 3. Enable Google Sheets API
 
 [Back to top](#table-of-contents)
 
@@ -819,9 +875,17 @@ It's impossible to hide the curses cursor on Heroku terminal. This means that th
 # Acknowledgments
 
 Huge thanks to my mentor, Ronan McClelland, for all his help and advice. \
-He’s given me great tips and resources that really improved my coding and testing skills.
+He's given me great tips and resources that really improved my coding and testing skills.
 
 [Back to top](#table-of-contents)
+
+```
+
+```
+
+```
+
+```
 
 ```
 
