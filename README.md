@@ -328,9 +328,9 @@ This integration allows for easy data management and retrieval, ensuring that th
 
 | Name                                                         | Purpose                                        |
 | :----------------------------------------------------------- | :--------------------------------------------- |
+| [VPS (Contabo)](https://contabo.com/en/vps/)                 | Host the app in a custom server environment    |
+| [Docker](https://www.docker.com)                             | Containerize the app for consistent deployment |
 | Heroku                                                       | Launch and host the CLI app                    |
-| VPS (Contabo)                                                | Host the app in a custom server environment    |
-| Docker                                                       | Containerize the app for consistent deployment |
 | Google Spreadsheets API                                      | Store data                                     |
 | Python Pytest                                                | Unit-testing                                   |
 | Favicon.cc                                                   | Create website favicon                         |
@@ -382,32 +382,22 @@ Before proceeding, ensure the following are set up:
 
 ### Deployment Steps on VPS
 
-1.  Create required folders
-
-    ```
-    mkdir -p twizy caddy
-    ```
-
-2.  Clone tWIZY repository and move to twizy folder
+1.  Clone tWIZY repository and move into to twizy folder:
 
     ```
     git clone https://github.com/tayapro/twizy.git && cd twizy
     ```
 
-3.  Create `creds.json` file inside the `twizy/` folder.
+2.  Create `creds.json` file inside the `twizy/` folder.
     For more details check [Google Sheets API Setup (`creds.json`)](#google-sheets-api-setup-credsjson).
 
-4.  Build the Docker Image
+3.  Build the Docker Image:
 
     ```
     docker build . --tag twizy:1.0.0
     ```
 
-> [!NOTE]
-> The example use Docker Hub.  
-> If you're using another container registry, you may need to adjust the image tag and use the appropriate login command.
-
-5.  Create `docker-compose.yml` in the root directory
+4.  Create `docker-compose.yml` in the root directory:
 
     ```
     networks:
@@ -436,6 +426,12 @@ Before proceeding, ensure the following are set up:
         restart: unless-stopped
     ```
 
+5.  Create `caddy` folder:
+
+    ```
+    mkdir -p caddy
+    ```
+
 6.  Create the `Caddyfile` in the `caddy/` folder, example:
 
     ```
@@ -453,7 +449,7 @@ Before proceeding, ensure the following are set up:
 > -   Restart the container
 > -   And update the Caddyfile to match the new port
 
-6.  Run the container:
+7.  Run the container:
 
     ```
     docker-compose up -d
