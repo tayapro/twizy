@@ -394,36 +394,36 @@ Before proceeding, ensure the following are set up:
 3.  Build the Docker Image:
 
     ```
-    docker build . --tag twizy:1.0.0
+    docker build . --tag twizy:prod
     ```
 
 4.  Create `docker-compose.yml` in the root directory:
 
-    ```
+    ```yaml
     networks:
-      mynet:
+        mynet:
 
     services:
-      caddy:
-        image: caddy:latest
-        networks:
-          - mynet
-        ports:
-          - 443:443
-          - 80:80
-        volumes:
-          - ${PWD}/caddy/Caddyfile:/etc/caddy/Caddyfile
-          - ${PWD}/caddy/data:/data
-        container_name: caddy
-        restart: unless-stopped
-      twizy:
-        image: twizy:1.0.0
-        networks:
-          - mynet
-        container_name: twizy
-        volumes:
-          - ${PWD}/twizy/creds.json:/app/creds.json
-        restart: unless-stopped
+        caddy:
+            image: caddy:latest
+            networks:
+                - mynet
+            ports:
+                - 443:443
+                - 80:80
+            volumes:
+                - ${PWD}/caddy/Caddyfile:/etc/caddy/Caddyfile
+                - ${PWD}/caddy/data:/data
+            container_name: caddy
+            restart: unless-stopped
+        twizy:
+            image: twizy:prod
+            networks:
+                - mynet
+            container_name: twizy
+            volumes:
+                - ${PWD}/twizy/creds.json:/app/creds.json
+            restart: unless-stopped
     ```
 
 5.  Create `caddy` folder:
